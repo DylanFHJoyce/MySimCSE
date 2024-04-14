@@ -85,6 +85,19 @@ class ModelArguments:
         },
     )
 
+    loss_function: str = field(
+        default="CrossEntropyLoss",
+        metadata={
+            "help": "Loss function for the model."
+        }
+    )
+
+    use_in_batch_instances_as_negatives: bool = field(
+        default=False,
+        metadata={
+            "help": "Whether to use other in-batch instances as negative examples."
+        }
+    )
     # SimCSE's arguments
     temp: float = field(
         default=0.05,
