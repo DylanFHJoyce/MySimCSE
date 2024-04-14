@@ -191,32 +191,49 @@ def cl_forward(cls,
         z1 = torch.cat(z1_list, 0)
         z2 = torch.cat(z2_list, 0)
 
-    cos_sim = cls.sim(z1.unsqueeze(1), z2.unsqueeze(0))
-    # Hard negative
-    if num_sent >= 3:
-        z1_z3_cos = cls.sim(z1.unsqueeze(1), z3.unsqueeze(0))
-        cos_sim = torch.cat([cos_sim, z1_z3_cos], 1)
-
-    labels = torch.arange(cos_sim.size(0)).long().to(cls.device)
-    loss_fct = nn.CrossEntropyLoss()
-
-    # Calculate loss with hard negatives
     if num_sent == 3:
-        # Note that weights are actually logits of weights
-        z3_weight = cls.model_args.hard_negative_weight
-        weights = torch.tensor(
-            [[0.0] * (cos_sim.size(-1) - z1_z3_cos.size(-1)) + [0.0] * i + [z3_weight] + [0.0] * (z1_z3_cos.size(-1) - i - 1) for i in range(z1_z3_cos.size(-1))]
-        ).to(cls.device)
-        cos_sim = cos_sim + weights
+        if cls.model_args.use_in_batch_instances_as_negatives:
+            cos_sim = cls.sim(z1.unsqueeze(1), z2.unsqueeze(0))
+            z1_z3_cos = cls.sim(z1.unsqueeze(1), z3.unsqueeze(0))
+            cos_sim = torch.cat([cos_sim, z1_z3_cos], 1)
+            labels = torch.arange(cos_sim.size(0)).long().to(cls.device)
+        else:
+            cos_sim_pos = cls.sim(z1, z2)  # Positive pairs
+            cos_sim_hard_neg = cls.sim(z1, z3)  # Hard negatives only
 
-    loss = loss_fct(cos_sim, labels)
+            # Combine the positive and hard negative similarities
+            cos_sim = torch.stack([cos_sim_pos, cos_sim_hard_neg], dim=1)
 
-    # Calculate loss for MLM
-    if mlm_outputs is not None and mlm_labels is not None:
-        mlm_labels = mlm_labels.view(-1, mlm_labels.size(-1))
-        prediction_scores = cls.lm_head(mlm_outputs.last_hidden_state)
-        masked_lm_loss = loss_fct(prediction_scores.view(-1, cls.config.vocab_size), mlm_labels.view(-1))
-        loss = loss + cls.model_args.mlm_weight * masked_lm_loss
+            labels = torch.zeros(cos_sim.size(0)).long().to(cls.device)
+    else:
+        cos_sim = cls.sim(z1.unsqueeze(1), z2.unsqueeze(0))
+        labels = torch.arange(cos_sim.size(0)).long().to(cls.device)
+
+    if cls.model_args.loss_function == "CrossEntropyLoss":
+        loss_fct = nn.CrossEntropyLoss()
+
+        if cls.model_args.use_in_batch_instances_as_negatives and num_sent == 3:
+            # Note that weights are actually logits of weights
+            z3_weight = cls.model_args.hard_negative_weight
+            weights = torch.tensor(
+                [[0.0] * (cos_sim.size(-1) - z1_z3_cos.size(-1)) + [0.0] * i + [z3_weight] + [0.0] * (z1_z3_cos.size(-1) - i - 1) for i in range(z1_z3_cos.size(-1))]
+            ).to(cls.device)
+            cos_sim = cos_sim + weights
+
+        loss = loss_fct(cos_sim, labels)
+
+        # Calculate loss for MLM
+        if mlm_outputs is not None and mlm_labels is not None:
+            mlm_labels = mlm_labels.view(-1, mlm_labels.size(-1))
+            prediction_scores = cls.lm_head(mlm_outputs.last_hidden_state)
+            masked_lm_loss = loss_fct(prediction_scores.view(-1, cls.config.vocab_size), mlm_labels.view(-1))
+            loss = loss + cls.model_args.mlm_weight * masked_lm_loss
+
+    elif cls.model_args.loss_function == "TripletMarginWithDistanceLoss":
+        loss_fct = nn.TripletMarginWithDistanceLoss(distance_function=lambda x, y: 1.0 - F.cosine_similarity(x, y))
+        loss = loss_fct(z1, z2, z3)
+    else:
+        raise ValueError("Unsupported loss function: {}".format(cls.model_args.loss_function))
 
     if not return_dict:
         output = (cos_sim,) + outputs[2:]
