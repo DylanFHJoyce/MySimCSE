@@ -54,10 +54,12 @@ def topicDiversity(topicsNWordsList): #you give this bertopicmodel.get_topic_inf
 #get the proceessed general dataset list
 with open("genDatasetProcessed.pkl", "rb") as f:
   generalDataset = pickle.load(f)
+  
 
 #get the general dataset embeddings that were made after the simmodel was trained
 with open("thisModelGeneralEmbeddings.pkl", "rb") as f:
   generalEmbeddings = pickle.load(f)
+  print("GENSET TYPE", type(generalDataset))
 
 
 
@@ -85,7 +87,8 @@ coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], co
 print("Coherence: ", coherenceTuple)
 ################
 
-
+print(bertopicModel.get_topic_info()["Representation"].tolist())
+print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
 
 
 print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
