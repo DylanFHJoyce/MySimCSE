@@ -46,6 +46,6 @@ datasetName = "placeholder"
 
 runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
-makeEmbeddings()
+makeEmbeddings(datasetName = "placeholder")
 
 runBert()
