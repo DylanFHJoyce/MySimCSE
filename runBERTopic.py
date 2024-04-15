@@ -85,7 +85,8 @@ print("COULD HAVE THE PARAM GRID HERE TO ITERATE THROUGH, ADDITING TO RESULTS DF
 print("have one df, BERTRESULTS, that is added to each time then taken into simresults overalldf in sim script")
 
 #make and save new bertResults df
-bertResults = {"iteration": [], "TD": [], "Coherence": []}
+empty = [[], [], []]
+bertResults = pd.DataFrame(empty, columns=["iteration", "TD", "Coherence"])
 bertResults.to_csv("bertResults.csv", index=False)
 
 for iteration in range(0, 2):
