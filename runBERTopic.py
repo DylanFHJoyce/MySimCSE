@@ -82,7 +82,7 @@ generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 #with additional params
 
 print("COULD HAVE THE PARAM GRID HERE TO ITERATE THROUGH, ADDITING TO RESULTS DF EACH TIME")
-
+print("have one df, BERTRESULTS, that is added to each time then taken into simresults overalldf in sim script")
 # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
 # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
 
