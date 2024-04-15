@@ -57,31 +57,36 @@ def runBert():
 
 #placeholders 
 trainingTripletsCSV = "trainingTriplets4000Manual.csv"
-learning_rate = 5e-5
-#learningRates = [5e-1, 5e-2, 5e-3, 5e-4, 5e-5, 5e-6] #prehaps reverse?
-num_epochs = 5
+#learning_rate = 5e-5
+learningRates = [5e-1, 5e-2, 5e-3, 5e-4, 5e-5]#, 5e-6] #prehaps reverse?
+num_epochs = 4
 datasetName = "placeholder"
 
 
 
 #clear the folder where result dataframe is stored
 #for each learning rate etc
-#for learning_rate in learningRates:
-
-runSim(trainingTripletsCSV, learning_rate, num_epochs)
-
-makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
-
-
-
-
-#for each bertopic parameters
-
-#COULD HAVE THE PARAM GRID INSIDE OF RUNBERT??
-
-runBert() #runBert loads df and adds its results to it
-
-
-
-
-print("CHECK IF SHELL=True is needed for subprocesses?")
+simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence"])
+simResults.to_csv("simResults.csv", index=False)
+for learning_rate in learningRates:
+  simResults = pd.read_csv("simResults.csv")
+  
+  runSim(trainingTripletsCSV, learning_rate, num_epochs)
+  
+  makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
+  
+  
+  
+  
+  #for each bertopic parameters
+  
+  #COULD HAVE THE PARAM GRID INSIDE OF RUNBERT??
+  
+  runBert() #runBert loads df and adds its results to it
+  
+  bertResults = pd.read_csv("bertResults.csv")
+  bertResults["learning_rate"] = learning_rate
+  bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence"]]
+  simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
+  
+  print("CHECK IF SHELL=True is needed for subprocesses?")
