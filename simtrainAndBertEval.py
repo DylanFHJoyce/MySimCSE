@@ -40,6 +40,7 @@ def makeEmbeddings(datasetName):
 
 
 def runBert():
+    #DOES THIS NEED SHELL = TRUE ASWELL?
     command = "conda run -n berTopicEnv python testBert.py"
 
     subprocess.run(command, shell=True)
@@ -60,3 +61,5 @@ runSim(trainingTripletsCSV, learning_rate, num_epochs)
 makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
 
 runBert()
+
+print("CHECK IF SHELL=True is needed for subprocesses?")
