@@ -131,7 +131,9 @@ for iteration in range(0, 2):
     
     
     print("STORE RESULTS NOW")
-    bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
+    newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple}
+    bertResults = pd.concat([bertResults, newRow], ignore_index=True)
+    #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
     
  #evaluate and store evaluation OUTSIDE OF LOOP!
 bertResults.to_csv("bertResults.csv", index=False)
