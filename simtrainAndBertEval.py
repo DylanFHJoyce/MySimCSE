@@ -41,7 +41,13 @@ def makeEmbeddings(datasetName):
 
 def runBert():
     #DOES THIS NEED SHELL = TRUE ASWELL?
-    command = "conda run -n berTopicEnv python testBert.py"
+    command = "conda run -n berTopicEnv python runBERTopic.py"
+
+    #test bert will take general embeddings, parameters
+
+    #fit bertopic model to embeddings
+
+    #evaluate and store evaluation
 
     subprocess.run(command, shell=True)
 
@@ -54,11 +60,18 @@ trainingTripletsCSV = "trainingTriplets4000Manual.csv"
 learning_rate = 0.1 #5e-1
 num_epochs = 1
 datasetName = "placeholder"
+
+
+
+
 #for each learning rate etc
 
 runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
 makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
+
+
+#for each bertopic parameters
 
 runBert()
 
