@@ -4,8 +4,8 @@ from bertopic import BERTopic
 from bertopic.vectorizers import ClassTfidfTransformer
 import pickle
 import numpy as np
-
-
+import pandas as pd
+import os
 
 
 import gensim
@@ -83,45 +83,64 @@ generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 
 print("COULD HAVE THE PARAM GRID HERE TO ITERATE THROUGH, ADDITING TO RESULTS DF EACH TIME")
 print("have one df, BERTRESULTS, that is added to each time then taken into simresults overalldf in sim script")
-# ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
-# bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
 
+#make and save new bertResults df
+bertResults = {"iteration": [], "TD": [], "Coherence": []}
+bertResults.to_csv("bertResults.csv", index=False)
 
-                                     
+for iteration in range(0, 2):
+    bertResults = pd.read_csv("bertResults.csv")
+    # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
+    # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
+    
+    
+                                         
+    #default
+    bertopicModel = BERTopic(min_topic_size=140)
+    
+    
+    
+    
+    
+    
+    #fit bertopic model to embeddings
+    bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ######################### ############## NEW COMMIT
+    TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
+    print("TD: ", TD)
+    coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
+    print("Coherence: ", coherenceTuple)
+    ################
+    
+    print(bertopicModel.get_topic_info()["Representation"].tolist())
+    print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
+    
+    
+    print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
+    
+    
+    
+    print("STORE RESULTS NOW")
+    iterationList = bertResults["iteration"]
+    iterationList.append(iteration)
 
-#default
-bertopicModel = BERTopic(min_topic_size=140)
+    TDList = bertResults["TD"]
+    TDList.append(TD)
 
+    CoherenceList = bertResults["Coherence"]
+    CoherenceList.append(coherenceTuple)
 
-
-
-
-
-#fit bertopic model to embeddings
-bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
-
-
-
-
-
-
-
-
-
-######################### ############## NEW COMMIT
-TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
-print("TD: ", TD)
-coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
-print("Coherence: ", coherenceTuple)
-################
-
-print(bertopicModel.get_topic_info()["Representation"].tolist())
-print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
-
-
-print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
-
-
-
-print("STORE RESULTS NOW")
-#evaluate and store evaluation
+    bertResults = bertResults.append("iteration": [], "TD": TDList, "Coherence": CoherenceList)
+    
+ #evaluate and store evaluation OUTSIDE OF LOOP!
+bertResults.to_csv("bertResults.csv", index=False)
+   
