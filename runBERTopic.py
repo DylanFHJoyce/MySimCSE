@@ -17,11 +17,13 @@ with open("thisModelGeneralEmbeddings.pkl", "rb") as f:
 
 
 #ALSO LOAD THE EMBEDDING MODEL #DONT NEED TO BECAUSE EMBEDDINGS ARE PRECOMPUTED?
-generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl")
+generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 
 
 #and provide params here
-bertopicModel = BERTopic(docs=generalDataset, embeddings=generalEmbeddings)
+bertopicModel = BERTopic()
+bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
+
 #fit bertopic model to embeddings
 
 
