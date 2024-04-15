@@ -13,7 +13,8 @@ from gensim.corpora import Dictionary
 from gensim.models.coherencemodel import CoherenceModel
 import nltk
 from nltk.tokenize import word_tokenize
-nltk.download('punkt')
+
+#nltk.download('punkt')
 
 print("first need to calculate corpus")
 def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
@@ -87,6 +88,6 @@ print("Coherence: ", coherenceTuple)
 
 
 
-print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings))
+print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
 
 #evaluate and store evaluation
