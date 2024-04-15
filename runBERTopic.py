@@ -1,6 +1,7 @@
 print("MADE IT TO runBERTopic")
 
 from bertopic import BERTopic
+from bertopic.vectorizers import ClassTfidfTransformer
 import pickle
 import numpy as np
 
@@ -74,9 +75,33 @@ with open('labelInclusiveTokenizedCorpusAndDictionary.pkl', 'rb') as f:
 #ALSO LOAD THE EMBEDDING MODEL #DONT NEED TO BECAUSE EMBEDDINGS ARE PRECOMPUTED?
 generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 #and provide params here
-bertopicModel = BERTopic()
+
+
+
+
+#with additional params
+ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
+bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
+
+
+                                     
+
+#default
+# bertopicModel = BERTopic(min_topic_size=140)
+
+
+
+
+
+
 #fit bertopic model to embeddings
 bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
+
+
+
+
+
+
 
 
 
