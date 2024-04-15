@@ -80,14 +80,14 @@ generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 
 
 #with additional params
-ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
-bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
+# ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
+# bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
 
 
                                      
 
 #default
-# bertopicModel = BERTopic(min_topic_size=140)
+bertopicModel = BERTopic(min_topic_size=140)
 
 
 
