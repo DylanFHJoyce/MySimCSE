@@ -1,14 +1,14 @@
 import subprocess
 
+#change training data file
 
 
-
-def runSim(learning_rate, num_epochs):
+def runSim(trainingTripletsCSV, learning_rate, num_epochs):
   command = (
     "conda run -n simEnv python train.py "
     "--model_name_or_path princeton-nlp/sup-simcse-bert-base-uncased"
-    "--train_file news2234_triplet_dataset.csv"
-    "--output_dir aTrainedModel"
+    f"--train_file {trainingTripletsCSV}"
+    "--output_dir thisTrainedModel"
     f"--num_train_epochs {num_epochs}"
     "--per_device_train_batch_size 64"
     f"--learning_rate {learning_rate}"
@@ -25,6 +25,7 @@ def runSim(learning_rate, num_epochs):
 
 
 
+
 def runBert():
     command = "conda run -n berTopicEnv python testBert.py"
 
@@ -32,15 +33,16 @@ def runBert():
 
 
 
-#for each learning rate etc
 
-#placeholder
+
+#placeholders 
+trainingTripletsCSV = "news2234_triplet_dataset.csv"
 learning_rate = 0.1 #5e-1
 num_epochs = 5
-batch_size = 32
 
+#for each learning rate etc
 
-runSim(learning_rate, num_epochs)
+runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
 
 runBert()
