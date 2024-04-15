@@ -25,6 +25,12 @@ def runSim(trainingTripletsCSV, learning_rate, num_epochs):
 
 def makeEmbeddings(datasetName):
   simModel = SimCSE("thisTrainedModel")
+
+  #load dataset to embed
+  #embeddings = simModel.encode(list of string documents)
+  #embed dataset with simcse model 
+
+  #return the embeddings 
   pass
 
 
