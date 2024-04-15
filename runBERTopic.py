@@ -24,9 +24,9 @@ def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
     coherence_npmi = coherence_model_npmi.get_coherence()
     
     coherence_npmiPerTopic = coherence_model_npmi.get_coherence_per_topic()
-
+    
     print("NPMI Coherence Score:", coherence_npmi)
-
+    
     return coherence_npmi, coherence_npmiPerTopic
     
 def topicDiversity(topicsNWordsList):
@@ -38,8 +38,8 @@ def topicDiversity(topicsNWordsList):
         uniqueSet = uniqueSet.union(thisTopicSet)
     
     return len(uniqueSet) / (10 *len(topicsNWordsList))
-
-
+    
+    
 
 
 
