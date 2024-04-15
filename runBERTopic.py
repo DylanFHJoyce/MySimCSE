@@ -132,7 +132,8 @@ for iteration in range(0, 2):
     
     print("STORE RESULTS NOW")
     newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple}
-    bertResults = pd.concat([bertResults, newRow], ignore_index=True)
+    newRow = pd.Dataframe([newRow])
+    bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
     #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
     
  #evaluate and store evaluation OUTSIDE OF LOOP!
