@@ -30,12 +30,13 @@ def makeEmbeddings(datasetName):
   #load dataset to embed
   with open(datasetName, "rb") as f:
     loaded_list = pickle.load(f)
-  
-  embeddings = simModel.encode(loaded_list).numpy()
+    
   #embed dataset with simcse model 
+  embeddings = simModel.encode(loaded_list).numpy()
 
-  #return the embeddings 
-  return embeddings
+  #save dataset
+  with open("thisModelGeneralEmbeddings.pkl", "wb") as f:
+    pickle.dump(embeddings, f)
 
 
 def runBert():
@@ -56,7 +57,6 @@ datasetName = "placeholder"
 
 runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
-modelEmbeddings = makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
-print(len(modelEmbeddings))
+makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
 
 runBert()
