@@ -139,7 +139,7 @@ for iteration in range(0, 2):
     CoherenceList = bertResults["Coherence"]
     CoherenceList.append(coherenceTuple)
 
-    bertResults = bertResults.append("iteration": [], "TD": TDList, "Coherence": CoherenceList)
+    bertResults = bertResults.append({"iteration": iterationList, "TD": TDList, "Coherence": CoherenceList})
     
  #evaluate and store evaluation OUTSIDE OF LOOP!
 bertResults.to_csv("bertResults.csv", index=False)
