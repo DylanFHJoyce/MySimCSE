@@ -29,7 +29,7 @@ def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
     
     return coherence_npmi, coherence_npmiPerTopic
     
-def topicDiversity(topicsNWordsList):
+def topicDiversity(topicsNWordsList): #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
     
     uniqueSet = set()
     for topicNWords in topicsNWordsList:
@@ -50,25 +50,41 @@ def topicDiversity(topicsNWordsList):
 
 #take general embeddings, parameters
 
-
+#get the proceessed general dataset list
 with open("genDatasetProcessed.pkl", "rb") as f:
   generalDataset = pickle.load(f)
 
+#get the general dataset embeddings that were made after the simmodel was trained
 with open("thisModelGeneralEmbeddings.pkl", "rb") as f:
   generalEmbeddings = pickle.load(f)
 
 
 
+############## NEW COMMIT
+#get the tokenized corpus and dictionary made from the gen dataset (including labelled data to have an accurate count)
+with open('labelInclusiveTokenizedCorpusAndDictionary.pkl', 'rb') as f:
+    corpusAndDictionaryLabelInc = pickle.load(f)
+########################
+
+
 
 #ALSO LOAD THE EMBEDDING MODEL #DONT NEED TO BECAUSE EMBEDDINGS ARE PRECOMPUTED?
 generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
-
-
 #and provide params here
 bertopicModel = BERTopic()
+#fit bertopic model to embeddings
 bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
 
-#fit bertopic model to embeddings
+
+
+######################### ############## NEW COMMIT
+TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
+print("TD: ", TD)
+coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
+print("Coherence: ", coherenceTuple)
+################
+
+
 
 
 print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings))
