@@ -23,7 +23,9 @@ def runSim(trainingTripletsCSV, learning_rate, num_epochs):
   )
   subprocess.run(command, shell=True)
 
-
+def makeEmbeddings(datasetName):
+  simModel = SimCSE("thisTrainedModel")
+  pass
 
 
 def runBert():
@@ -44,5 +46,6 @@ num_epochs = 5
 
 runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
+makeEmbeddings()
 
 runBert()
