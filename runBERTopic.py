@@ -85,8 +85,8 @@ print("COULD HAVE THE PARAM GRID HERE TO ITERATE THROUGH, ADDITING TO RESULTS DF
 print("have one df, BERTRESULTS, that is added to each time then taken into simresults overalldf in sim script")
 
 #make and save new bertResults df
-empty = [[], [], []]
-bertResults = pd.DataFrame(empty, columns=["iteration", "TD", "Coherence"])
+
+bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence"])
 bertResults.to_csv("bertResults.csv", index=False)
 
 for iteration in range(0, 2):
@@ -131,16 +131,7 @@ for iteration in range(0, 2):
     
     
     print("STORE RESULTS NOW")
-    iterationList = bertResults["iteration"]
-    iterationList.append(iteration)
-
-    TDList = bertResults["TD"]
-    TDList.append(TD)
-
-    CoherenceList = bertResults["Coherence"]
-    CoherenceList.append(coherenceTuple)
-
-    bertResults = bertResults.append({"iteration": iterationList, "TD": TDList, "Coherence": CoherenceList})
+    bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
     
  #evaluate and store evaluation OUTSIDE OF LOOP!
 bertResults.to_csv("bertResults.csv", index=False)
