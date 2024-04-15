@@ -1,5 +1,5 @@
 import subprocess
-
+from simcse import SimCSE
 #change training data file
 
 
