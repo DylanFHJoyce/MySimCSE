@@ -1,8 +1,7 @@
 print("MADE IT TO runBERTopic")
 
 from bertopic import BERTopic
-
-
+import pickle
 
 
 #take general embeddings, parameters
