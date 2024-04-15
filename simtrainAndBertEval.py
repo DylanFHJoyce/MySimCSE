@@ -57,8 +57,8 @@ def runBert():
 
 #placeholders 
 trainingTripletsCSV = "trainingTriplets4000Manual.csv"
-learning_rate = 0.1 #5e-1
-num_epochs = 1
+learning_rate = 5e-5
+num_epochs = 3
 datasetName = "placeholder"
 
 
