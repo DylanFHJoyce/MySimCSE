@@ -89,7 +89,7 @@ print("have one df, BERTRESULTS, that is added to each time then taken into simr
 bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence"])
 bertResults.to_csv("bertResults.csv", index=False)
 
-for iteration in range(0, 2):
+for iteration in range(0, 3):
     bertResults = pd.read_csv("bertResults.csv")
     # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
     # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
@@ -132,10 +132,11 @@ for iteration in range(0, 2):
     
     print("STORE RESULTS NOW")
     newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple}
-    newRow = pd.Dataframe([newRow])
+    newRow = pd.DataFrame([newRow])
     bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
     #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
     
- #evaluate and store evaluation OUTSIDE OF LOOP!
+#evaluate and store evaluation OUTSIDE OF LOOP!
+print("NOW DONE WITH BERT ITERS")
 bertResults.to_csv("bertResults.csv", index=False)
    
