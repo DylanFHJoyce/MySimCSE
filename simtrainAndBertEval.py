@@ -5,7 +5,7 @@ import subprocess
 
 def runSim(learning_rate, num_epochs):
   command = (
-    "conda run -n berTopicEnv python train.py "
+    "conda run -n simEnv python train.py "
     "--model_name_or_path princeton-nlp/sup-simcse-bert-base-uncased"
     "--train_file news2234_triplet_dataset.csv"
     "--output_dir aTrainedModel"
@@ -21,7 +21,7 @@ def runSim(learning_rate, num_epochs):
      "--fp16"
      "--use_in_batch_instances_as_negatives"
   )
-    subprocess.run(command, shell=True)
+  subprocess.run(command, shell=True)
 
 
 
