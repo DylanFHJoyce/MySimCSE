@@ -77,7 +77,7 @@ makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
 
 #for each bertopic parameters
 
-
+#COULD HAVE THE PARAM GRID INSIDE OF RUNBERT??
 
 runBert() #runBert loads df and adds its results to it
 
