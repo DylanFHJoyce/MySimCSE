@@ -1,7 +1,7 @@
 import subprocess
 from simcse import SimCSE
+import pickle
 #change training data file
-
 
 def runSim(trainingTripletsCSV, learning_rate, num_epochs):
   command = (
@@ -27,11 +27,14 @@ def makeEmbeddings(datasetName):
   simModel = SimCSE("thisTrainedModel")
 
   #load dataset to embed
-  #embeddings = simModel.encode(list of string documents)
+  with open(datasetName, "rb") as f:
+    loaded_list = pickle.load(f)
+  
+  embeddings = simModel.encode(list of string documents)
   #embed dataset with simcse model 
 
   #return the embeddings 
-  pass
+  return embeddings
 
 
 def runBert():
@@ -46,12 +49,12 @@ def runBert():
 #placeholders 
 trainingTripletsCSV = "trainingTriplets4000Manual.csv"
 learning_rate = 0.1 #5e-1
-num_epochs = 2
+num_epochs = 1
 datasetName = "placeholder"
 #for each learning rate etc
 
 runSim(trainingTripletsCSV, learning_rate, num_epochs)
 
-makeEmbeddings(datasetName = "placeholder")
+modelEmbeddings = makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
 
 runBert()
