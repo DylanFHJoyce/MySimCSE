@@ -263,10 +263,10 @@ for iteration in range(0, 1):
     #TrainValTest is the training data with its labels
     crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[1], thisModelTrainingValEmbeddings) 
     print("Many crosstab stats may be unnecessary in the final version")
-    # statsFromCT = statsFromCrosstab(crosstab)
+    statsFromCT = statsFromCrosstab(crosstab)
     print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
-    #most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
-    #topicsToThemesDict = topicsToThemes(BTTrainComp)
+    most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+    topicsToThemesDict = topicsToThemes(BTTrainComp)
     
     print(bertopicModel.get_topic_info()["Representation"].tolist())
     print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
