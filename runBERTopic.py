@@ -77,8 +77,8 @@ def getTopicPredByName(bertModel, trainDocData, docDataEmbedded):
     
     trainDocData = trainDocData.reset_index(drop=True)
     trainDocs = trainDocData["Document"]
-    if type(docDataEmbedded) == torch.Tensor:
-        docDataEmbedded = docDataEmbedded.numpy()
+    #if type(docDataEmbedded) == torch.Tensor:
+        #docDataEmbedded = docDataEmbedded.numpy()
 
     print("tempCHange in get top pred name")
     #bertModel.transform(trainDocs, docDataEmbedded) #
