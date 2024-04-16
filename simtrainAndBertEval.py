@@ -59,7 +59,7 @@ def runBert():
 #placeholders 
 trainingTripletsCSV = "trainingTriplets4000Manual.csv"
 #learning_rate = 5e-5
-learningRates = [5e-1, 5e-2, 5e-3, 5e-4, 5e-5]#, 5e-6] #prehaps reverse?
+learningRates = [5e-3, 5e-4, 5e-5]#, 5e-6] #prehaps reverse?
 num_epochs = 4
 datasetName = "placeholder"
 
