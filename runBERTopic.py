@@ -194,6 +194,9 @@ with open('labelInclusiveTokenizedCorpusAndDictionary.pkl', 'rb') as f:
     corpusAndDictionaryLabelInc = pickle.load(f)
 ########################
 
+#get the training data and its labels (as a tuple of dataframes train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
 
 
 #ALSO LOAD THE EMBEDDING MODEL #DONT NEED TO BECAUSE EMBEDDINGS ARE PRECOMPUTED?
@@ -247,8 +250,8 @@ for iteration in range(0, 2):
     print("Coherence: ", coherenceTuple)
     ################
 
-
-    #crosstab = compareTrainTopicsToBTopics(bertopicModel, HELD OUT TRAINING DATA LIST(CHECK IF NEEDS TO BE DF), HELD OUT training data embeddings) 
+    #TrainValTest is the training data with its labels
+    #crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[1], HELD OUT training data embeddings) 
     print("Many crosstab stats may be unnecessary in the final version")
     # statsFromCT = statsFromCrosstab(crosstab)
     print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
