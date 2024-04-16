@@ -205,8 +205,8 @@ generalEmbeddings = np.load("thisModelGeneralEmbeddings.pkl", allow_pickle=True)
 
 
 #load val data embeddings
-with open("thisModelTrainingValEmbeddings.pkl", "rb") as f:
-    thisModelTrainingValEmbeddings = pickle.load(f)
+with open("thisModelTrainingEmbeddings.pkl", "rb") as f:
+    thisModelTrainingEmbeddings = pickle.load(f)
 
   
 
@@ -261,7 +261,7 @@ for iteration in range(0, 1):
     ################
 
     #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
-    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingValEmbeddings) 
+    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
     print("Many crosstab stats may be unnecessary in the final version")
     statsFromCT = statsFromCrosstab(crosstab)
     print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
