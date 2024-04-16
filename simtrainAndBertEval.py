@@ -65,6 +65,12 @@ datasetName = "placeholder"
 
 
 
+#get the training data and its labels (as a tuple of dataframes train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+  TrainValTest = pickle.load(f)
+
+
+
 #clear the folder where result dataframe is stored
 #for each learning rate etc
 simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence"])
@@ -78,10 +84,27 @@ for learning_rate in learningRates:
   
   runSim(trainingTripletsCSV, learning_rate, num_epochs)
   
-  makeEmbeddings(datasetName = "genDatasetProcessed.pkl")
-  
-  
-  
+  #makeEmbeddings()
+  datasetName = "genDatasetProcessed.pkl"
+  #def makeEmbeddings(datasetName):
+  simModel = SimCSE("thisTrainedModel")
+  #load dataset to embed
+  with open(datasetName, "rb") as f:
+    loaded_list = pickle.load(f)
+  #embed dataset with simcse model 
+  embeddings = simModel.encode(loaded_list).numpy()
+  #save dataset
+  with open("thisModelGeneralEmbeddings.pkl", "wb") as f:
+    pickle.dump(embeddings, f)
+
+
+  #make embeddings of val data for experiment 2 use
+  valEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist())
+  with open("thisModelTrainingValEmbeddings.pkl", "wb") as f:
+    pickle.dump(valEmbeddings, f)
+
+
+
   
   #for each bertopic parameters
   
