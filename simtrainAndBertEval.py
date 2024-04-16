@@ -99,9 +99,9 @@ for learning_rate in learningRates:
 
 
   #make embeddings of val data for experiment 2 use
-  valEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
-  with open("thisModelTrainingValEmbeddings.pkl", "wb") as f:
-    pickle.dump(valEmbeddings, f)
+  trainEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+  with open("thisModelTrainingEmbeddings.pkl", "wb") as f:
+    pickle.dump(trainEmbeddings, f)
 
 
 
