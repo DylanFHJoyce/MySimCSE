@@ -69,8 +69,9 @@ datasetName = "placeholder"
 #for each learning rate etc
 simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence"])
 simResults.to_csv("simResults.csv", index=False)
-simResults = pd.read_csv("simResults.csv")
+
 for learning_rate in learningRates:
+  simResults = pd.read_csv("simResults.csv")
   print("\n\n\n\n\n\n\n\nSTARTING LEARNING RATE", learning_rate)
   
   
@@ -89,6 +90,7 @@ for learning_rate in learningRates:
   
   bertResults = pd.read_csv("bertResults.csv")
   bertResults["learning_rate"] = learning_rate
+  print(simResults, bertResults, "\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.")
   bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence"]]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
 
