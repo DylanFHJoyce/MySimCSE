@@ -2,6 +2,7 @@ import subprocess
 from simcse import SimCSE
 import pickle
 import numpy as np
+import pandas as pd
 #change training data file
 
 def runSim(trainingTripletsCSV, learning_rate, num_epochs):
