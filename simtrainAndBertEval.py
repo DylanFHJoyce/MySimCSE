@@ -90,4 +90,5 @@ for learning_rate in learningRates:
   bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence"]]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
   
-  print("CHECK IF SHELL=True is needed for subprocesses?")
+simResults.to_csv("simResults.csv", index=False)
+print("CHECK IF SHELL=True is needed for subprocesses?")
