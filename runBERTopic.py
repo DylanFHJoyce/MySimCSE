@@ -227,7 +227,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 bertResults = pd.read_csv("bertResults.csv")
 
 
-for iteration in range(0, 1):
+for iteration in range(0, 2):
     
     # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
     # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
