@@ -260,18 +260,20 @@ for iteration in range(0, 1):
     print("Coherence: ", coherenceTuple)
     ################
 
-    #TrainValTest is the training data with its labels
-    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[1], thisModelTrainingValEmbeddings) 
+    #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
+    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingValEmbeddings) 
     print("Many crosstab stats may be unnecessary in the final version")
     statsFromCT = statsFromCrosstab(crosstab)
     print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
     most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
     topicsToThemesDict = topicsToThemes(BTTrainComp)
+
+
+
+
     
     print(bertopicModel.get_topic_info()["Representation"].tolist())
     print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
-    
-    
     print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
     
     
