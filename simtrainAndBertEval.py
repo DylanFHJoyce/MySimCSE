@@ -70,6 +70,7 @@ datasetName = "placeholder"
 simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence"])
 simResults.to_csv("simResults.csv", index=False)
 for learning_rate in learningRates:
+  print("\n\n\n\n\n\n\n\nSTARTING LEARNING RATE", learning_rate)
   simResults = pd.read_csv("simResults.csv")
   
   runSim(trainingTripletsCSV, learning_rate, num_epochs)
@@ -89,6 +90,8 @@ for learning_rate in learningRates:
   bertResults["learning_rate"] = learning_rate
   bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence"]]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
+
+  print("\n\n\n\n\nENDING LEARNING RATE", learning_rate)
   
 simResults.to_csv("simResults.csv", index=False)
 print("CHECK IF SHELL=True is needed for subprocesses?")
