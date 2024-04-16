@@ -89,8 +89,9 @@ print("have one df, BERTRESULTS, that is added to each time then taken into simr
 bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence"])
 bertResults.to_csv("bertResults.csv", index=False)
 
+bertResults = pd.read_csv("bertResults.csv")
 for iteration in range(0, 3):
-    bertResults = pd.read_csv("bertResults.csv")
+    
     # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
     # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
     
