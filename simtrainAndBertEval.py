@@ -70,8 +70,9 @@ datasetName = "placeholder"
 simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence"])
 simResults.to_csv("simResults.csv", index=False)
 
+simResults = pd.read_csv("simResults.csv")
 for learning_rate in learningRates:
-  simResults = pd.read_csv("simResults.csv")
+  
   print("\n\n\n\n\n\n\n\nSTARTING LEARNING RATE", learning_rate)
   
   
