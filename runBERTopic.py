@@ -29,12 +29,12 @@ print("first need to calculate corpus")
 def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
 
 
-    #remove -1 from topics (-1 is those that didnt fall into a topic)
-    # topicReps = topicModel.get_topic_info()[1:]["Representation"].tolist()
+    remove -1 from topics (-1 is those that didnt fall into a topic)
+    topicReps = topicModel.get_topic_info()[1:]["Representation"].tolist()
+    # Calculate NPMI coherence
+    coherence_model_npmi = gensim.models.CoherenceModel(topics=topicReps, texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi', topn=3) #or <10
     # # Calculate NPMI coherence
-    # coherence_model_npmi = gensim.models.CoherenceModel(topics=topicReps, texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi')
-    # # Calculate NPMI coherence
-    coherence_model_npmi = gensim.models.CoherenceModel(topics=topicModel.get_topic_info()["Representation"].tolist(), texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi')
+    #coherence_model_npmi = gensim.models.CoherenceModel(topics=topicModel.get_topic_info()["Representation"].tolist(), texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi'would put top n here but changing back)
     
     coherence_npmi = coherence_model_npmi.get_coherence()
     
@@ -231,7 +231,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 
 bertResults = pd.read_csv("bertResults.csv")
 
-topicSizes = [40]#, 60, 80, 100]
+topicSizes = [100]#, 60, 80, 100]
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
     for iteration in range(0, 1):
