@@ -122,7 +122,10 @@ for learning_rate in learningRates:
   bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence"]]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
 
+  
   print("\n\n\n\n\nENDING LEARNING RATE", learning_rate)
+  print(simResults)
+   print("\n\n\n\n\nabove are result from LEARNING RATE", learning_rate)
   
 pd.set_option('display.width', 1000)
 print(simResults)
