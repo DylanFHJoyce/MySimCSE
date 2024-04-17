@@ -53,7 +53,7 @@ def runBert():
     subprocess.run(command, shell=True)
 
 
-
+pd.set_option('display.width', 1000)
 
 
 #placeholders 
