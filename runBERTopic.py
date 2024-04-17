@@ -269,7 +269,7 @@ for min_topic_size in topicSizes:
         ################
 
 
-        
+        #THE THEME CONTENT/SPREAD ANALYSIS#################################################
         # #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
         # crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
         # print("Many crosstab stats may be unnecessary in the final version")
@@ -278,10 +278,30 @@ for min_topic_size in topicSizes:
         # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
         # topicsToThemesDict = topicsToThemes(BTTrainComp)
     
+        #here we get predictions for the theme training data (CHECK held out or main?)
+
+        #then we convert to pred by name
+
+        #then we use topics to themes Dict to get topic prediction by theme 
+
+        #then we get the samples true theme label data (cos its the labelled training data)
+        #we can use this for accuacy, precision, recall, f1 etc (that might not be useful.)
+
+
+        #THEN CHECK WITHIN MAYBE VER1ALTERBERTMODEL OR ALTERBERT MODEL OR SOMETING
+        #i think thats where the next step of my experiment is?
+        #OR IT MIGHT HAVE BEEN THE CROSSTAB ITSELF WITH DIFFERENT PROCESSING AFTER?
+
+        #either way you get information about the theme spread or topic composition etc
+        #and use this as basis for further training
+
+        #e.g. doing a sub bertopic model on just the docs from one big condenced topic and training simcse 
+        #to split it up more based on its (sub) topics
+        #with the hope that that makes it more nuanced back in the main view/splits it up
     
-    
-    
-    
+        # END OF THE CALC FOR THE THEME CONTENT/SPREAD ANALYSIS
+        ##########################################################################################################
+        
         print(bertopicModel.get_topic_info()["Representation"].tolist())
         print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
         print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
