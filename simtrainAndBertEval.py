@@ -77,7 +77,7 @@ with open('split4000Manual.pkl', 'rb') as f:
 
 #clear the folder where result dataframe is stored
 #for each learning rate etc
-simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherence", "topicSize"])
+simResults = pd.DataFrame(columns=["learning_rate", "iteration", "topicSize", "Coherence", "TD"])
 simResults.to_csv("simResults.csv", index=False)
 
 
@@ -126,7 +126,7 @@ for learning_rate in learningRates:
   bertResults = pd.read_csv("bertResults.csv")
   bertResults["learning_rate"] = learning_rate
   print(simResults, bertResults, "\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.")
-  bertResults = bertResults[["learning_rate", "iteration", "TD", "Coherence", "topicSize"]]
+  bertResults = bertResults[["learning_rate", "iteration", "topicSize", "Coherence", "TD"]]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
 
   
