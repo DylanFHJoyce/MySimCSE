@@ -21,7 +21,7 @@ from nltk.tokenize import word_tokenize
 
 
 
-
+pd.set_option('display.width', 1000)
 
 #nltk.download('punkt')
 
