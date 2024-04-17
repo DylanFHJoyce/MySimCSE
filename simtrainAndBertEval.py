@@ -5,10 +5,10 @@ import numpy as np
 import pandas as pd
 #change training data file
 
-def runSim(trainingTripletsCSV, learning_rate, num_epochs):
+def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
   command = (
     "conda run -n simEnv python train.py "
-    "--model_name_or_path princeton-nlp/sup-simcse-bert-base-uncased "
+    f"--model_name_or_path {startingModel} "
     f"--train_file {trainingTripletsCSV} "
     "--output_dir thisTrainedModel "
     f"--num_train_epochs {num_epochs} "
@@ -81,17 +81,20 @@ simResults = pd.DataFrame(columns=["learning_rate", "iteration", "TD", "Coherenc
 simResults.to_csv("simResults.csv", index=False)
 
 simResults = pd.read_csv("simResults.csv")
+
+#ALSO DO FOR: starting model 
 for learning_rate in learningRates:
   
   print("\n\n\n\n\n\n\n\nSTARTING LEARNING RATE", learning_rate)
   
-  
-  runSim(trainingTripletsCSV, learning_rate, num_epochs)
+  startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
+  runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs)
   
   #makeEmbeddings()
   datasetName = "genDatasetProcessed.pkl"
   #def makeEmbeddings(datasetName):
   simModel = SimCSE("thisTrainedModel")
+  
   #load dataset to embed
   with open(datasetName, "rb") as f:
     loaded_list = pickle.load(f)
