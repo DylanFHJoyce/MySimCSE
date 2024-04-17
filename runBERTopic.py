@@ -226,70 +226,71 @@ print("have one df, BERTRESULTS, that is added to each time then taken into simr
 
 #make and save new bertResults df
 
-bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence"])
+bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize"])
 bertResults.to_csv("bertResults.csv", index=False)
 
 bertResults = pd.read_csv("bertResults.csv")
 
-#topicSizes = [40]
-for iteration in range(0, 1):
-    #for min_topic_size in 
+topicSizes = [20, 40]
+for min_topic_size in topicSizes:
+    for iteration in range(0, 1):
+        
+        
+        # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
+        # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
+        
+        
+                                             
+        #default
+        bertopicModel = BERTopic(min_topic_size=min_topic_size)
+        
+        
+        
+        
+        
+        
+        #fit bertopic model to embeddings
+        bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        ######################### ############## NEW COMMIT
+        TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
+        print("TD: ", TD)
+        coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
+        print("Coherence: ", coherenceTuple)
+        ################
     
-    # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
-    # bertopicModel = BERTopic(min_topic_size=140, ctfidf_model=ctfidf_model)
-    
-    
-                                         
-    #default
-    bertopicModel = BERTopic(min_topic_size=50)
-    
-    
-    
-    
-    
-    
-    #fit bertopic model to embeddings
-    bertopicModel.fit(documents=generalDataset, embeddings=generalEmbeddings)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ######################### ############## NEW COMMIT
-    TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
-    print("TD: ", TD)
-    coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
-    print("Coherence: ", coherenceTuple)
-    ################
-
-    #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
-    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
-    print("Many crosstab stats may be unnecessary in the final version")
-    statsFromCT = statsFromCrosstab(crosstab)
-    print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
-    most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
-    topicsToThemesDict = topicsToThemes(BTTrainComp)
-
-
-
-
-    
-    print(bertopicModel.get_topic_info()["Representation"].tolist())
-    print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
-    print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
+        #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
+        crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
+        print("Many crosstab stats may be unnecessary in the final version")
+        statsFromCT = statsFromCrosstab(crosstab)
+        print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
+        most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+        topicsToThemesDict = topicsToThemes(BTTrainComp)
     
     
     
-    print("STORE RESULTS NOW")
-    newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple}
-    newRow = pd.DataFrame([newRow])
-    bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
-    #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
     
+        
+        print(bertopicModel.get_topic_info()["Representation"].tolist())
+        print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
+        print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
+        
+        
+        
+        print("STORE RESULTS NOW")
+        newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size}
+        newRow = pd.DataFrame([newRow])
+        bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
+        #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
+        
 #evaluate and store evaluation OUTSIDE OF LOOP!
 print("NOW DONE WITH BERT ITERS")
 bertResults.to_csv("bertResults.csv", index=False)
