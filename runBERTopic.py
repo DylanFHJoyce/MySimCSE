@@ -227,7 +227,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 bertResults = pd.read_csv("bertResults.csv")
 
 #topicSizes = [40]
-for iteration in range(0, 2):
+for iteration in range(0, 1):
     #for min_topic_size in 
     
     # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
