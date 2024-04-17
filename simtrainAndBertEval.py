@@ -63,7 +63,7 @@ trainingTripletsCSV = "trainingTriplets4000Manual.csv"
 
 #USE 5e-4, 2.5e-4, 1e-4, 7.5e-5, 5e-5, 2.5e-5, 1e-5, 7.5e-6
 #learningRates = [0, 1e-4, 7.5e-5, 5e-5, 2.5e-5, 1e-5, 7.5e-6]#[5e-4, 1e-4, 5e-5, 1e-5, 5e-6]
-learningRates = [5e-5, 1e-5]# [5e-3, #, 5e-6] #prehaps reverse?
+learningRates = [0, 5e-5, 1e-5]# [5e-3, #, 5e-6] #prehaps reverse?
 num_epochs = 4
 datasetName = "placeholder"
 
@@ -88,7 +88,9 @@ simResults = pd.read_csv("simResults.csv")
 for learning_rate in learningRates:
   
   print("\n\n\n\n\n\n\n\nSTARTING LEARNING RATE", learning_rate)
-  
+
+
+  #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
   startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
   runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs)
   
