@@ -231,7 +231,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 
 bertResults = pd.read_csv("bertResults.csv")
 
-topicSizes = [20, 40, 60, 80, 100, None]
+topicSizes = [40]#, 60, 80, 100]
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
     for iteration in range(0, 1):
@@ -243,7 +243,7 @@ for min_topic_size in topicSizes:
         
                                              
         #default
-        bertopicModel = BERTopic(nr_topics=min_topic_size)
+        bertopicModel = BERTopic()#nr_topics=min_topic_size)
         
         
         
@@ -261,25 +261,25 @@ for min_topic_size in topicSizes:
         
         
         
-        ######################### ############## NEW COMMIT
-        TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
-        print("TD: ", TD)
-        coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
-        print("Coherence: ", coherenceTuple)
-        ################
+        # ######################### ############## NEW COMMIT
+        # TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
+        # print("TD: ", TD)
+        # coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
+        # print("Coherence: ", coherenceTuple)
+        # ################
     
-        #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
-        crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
-        print("Many crosstab stats may be unnecessary in the final version")
-        statsFromCT = statsFromCrosstab(crosstab)
-        print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
-        most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
-        topicsToThemesDict = topicsToThemes(BTTrainComp)
-    
-    
+        # #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
+        # crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
+        # print("Many crosstab stats may be unnecessary in the final version")
+        # statsFromCT = statsFromCrosstab(crosstab)
+        # print("Many crosstab stats may be unnecessary in the final version, but it might not matter")
+        # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+        # topicsToThemesDict = topicsToThemes(BTTrainComp)
     
     
-        
+    
+    
+    
         print(bertopicModel.get_topic_info()["Representation"].tolist())
         print(len(bertopicModel.get_topic_info()["Representation"].tolist()))
         print("gendatasetLen: ", len(generalDataset), " generalEmbeddings len: ", len(generalEmbeddings), "\n\n\n\n\n\n")
