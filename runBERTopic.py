@@ -261,13 +261,15 @@ for min_topic_size in topicSizes:
         
         
         
-        # ######################### ############## NEW COMMIT
-        # TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
-        # print("TD: ", TD)
-        # coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
-        # print("Coherence: ", coherenceTuple)
-        # ################
-    
+        ######################### ############## NEW COMMIT
+        TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
+        print("TD: ", TD)
+        coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
+        print("Coherence: ", coherenceTuple)
+        ################
+
+
+        
         # #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
         # crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings) 
         # print("Many crosstab stats may be unnecessary in the final version")
