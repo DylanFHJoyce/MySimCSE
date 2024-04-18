@@ -232,6 +232,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 bertResults = pd.read_csv("bertResults.csv")
 
 topicSizes = [100]#, 60, 80, 100]
+#
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
     for iteration in range(0, 1):
@@ -243,7 +244,7 @@ for min_topic_size in topicSizes:
         
                                              
         #default
-        bertopicModel = BERTopic()#nr_topics=min_topic_size)
+        bertopicModel = BERTopic(min_topic_size= 40)#nr_topics=min_topic_size)
         
         
         
