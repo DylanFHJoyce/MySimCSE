@@ -273,6 +273,8 @@ for min_topic_size in topicSizes:
         #THE THEME CONTENT/SPREAD ANALYSIS#################################################
         # #TrainValTest is the training data with its labels #SHOULD BE 0 FOR THE WHOLE TRAINING daTA
         crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings)
+        
+
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\nCROSSTAB: ")
         print(crosstab)
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
