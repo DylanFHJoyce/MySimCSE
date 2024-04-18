@@ -137,5 +137,5 @@ for learning_rate in learningRates:
 pd.set_option('display.width', 1000)
 print(simResults)
 
-simResults.to_csv("simResults.csv", index=False)
+simResults.to_csv("nonFinalTestingResults/simResults.csv", index=False)
 print("CHECK IF SHELL=True is needed for subprocesses?")
