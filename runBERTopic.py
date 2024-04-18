@@ -42,7 +42,7 @@ def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
     
     print("NPMI Coherence Score:", coherence_npmi)
     
-    return coherence_npmi, coherence_npmiPerTopic
+    return coherence_npmi#, coherence_npmiPerTopic
     
 def topicDiversity(topicsNWordsList): #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
     
