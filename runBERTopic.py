@@ -231,7 +231,7 @@ bertResults.to_csv("bertResults.csv", index=False)
 
 bertResults = pd.read_csv("bertResults.csv")
 
-topicSizes = [100]#, 60, 80, 100]
+topicSizes = [20, 40, 60, 80, 100]#, 60, 80, 100]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
@@ -244,7 +244,7 @@ for min_topic_size in topicSizes:
         
                                              
         #default
-        bertopicModel = BERTopic()#min_topic_size= 40)#nr_topics=min_topic_size)
+        bertopicModel = BERTopic(min_topic_size=min_topic_size)#min_topic_size= 40)#nr_topics=min_topic_size)
         
         
         
@@ -328,7 +328,7 @@ for min_topic_size in topicSizes:
         
         
         print("STORE RESULTS NOW")
-        newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100}
+        newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics())}
         newRow = pd.DataFrame([newRow])
         bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
         #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
