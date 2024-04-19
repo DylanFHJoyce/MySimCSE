@@ -77,7 +77,7 @@ with open('split4000Manual.pkl', 'rb') as f:
 
 #clear the folder where result dataframe is stored
 #for each learning rate etc
-TopicOrder=["learning_rate", "iteration", "topicSize", "Coherence", "TD", "percTrainInMinusOne"]
+TopicOrder=["learning_rate", "iteration", "topicSize", "Coherence", "TD", "percTrainInMinusOne", "numTopicsGenerated"]
 simResults = pd.DataFrame(columns=TopicOrder)
 simResults.to_csv("simResults.csv", index=False)
 
