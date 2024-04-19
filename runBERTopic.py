@@ -244,7 +244,7 @@ for min_topic_size in topicSizes:
         
                                              
         #default
-        bertopicModel = BERTopic(min_topic_size= 40)#nr_topics=min_topic_size)
+        bertopicModel = BERTopic()#min_topic_size= 40)#nr_topics=min_topic_size)
         
         
         
