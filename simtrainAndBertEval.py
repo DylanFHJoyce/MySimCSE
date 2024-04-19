@@ -126,14 +126,13 @@ for learning_rate in learningRates:
   
   bertResults = pd.read_csv("bertResults.csv")
   bertResults["learning_rate"] = learning_rate
-  print(simResults, bertResults, "\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.")
+  
   bertResults = bertResults[TopicOrder]
   simResults = pd.concat([simResults, bertResults], axis=0, ignore_index=True)
-
   
-  print("\n\n\n\n\nENDING LEARNING RATE", learning_rate)
+  print("\n\n\n\n\n\n\n\n\n\n\n\n\nENDING LEARNING RATE", learning_rate)
   print(simResults)
-  print("\n\n\n\n\nabove are result from LEARNING RATE", learning_rate)
+  print("above are all simResults so far)
   
 pd.set_option('display.width', 1000)
 print(simResults)
