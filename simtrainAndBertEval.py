@@ -132,7 +132,7 @@ for learning_rate in learningRates:
   
   print("\n\n\n\n\n\n\n\n\n\n\n\n\nENDING LEARNING RATE", learning_rate)
   print(simResults)
-  print("above are all simResults so far)
+  print("above are all simResults so far")
   
 pd.set_option('display.width', 1000)
 print(simResults)
