@@ -226,7 +226,7 @@ print("have one df, BERTRESULTS, that is added to each time then taken into simr
 
 #make and save new bertResults df
 
-bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne"])
+bertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated"])
 bertResults.to_csv("bertResults.csv", index=False)
 
 bertResults = pd.read_csv("bertResults.csv")
@@ -328,7 +328,7 @@ for min_topic_size in topicSizes:
         
         
         print("STORE RESULTS NOW")
-        newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": minusOneTopic.sum()/len(TrainValTest[0])}
+        newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100}
         newRow = pd.DataFrame([newRow])
         bertResults = pd.concat([bertResults, newRow], axis=0, ignore_index=True)
         #bertResults = bertResults.append({"iteration": iteration, "TD": TD, "Coherence": coherenceTuple})
