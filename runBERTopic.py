@@ -281,9 +281,11 @@ for min_topic_size in topicSizes:
         #from crosstab or crosstab formatted
         #crosstab.iloc[:, 5]#.sum() #for getting all of column 5 (0 indexed obvs) (and can sum if needed)
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-        print(crosstab["-1_said_woman_people_new"].sum()) #for getting all of column by name
+        minusOneTopic = crosstab.iloc[:, 0]#.sum() #for getting all of column 0 (0 indexed obvs) (and can sum if needed)
+        print(minusOneTopic.sum())
+        #THIS doesnt work due to changing topic reps each iter, print(crosstab["-1_said_woman_people_new"].sum()) #for getting all of column by name
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
-        print(crosstab["-1_said_woman_people_new"].sum()/len(TrainValTest[0]))
+        print(minusOneTopic.sum()/len(TrainValTest[0]))
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
         # crosstab.iloc[2] #for getting all of row 2 (0 indexed)
         # crosstab.loc["Economic/business"] #for getting row by  theme name
