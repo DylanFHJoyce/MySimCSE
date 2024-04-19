@@ -278,6 +278,7 @@ for min_topic_size in topicSizes:
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\nCROSSTAB: ")
         print(crosstab)
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+        crosstab.to_csv("mostRecentCrossTab.csv", index=False)
         #from crosstab or crosstab formatted
         #crosstab.iloc[:, 5]#.sum() #for getting all of column 5 (0 indexed obvs) (and can sum if needed)
         print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
