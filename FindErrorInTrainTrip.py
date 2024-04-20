@@ -30,7 +30,7 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
 ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
 print(len(ourTripTrain))
-altTripFindError = ourTripTrain.iloc[100:200, :]
+altTripFindError = ourTripTrain.iloc[150:, :]
 
 altTripFindError.to_csv("altTripFindError.csv", index=False)
 
