@@ -5,6 +5,38 @@ import numpy as np
 import pandas as pd
 #change training data file
 
+def generate_triplet_dataset(input_df, length):
+    # lists for triplet data
+    sent0_list, sent1_list, hard_neg_list = [], [], []
+
+    for _ in range(length):
+        # Randomly select a row from the input DataFrame
+        random_row_index = random.randint(0, len(input_df) - 1)
+        sent0_row = input_df.iloc[random_row_index]
+
+        # Randomly select a row from the same category as sent0
+        same_category_rows = input_df[input_df['Category'] == sent0_row['Category']]
+        sent1_row = same_category_rows.sample(1).iloc[0]
+
+        # Randomly select a row from a different category than sent0
+        different_category_rows = input_df[input_df['Category'] != sent0_row['Category']]
+        hard_neg_row = different_category_rows.sample(1).iloc[0]
+
+        # Append the selected rows to the lists
+        sent0_list.append(sent0_row['Document'])
+        sent1_list.append(sent1_row['Document'])
+        hard_neg_list.append(hard_neg_row['Document'])
+
+    # Create the triplet DataFrame
+    triplet_df = pd.DataFrame({
+        'sent0': sent0_list,
+        'sent1': sent1_list,
+        'hard_neg': hard_neg_list
+    })
+
+    return triplet_df
+
+
 def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
   command = (
     "conda run -n simEnv python train.py "
@@ -30,7 +62,7 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
 ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
 print(len(ourTripTrain))
-altTripFindError = ourTripTrain.iloc[150:, :]
+altTripFindError = ourTripTrain.iloc[0:100, :]
 
 altTripFindError.to_csv("altTripFindError.csv", index=False)
 
