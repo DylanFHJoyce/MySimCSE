@@ -6,6 +6,8 @@ import pandas as pd
 
 import random
 
+print("\n\n\nSTARTING THEME FOCUSED TRAINING: ")
+
 def runThemeSpreadAnalysis():
     #DOES THIS NEED SHELL = TRUE ASWELL?
     command = "conda run -n berTopicEnv python runThemeSpreadAnalysis.py"
