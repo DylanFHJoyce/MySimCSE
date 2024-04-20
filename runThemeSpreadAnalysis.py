@@ -173,17 +173,29 @@ def topicsToThemes(BTTrainComp):
 
 
 
-
+print("FOR LATER VERSION CONSIDER USING HIGHER GEN DATASET SAMPLE SIZE AS MAY NEED MORE DENSITY FOR SUBMODELING")
 #take general embeddings, parameters
 
 #get the proceessed general dataset list 
 with open("genDatasetProcessed.pkl", "rb") as f:
   generalDataset = pickle.load(f)
 
+
+
+
 #get the embeddings to then be theme analysed
 with open("ThemeSpreadEmbeddings.pkl", "rb") as f:
   ThemeSpreadEmbeddings = pickle.load(f)
   #print("GENSET TYPE", type(ThemeSpreadEmbeddings))
+
+
+
+
+
+#open  the laelled data (format train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
+
 
 
 print(len(ThemeSpreadEmbeddings), len(generalDataset))
@@ -194,6 +206,15 @@ bertopicModel = BERTopic()#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 
 
+crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings)
+minusOneTopic = crosstab.iloc[:, 0]
+
+for idx, row in crosstab.iterrows():
+    rowsTotal = row.sum()
+
+    print(idx, rowsTotal / row[0])
+    
+    
 
 #take training data embeddings and transform to the bert model
 
