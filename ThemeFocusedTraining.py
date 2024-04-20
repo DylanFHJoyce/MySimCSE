@@ -114,10 +114,15 @@ runThemeSpreadAnalysis()
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
-focusCategory = "Education"
+focusCategory = "crime"
 
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
 trainLabeledDataDFFocus.reset_index(drop=True)
+
+trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
+
+
+
 trainLabeledDataDFNonFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] != focusCategory]
 focusSamples = len(trainLabeledDataDFFocus)
 percentFromNonFocus = 0.1
@@ -129,6 +134,7 @@ print("\n\n\n")
 
 
 #take random sample of NonFocus df to keep general context
+
 random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
 trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
 trainLabeledDataDFNonFocus.reset_index(drop=True)
@@ -175,36 +181,35 @@ runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_dev
 
 #redo Embeddings with new focus model
 
-
-
-
-
-
+simModel = output_dir
 
 # datasetName = "genDatasetProcessed.pkl"
 # #def makeEmbeddings(datasetName):
-# simModel = SimCSE(startingModel)
+simModel = SimCSE(newModel)
 
-# #load dataset to embed
-# with open(datasetName, "rb") as f:
-#   loaded_list = pickle.load(f)
-# #embed dataset with simcse model 
-# ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
-# with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
-#     pickle.dump(ThemeSpreadEmbeddings, f)
+#load dataset to embed
+with open(datasetName, "rb") as f:
+  loaded_list = pickle.load(f)
+#embed dataset with simcse model 
+ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
-# #open  the laelled data (format train, val, test)
-# with open('split4000Manual.pkl', 'rb') as f:
-#     TrainValTest = pickle.load(f)
-# #make embeddings of val data for experiment 2 use
-# ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
-# with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
-#     pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeSpreadEmbeddings, f)
+
+
+#open  the laelled data (format train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
+#make embeddings of val data for experiment 2 use
+ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+
 
 # #do bert model and use theme spread analysis to decide upon themes to train
 
-# runThemeSpreadAnalysis()
+runThemeSpreadAnalysis()
 
 
 
