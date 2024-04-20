@@ -270,7 +270,7 @@ print(bertopicModel.get_topic_info())
 
 
 
-
+print("if doing entropy then need all columns as count, even blank ones?")
     #then i also want the enthropy for each theme with and without the -1 topic
     #and keep in mid the difference that will make
 
