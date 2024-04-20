@@ -198,6 +198,13 @@ with open('split4000Manual.pkl', 'rb') as f:
 
 
 
+with open("ThemeFocusedTrainingEmbeddings.pkl", "rb") as f:
+    ThemeFocusedTrainingEmbeddings = pickle.load(f)
+
+
+
+
+
 print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 #do bert model on gen dataset
@@ -206,7 +213,7 @@ bertopicModel = BERTopic()#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 
 
-crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], thisModelTrainingEmbeddings)
+crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocusedTrainingEmbeddings)
 minusOneTopic = crosstab.iloc[:, 0]
 
 for idx, row in crosstab.iterrows():
