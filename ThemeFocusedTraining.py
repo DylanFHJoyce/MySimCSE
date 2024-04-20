@@ -50,12 +50,12 @@ def generate_triplet_dataset(input_df, length):
     return triplet_df
 
 
-def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
+def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output_dir):
   command = (
     "conda run -n simEnv python train.py "
     f"--model_name_or_path {startingModel} "
     f"--train_file {trainingTripletsCSV} "
-    "--output_dir thisTrainedModel "
+    f"--output_dir {themeFocusModel} "
     f"--num_train_epochs {num_epochs} "
     "--per_device_train_batch_size 64 "
     f"--learning_rate {learning_rate} "
@@ -131,11 +131,15 @@ print(len(trainLabeledDataDFFocus))
 FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
 
 specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
+specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 
 #run training 
-#runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs)
+#need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
+themeFocusModel = "themeFocusModel"
+runSim(startingModel = startingModel, trainingTripletsCSV = "specificThemeTripletDataset.csv", learning_rate =5e-5, num_epochs = 4, output_dir = themeFocusModel)
 
 
+#redo Embeddings with new focus model
 
 #do bertopic model and spread analysis and compare to starting one 
 
