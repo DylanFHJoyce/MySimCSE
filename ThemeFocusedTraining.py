@@ -169,11 +169,55 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 output_dir = "themeFocusModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-5
-per_device_train_batch_size = 32 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
+per_device_train_batch_size = 16 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
 
 
 #redo Embeddings with new focus model
+
+
+
+
+
+
+
+# datasetName = "genDatasetProcessed.pkl"
+# #def makeEmbeddings(datasetName):
+# simModel = SimCSE(startingModel)
+
+# #load dataset to embed
+# with open(datasetName, "rb") as f:
+#   loaded_list = pickle.load(f)
+# #embed dataset with simcse model 
+# ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
+
+# with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeSpreadEmbeddings, f)
+
+# #open  the laelled data (format train, val, test)
+# with open('split4000Manual.pkl', 'rb') as f:
+#     TrainValTest = pickle.load(f)
+# #make embeddings of val data for experiment 2 use
+# ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+# with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+
+# #do bert model and use theme spread analysis to decide upon themes to train
+
+# runThemeSpreadAnalysis()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #do bertopic model and spread analysis and compare to starting one 
 
