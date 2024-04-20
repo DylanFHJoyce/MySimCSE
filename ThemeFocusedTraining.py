@@ -18,7 +18,25 @@ def runThemeSpreadAnalysis():
     subprocess.run(command, shell=True)
 
 
-
+def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
+  command = (
+    "conda run -n simEnv python train.py "
+    f"--model_name_or_path {startingModel} "
+    f"--train_file {trainingTripletsCSV} "
+    "--output_dir thisTrainedModel "
+    f"--num_train_epochs {num_epochs} "
+    "--per_device_train_batch_size 64 "
+    f"--learning_rate {learning_rate} "
+    "--max_seq_length 64 "
+    "--load_best_model_at_end "
+    "--pooler_type cls "
+    "--overwrite_output_dir "
+    "--temp 0.05 "
+     "--do_train "
+     "--fp16 "
+     "--use_in_batch_instances_as_negatives"
+  )
+  subprocess.run(command, shell=True)
 
 
 
@@ -62,7 +80,15 @@ runThemeSpreadAnalysis()
 
 
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
+trainLabeledDataDF = TrainValTest[0]
+trainLabeledDataDF = trainLabeledDataDF[trainLabeledDataDF["Category"] == "crime"]
+print(len(trainLabeledDataDF))
+
+
 
 #run training 
+#runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs)
+
+
 
 #do bertopic model and spread analysis and compare to starting one 
