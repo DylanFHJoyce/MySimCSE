@@ -58,11 +58,22 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
   subprocess.run(command, shell=True)
 
 
+# #open  the laelled data (format train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
+trainLabeledDataDF = TrainValTest[0]
+
+
+
+specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 2000)
+specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
+
+
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
-ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
-print(len(ourTripTrain))
-altTripFindError = ourTripTrain.iloc[100:180, :]
+# ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
+# print(len(ourTripTrain))
+# altTripFindError = ourTripTrain.iloc[100:180, :]
 
 altTripFindError.to_csv("altTripFindError.csv", index=False)
 
