@@ -148,9 +148,9 @@ FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 
-
-# specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
-specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
+#COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
+specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
+#specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 
 
