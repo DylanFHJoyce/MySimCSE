@@ -226,9 +226,9 @@ quantInTop12345 = ()
 for idx, row in crosstab.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
-    print(SV)
+    #print(SV)
     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
-    print(quantInTop12345, "\n\n")
+    print(quantInTop12345, "\n")
 
 
 #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
@@ -239,9 +239,9 @@ crossTabNoMinus = crosstab.iloc[:, 1:]
 for idx, row in crossTabNoMinus.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
-    print(SV)
-    quantInTop12345 = (SV[1], sum(SV[1:3]), sum(SV[1:4]), sum(SV[1:5]), sum(SV[1:6]))
-    print(quantInTop12345, "\n\n")
+    #print(SV)
+    quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+    print(quantInTop12345, "\n")
 
 
 
