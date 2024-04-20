@@ -177,7 +177,7 @@ output_dir = "themeFocusModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-5
 per_device_train_batch_size = 16 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
-runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
 
 
 #redo Embeddings with new focus model
