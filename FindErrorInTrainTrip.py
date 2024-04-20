@@ -28,7 +28,14 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
 
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
-themeFocusModel = "themeFocusModel"
-trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rate =5e-5
-runSim(startingModel, trainingTripletsCSV, learning_rate, 1)#, themeFocusModel)
+ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
+print(len(ourTripTrain))
+
+
+# specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
+
+
+# themeFocusModel = "themeFocusModel"
+# trainingTripletsCSV = "specificThemeTripletDataset.csv"
+# learning_rate =5e-5
+# runSim(startingModel, trainingTripletsCSV, learning_rate, 1)#, themeFocusModel)
