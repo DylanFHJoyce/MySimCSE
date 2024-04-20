@@ -220,6 +220,12 @@ for idx, row in crosstab.iterrows():
     rowsTotal = row.sum()
 
     print(idx, (row[0] / rowsTotal) * 100 )
+
+print(bertopicModel.get_topic_info())
+
+    #then i also want the enthropy for each theme with and without the -1 topic
+    #and keep in mid the difference that will make
+
     
     
 
