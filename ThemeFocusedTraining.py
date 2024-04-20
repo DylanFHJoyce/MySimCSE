@@ -186,7 +186,7 @@ simModel = output_dir
 
 # datasetName = "genDatasetProcessed.pkl"
 # #def makeEmbeddings(datasetName):
-simModel = SimCSE(newModel)
+simModel = SimCSE(simModel)
 
 
 #load dataset to embed
