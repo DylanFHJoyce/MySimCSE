@@ -3,6 +3,7 @@ from simcse import SimCSE
 import pickle
 import numpy as np
 import pandas as pd
+import random
 #change training data file
 
 def generate_triplet_dataset(input_df, length):
