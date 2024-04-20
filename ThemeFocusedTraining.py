@@ -144,7 +144,9 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 themeFocusModel = "themeFocusModel"
-runSim(startingModel = startingModel, trainingTripletsCSV = "specificThemeTripletDataset.csv", learning_rate =5e-5, num_epochs = 4, output_dir = themeFocusModel)
+trainingTripletsCSV = "specificThemeTripletDataset.csv"
+learning_rate =5e-5
+runSim(startingModel, trainingTripletsCSV, learning_rate, 4, themeFocusModel)
 
 
 #redo Embeddings with new focus model
