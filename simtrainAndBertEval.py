@@ -57,7 +57,7 @@ pd.set_option('display.width', 1000)
 
 
 #placeholders 
-trainingTripletsCSV = "trainingTriplets4000Manual.csv"
+trainingTripletsCSV = "trainingTriplets4000Manual.csv" #
 #learning_rate = 5e-5
 
 
