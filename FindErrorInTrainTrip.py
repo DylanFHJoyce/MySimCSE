@@ -67,6 +67,11 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 100)
+# Repeat the original DataFrame 10 times
+specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
+specificThemeTripletDataset.reset_index(drop=True, inplace=True)
+
+
 specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
 
 
