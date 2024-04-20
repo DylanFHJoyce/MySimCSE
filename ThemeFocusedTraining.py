@@ -50,14 +50,14 @@ def generate_triplet_dataset(input_df, length):
     return triplet_df
 
 
-def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output_dir):
+def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output_dir, per_device_train_batch_size):
   command = (
     "conda run -n simEnv python train.py "
     f"--model_name_or_path {startingModel} "
     f"--train_file {trainingTripletsCSV} "
     f"--output_dir {output_dir} "
     f"--num_train_epochs {num_epochs} "
-    "--per_device_train_batch_size 64 "
+    f"--per_device_train_batch_size {per_device_train_batch_size} "
     f"--learning_rate {learning_rate} "
     "--max_seq_length 64 "
     "--load_best_model_at_end "
@@ -169,7 +169,8 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 output_dir = "themeFocusModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-5
-runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir)
+per_device_train_batch_size = 32 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
+runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
 
 
 #redo Embeddings with new focus model
