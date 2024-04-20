@@ -219,7 +219,7 @@ minusOneTopic = crosstab.iloc[:, 0]
 for idx, row in crosstab.iterrows():
     rowsTotal = row.sum()
 
-    print(idx, rowsTotal / row[0])
+    print(idx, (row[0] / rowsTotal) * 100 )
     
     
 
