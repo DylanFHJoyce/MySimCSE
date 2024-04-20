@@ -232,10 +232,11 @@ bertResults.to_csv("bertResults.csv", index=False)
 bertResults = pd.read_csv("bertResults.csv")
 
 topicSizes = [20, 40, 60, 80, 100]#, 60, 80, 100]
+topicSizes = [20, 60, 100]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
-    for iteration in range(0, 2):
+    for iteration in range(0, 1):
         
         
         # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
