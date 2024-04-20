@@ -190,6 +190,9 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 #do bert model on gen dataset
 
+bertopicModel = BERTopic()#min_topic_size=min_topic_size)
+bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
+
 
 
 #take training data embeddings and transform to the bert model
