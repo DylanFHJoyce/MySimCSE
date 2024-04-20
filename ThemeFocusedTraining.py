@@ -114,7 +114,7 @@ runThemeSpreadAnalysis()
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
-focusCategory = "General Media"
+focusCategory = "Education"
 
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
 trainLabeledDataDFFocus.reset_index(drop=True)
