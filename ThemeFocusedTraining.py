@@ -126,7 +126,7 @@ trainLabeledDataDFFocus.reset_index(drop=True)
 
 
 
-trainLabeledDataDFNonFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] != focusCategory]
+trainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
 focusSamples = len(trainLabeledDataDFFocus)
 percentFromNonFocus = 0.1
 
@@ -147,14 +147,7 @@ print(len(trainLabeledDataDFFocus))
 
 FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
 
-
 FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
-
-
-
-
-
-
 
 
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
