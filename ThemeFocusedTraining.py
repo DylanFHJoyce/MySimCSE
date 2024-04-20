@@ -181,7 +181,7 @@ trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-6
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
-
+print("firstTrain")
 for ThemeFocusedIteration in range(0, 3):
     runSim(startingModel, trainingTripletsCSV, learning_rate, 3, output_dir, per_device_train_batch_size)
     startingModel = output_dir #after first training run we use that model for each subsequent run
@@ -217,7 +217,7 @@ for ThemeFocusedIteration in range(0, 3):
     # #do bert model and use theme spread analysis to decide upon themes to train
     
     
-    print("STARTING SECOND THEME SPREAD ANALYSIS")
+    print("\n\nSTARTING SECOND THEME SPREAD ANALYSIS/ secondTrain")
     runThemeSpreadAnalysis()
 
 
