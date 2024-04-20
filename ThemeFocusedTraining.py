@@ -44,6 +44,16 @@ with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
 
 
 
+#open  the laelled data (format train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
+#make embeddings of val data for experiment 2 use
+ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+
+
+
 #do bert model and use theme spread analysis to decide upon themes to train
 
 
