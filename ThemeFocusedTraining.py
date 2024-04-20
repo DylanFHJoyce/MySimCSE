@@ -116,9 +116,10 @@ runThemeSpreadAnalysis()
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
-focusCategory = "crime"
+focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
+focusCategories = ["crime"]
 
-trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
+trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
 trainLabeledDataDFFocus.reset_index(drop=True)
 
 #trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
