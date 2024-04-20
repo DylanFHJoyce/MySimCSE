@@ -139,6 +139,7 @@ print(len(trainLabeledDataDFFocus))
 FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
 
 
+FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 
