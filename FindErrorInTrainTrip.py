@@ -45,7 +45,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
     f"--train_file {trainingTripletsCSV} "
     "--output_dir thisTrainedModel "
     f"--num_train_epochs {num_epochs} "
-    "--per_device_train_batch_size 64 "
+    "--per_device_train_batch_size 8 "
     f"--learning_rate {learning_rate} "
     "--max_seq_length 64 "
     "--load_best_model_at_end "
@@ -66,7 +66,7 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 
-specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 100)
+specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 16)
 # Repeat the original DataFrame 10 times
 specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
 specificThemeTripletDataset.reset_index(drop=True, inplace=True)
