@@ -244,6 +244,7 @@ for idx, row in crossTabNoMinus.iterrows():
     print(SV[:10])
     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
     total = sum(SV)
+    print("below doesnt count the -1 so is also inaccurate")
     print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
     print(quantInTop12345, "\n")
 
