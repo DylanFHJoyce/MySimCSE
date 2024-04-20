@@ -55,7 +55,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
     "conda run -n simEnv python train.py "
     f"--model_name_or_path {startingModel} "
     f"--train_file {trainingTripletsCSV} "
-    f"--output_dir {themeFocusModel} "
+    f"--output_dir {output_dir} "
     f"--num_train_epochs {num_epochs} "
     "--per_device_train_batch_size 64 "
     f"--learning_rate {learning_rate} "
@@ -141,12 +141,13 @@ FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDa
 specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 
+
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
-themeFocusModel = "themeFocusModel"
+output_dir = "themeFocusModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-5
-runSim(startingModel, trainingTripletsCSV, learning_rate, 4, themeFocusModel)
+runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir)
 
 
 #redo Embeddings with new focus model
