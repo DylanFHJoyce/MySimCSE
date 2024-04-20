@@ -75,8 +75,7 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 # ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
 # print(len(ourTripTrain))
 # altTripFindError = ourTripTrain.iloc[100:180, :]
-
-altTripFindError.to_csv("altTripFindError.csv", index=False)
+#altTripFindError.to_csv("altTripFindError.csv", index=False)
 
 
 themeFocusModel = "themeFocusModel"
