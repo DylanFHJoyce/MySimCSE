@@ -128,7 +128,7 @@ print("\n\n\n")
 
 
 #take random sample of NonFocus df to keep general context
-random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples/percentFromNonFocus), replace=False)
+random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
 trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
 
 print(len(trainLabeledDataDFFocus))
