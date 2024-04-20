@@ -81,7 +81,7 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 #makeEmbeddings()
 datasetName = "genDatasetProcessed.pkl"
 #def makeEmbeddings(datasetName):
-simModel = SimCSE("thisTrainedModel")
+simModel = SimCSE(startingModel)
 
 #load dataset to embed
 with open(datasetName, "rb") as f:
