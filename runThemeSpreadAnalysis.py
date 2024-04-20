@@ -229,6 +229,14 @@ print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
 
 print(bertopicModel.get_topic_info())
 
+
+# exampleColName = crosstab.columns[1]
+# for val in crosstab[exampleColName]:
+#     print(val)
+
+
+
+
     #then i also want the enthropy for each theme with and without the -1 topic
     #and keep in mid the difference that will make
 
