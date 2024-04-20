@@ -138,9 +138,29 @@ print(len(trainLabeledDataDFFocus))
 
 FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
 
+
+
+
+
+
+
+
+
+
+
 # specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
-specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 30))
+specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 30)
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
+
+
+
+
+
+
+
+
+
+
 
 
 #run training 
