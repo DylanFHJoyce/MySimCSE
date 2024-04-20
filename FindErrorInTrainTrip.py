@@ -66,7 +66,7 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 
-specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 250)
+specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 500)
 specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
 
 
