@@ -222,7 +222,7 @@ quantInTop12345 = ()
 for idx, row in crosstab.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
-    quantInTop12345 = (SV[0], sum(SV[:1]), sum(SV[:2]), sum(SV[:3]), sum(SV[:4]))
+    quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
     print(quantInTop12345)
 
 
