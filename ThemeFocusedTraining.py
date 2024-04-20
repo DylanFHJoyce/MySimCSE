@@ -119,7 +119,7 @@ focusCategory = "crime"
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
 trainLabeledDataDFFocus.reset_index(drop=True)
 
-trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
+#trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
 
 
 
@@ -155,8 +155,9 @@ FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
-specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
+specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
+print(len(specificThemeTripletDataset))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 
 
