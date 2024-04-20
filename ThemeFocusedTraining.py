@@ -92,3 +92,6 @@ print(len(trainLabeledDataDF))
 
 
 #do bertopic model and spread analysis and compare to starting one 
+
+
+print("end of theme focused training file")
