@@ -45,7 +45,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
     f"--train_file {trainingTripletsCSV} "
     "--output_dir thisTrainedModel "
     f"--num_train_epochs {num_epochs} "
-    "--per_device_train_batch_size 8 "
+    "--per_device_train_batch_size 64 " ################ ##############    #CHANGE THIS IF NEEDED#  ######   ############### ############################################################
     f"--learning_rate {learning_rate} "
     "--max_seq_length 64 "
     "--load_best_model_at_end "
@@ -66,18 +66,18 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 
-specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 16)
-# Repeat the original DataFrame 10 times
-#specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
-specificThemeTripletDataset.reset_index(drop=True, inplace=True)
+# specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 16)
+# # Repeat the original DataFrame 10 times
+# specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
+# specificThemeTripletDataset.reset_index(drop=True, inplace=True)
 
 
 specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
 
-"specificThemeTripletDataset.csv"
+#"specificThemeTripletDataset.csv"
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
-# ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
+#ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
 # print(len(ourTripTrain))
 # altTripFindError = ourTripTrain.iloc[100:180, :]
 #altTripFindError.to_csv("altTripFindError.csv", index=False)
