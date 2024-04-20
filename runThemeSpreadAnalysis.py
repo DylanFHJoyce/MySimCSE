@@ -217,6 +217,16 @@ crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocu
 minusOneTopic = crosstab.iloc[:, 0]
 
 
+
+quantInTop12345 = ()
+for idx, row in sortedCT.iterrows():
+    print(idx)
+    SV = sorted(row, reverse=True)
+    quantInTop12345 = (SV[0], sum(SV[:1]), sum(SV[:2]), sum(SV[:3]), sum(SV[:4]))
+    print(quantInTop12345)
+
+
+
 allRowsTotal = 0
 allMinusOneTotal = 0
 for idx, row in crosstab.iterrows():
@@ -228,6 +238,9 @@ for idx, row in crosstab.iterrows():
 print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
 
 print(bertopicModel.get_topic_info())
+
+
+
 
 
 # exampleColName = crosstab.columns[1]
