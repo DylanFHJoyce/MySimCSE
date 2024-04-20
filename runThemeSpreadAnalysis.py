@@ -226,7 +226,7 @@ quantInTop12345 = ()
 for idx, row in crosstab.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
-    #print(SV)
+    print(SV[:10)
     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
     print(quantInTop12345, "\n")
 
@@ -239,7 +239,7 @@ crossTabNoMinus = crosstab.iloc[:, 1:]
 for idx, row in crossTabNoMinus.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
-    #print(SV)
+    print(SV[:10)
     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
     print(quantInTop12345, "\n")
 
