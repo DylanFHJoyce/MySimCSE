@@ -117,6 +117,7 @@ trainLabeledDataDF = TrainValTest[0]
 focusCategory = "crime"
 
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
+trainLabeledDataDFFocus.reset_index(drop=True)
 trainLabeledDataDFNonFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] != focusCategory]
 focusSamples = len(trainLabeledDataDFFocus)
 percentFromNonFocus = 0.1
@@ -130,6 +131,7 @@ print("\n\n\n")
 #take random sample of NonFocus df to keep general context
 random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
 trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
+trainLabeledDataDFNonFocus.reset_index(drop=True)
 
 print(len(trainLabeledDataDFFocus))
 
