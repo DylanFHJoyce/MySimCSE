@@ -218,12 +218,31 @@ minusOneTopic = crosstab.iloc[:, 0]
 
 
 
+
+
+#NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
+print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
 quantInTop12345 = ()
 for idx, row in crosstab.iterrows():
     print(idx)
     SV = sorted(row, reverse=True)
     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
     print(quantInTop12345)
+
+
+#NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
+print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
+print("before training this will probably be much lower than the one including -1")
+quantInTop12345 = ()
+crossTabNoMinus = crosstab.iloc[:, 1:]
+for idx, row in crossTabNoMinus.iterrows():
+    print(idx)
+    SV = sorted(row, reverse=True)
+    quantInTop12345 = (SV[1], sum(SV[1:3]), sum(SV[1:4]), sum(SV[1:5]), sum(SV[1:6]))
+    print(quantInTop12345)
+
+
+
 
 
 
