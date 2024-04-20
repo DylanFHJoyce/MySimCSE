@@ -37,9 +37,10 @@ simModel = SimCSE("thisTrainedModel")
 with open(datasetName, "rb") as f:
   loaded_list = pickle.load(f)
 #embed dataset with simcse model 
-embeddings = simModel.encode(loaded_list).numpy()
+ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
-
+with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeSpreadEmbeddings, f)
 
 
 
