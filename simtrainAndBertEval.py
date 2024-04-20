@@ -63,7 +63,8 @@ trainingTripletsCSV = "trainingTriplets4000Manual.csv" #
 
 #USE 5e-4, 2.5e-4, 1e-4, 7.5e-5, 5e-5, 2.5e-5, 1e-5, 7.5e-6
 #learningRates = [0, 1e-4, 7.5e-5, 5e-5, 2.5e-5, 1e-5, 7.5e-6]#[5e-4, 1e-4, 5e-5, 1e-5, 5e-6]
-learningRates = [0, 1e-4, 5e-5, 1e-5]# [5e-3, #, 5e-6] #prehaps reverse?
+#learningRates = [0, 1e-4, 5e-5, 1e-5]# [5e-3, #, 5e-6] #prehaps reverse?
+learningRates = [5e-5]
 num_epochs = 4
 datasetName = "placeholder"
 
