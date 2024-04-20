@@ -68,7 +68,7 @@ trainLabeledDataDF = TrainValTest[0]
 
 specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 16)
 # Repeat the original DataFrame 10 times
-specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
+#specificThemeTripletDataset = pd.concat([specificThemeTripletDataset] * 40, ignore_index=True)
 specificThemeTripletDataset.reset_index(drop=True, inplace=True)
 
 
