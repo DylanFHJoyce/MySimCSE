@@ -30,12 +30,12 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
 ourTripTrain = pd.read_csv("specificThemeTripletDataset.csv")
 print(len(ourTripTrain))
+altTripFindError = ourTripTrain.iloc[0:100, :]
+
+altTripFindError.to_csv("altTripFindError.csv", index=False)
 
 
-# specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
-
-
-# themeFocusModel = "themeFocusModel"
-# trainingTripletsCSV = "specificThemeTripletDataset.csv"
-# learning_rate =5e-5
-# runSim(startingModel, trainingTripletsCSV, learning_rate, 1)#, themeFocusModel)
+themeFocusModel = "themeFocusModel"
+trainingTripletsCSV = "altTripFindError.csv"
+learning_rate =5e-5
+runSim(startingModel, trainingTripletsCSV, learning_rate, 1)#, themeFocusModel)
