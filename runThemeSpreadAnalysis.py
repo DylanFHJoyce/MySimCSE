@@ -216,10 +216,16 @@ bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocusedTrainingEmbeddings)
 minusOneTopic = crosstab.iloc[:, 0]
 
+
+allRowsTotal = 0
+allMinusOneTotal = 0
 for idx, row in crosstab.iterrows():
     rowsTotal = row.sum()
+    allRowsTotal = allRowsTotal + rowsTotal
 
-    print(idx, (row[0] / rowsTotal) * 100 )
+    allMinusOneTotal = allMinusOneTotal + row[0]
+    print(idx, (row[0] / rowsTotal) * 100)
+print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
 
 print(bertopicModel.get_topic_info())
 
