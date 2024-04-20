@@ -106,7 +106,7 @@ with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
 
 #do bert model and use theme spread analysis to decide upon themes to train
 
-
+print("STARTING FIRST THEME SPREAD ANALYSIS")
 runThemeSpreadAnalysis()
 
 
@@ -210,6 +210,8 @@ with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
 
 # #do bert model and use theme spread analysis to decide upon themes to train
 
+
+print("STARTING SECOND THEME SPREAD ANALYSIS")
 runThemeSpreadAnalysis()
 
 
