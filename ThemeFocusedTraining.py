@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import pandas as pd
 
+import random
 
 def runThemeSpreadAnalysis():
     #DOES THIS NEED SHELL = TRUE ASWELL?
@@ -16,6 +17,37 @@ def runThemeSpreadAnalysis():
     #evaluate and store evaluation
 
     subprocess.run(command, shell=True)
+
+def generate_triplet_dataset(input_df, length):
+    # lists for triplet data
+    sent0_list, sent1_list, hard_neg_list = [], [], []
+
+    for _ in range(length):
+        # Randomly select a row from the input DataFrame
+        random_row_index = random.randint(0, len(input_df) - 1)
+        sent0_row = input_df.iloc[random_row_index]
+
+        # Randomly select a row from the same category as sent0
+        same_category_rows = input_df[input_df['Category'] == sent0_row['Category']]
+        sent1_row = same_category_rows.sample(1).iloc[0]
+
+        # Randomly select a row from a different category than sent0
+        different_category_rows = input_df[input_df['Category'] != sent0_row['Category']]
+        hard_neg_row = different_category_rows.sample(1).iloc[0]
+
+        # Append the selected rows to the lists
+        sent0_list.append(sent0_row['Document'])
+        sent1_list.append(sent1_row['Document'])
+        hard_neg_list.append(hard_neg_row['Document'])
+
+    # Create the triplet DataFrame
+    triplet_df = pd.DataFrame({
+        'sent0': sent0_list,
+        'sent1': sent1_list,
+        'hard_neg': hard_neg_list
+    })
+
+    return triplet_df
 
 
 def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs):
@@ -81,10 +113,24 @@ runThemeSpreadAnalysis()
 
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
-trainLabeledDataDF = trainLabeledDataDF[trainLabeledDataDF["Category"] == "crime"]
-print(len(trainLabeledDataDF))
+
+focusCategory = "crime"
+
+trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] == focusCategory]
+trainLabeledDataDFNonFocus = trainLabeledDataDF[trainLabeledDataDF["Category"] != focusCategory]
+focusSamples = len(trainLabeledDataDFFocus)
+percentFromNonFocus = 0.1
+
+#take random sample of NonFocus df to keep general context
+random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples/percentFromNonFocus), replace=False)
+trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
+
+print(len(trainLabeledDataDFFocus))
 
 
+FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
+
+specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, len(FocusAndPercentOfNonFocusDf))
 
 #run training 
 #runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs)
