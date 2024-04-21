@@ -217,7 +217,7 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 #do bert model on gen dataset
 
-bertopicModel = BERTopic()#min_topic_size=min_topic_size)
+bertopicModel = BERTopic(min_topic_size=70)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 
 print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
@@ -283,6 +283,10 @@ else:
     
     #THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
     topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
+
+
+    #could do these metrics by theme
+    
     
     pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
     predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
