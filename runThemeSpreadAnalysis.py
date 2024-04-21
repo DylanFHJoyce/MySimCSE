@@ -242,14 +242,14 @@ else:
     
     #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
     print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
-    quantInTop12345 = ()
+    quantInTop12345WithMinus = []
     for idx, row in crosstab.iterrows():
         print(idx)
         print(row)
-        print("Quantity in -1: ", row.loc["minusOneTopicName"])
+        print("Quantity in -1: ", row.loc[minusOneTopicName])
         SV = sorted(row, reverse=True)
         print(SV[:10])
-        quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+        quantInTop12345WithMinus = [SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5])]
         total = sum(SV)
         print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
         print(quantInTop12345, "\n")
@@ -258,13 +258,13 @@ else:
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
     # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
     # print("before training this will probably be much lower than the one including -1")
-    # quantInTop12345 = ()
+    # quantInTop12345NoMinus = []
     # crossTabNoMinus = crosstab.iloc[:, 1:]
     # for idx, row in crossTabNoMinus.iterrows():
     #     print(idx)
     #     SV = sorted(row, reverse=True)
     #     print(SV[:10])
-    #     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+    #     quantInTop12345NoMinus = [SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5])]
     #     total = sum(SV)
     #     print("below doesnt count the -1 so is also inaccurate")
     #     print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
