@@ -132,7 +132,7 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 
-#MUST HAVE AT LEAST ONE 
+#MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
 focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
 focusCategories = ["crime"]
 
@@ -168,7 +168,10 @@ FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
-specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
+
+#specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
+specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
+
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
 print(len(specificThemeTripletDataset))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
