@@ -105,6 +105,20 @@ with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeFocusedTrainingEmbeddings, f)
 
 
+ThemeFocusedValEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
+with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedValEmbeddings, f)
+
+ThemeFocusedTestEmbeddings = simModel.encode(TrainValTest[2]["Document"].tolist()).numpy()
+with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedTestEmbeddings, f)
+
+
+
+
+
+
+
 
 #do bert model and use theme spread analysis to decide upon themes to train
 
