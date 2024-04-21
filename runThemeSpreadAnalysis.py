@@ -277,38 +277,38 @@ print(bertopicModel.get_topic_info())
 
 
 
-statsFromCT = statsFromCrosstab(crosstab)
-most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+# statsFromCT = statsFromCrosstab(crosstab)
+# most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
 
-#THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
-topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
+# #THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
+# topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
 
-pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
-predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
-predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName]
-print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
+# pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
+# predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
+# predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName]
+# print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
 
-themeTrueLabel = TrainValTest[1]["Category"].tolist()
+# themeTrueLabel = TrainValTest[1]["Category"].tolist()
 
-# Calculate accuracy
-accuracy = accuracy_score(themeTrueLabel, predByTheme)
-print("Accuracy:", accuracy)
+# # Calculate accuracy
+# accuracy = accuracy_score(themeTrueLabel, predByTheme)
+# print("Accuracy:", accuracy)
 
-# Calculate precision
-precision = precision_score(themeTrueLabel, predByTheme, average='weighted')
-print("Precision:", precision)
+# # Calculate precision
+# precision = precision_score(themeTrueLabel, predByTheme, average='weighted')
+# print("Precision:", precision)
 
-# Calculate recall
-recall = recall_score(themeTrueLabel, predByTheme, average='weighted')
-print("Recall:", recall)
+# # Calculate recall
+# recall = recall_score(themeTrueLabel, predByTheme, average='weighted')
+# print("Recall:", recall)
 
-# Calculate F1 score
-f1 = f1_score(themeTrueLabel, predByTheme, average='weighted')
-print("F1 Score:", f1)
+# # Calculate F1 score
+# f1 = f1_score(themeTrueLabel, predByTheme, average='weighted')
+# print("F1 Score:", f1)
 
-# # Calculate confusion matrix
-# conf_matrix = confusion_matrix(themeTrueLabel, predByTheme)
-# print("Confusion Matrix:\n", conf_matrix)
+# # # Calculate confusion matrix
+# # conf_matrix = confusion_matrix(themeTrueLabel, predByTheme)
+# # print("Confusion Matrix:\n", conf_matrix)
 
 
 
