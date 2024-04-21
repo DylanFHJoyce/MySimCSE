@@ -220,97 +220,98 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 bertopicModel = BERTopic()#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 
-
-crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocusedTrainingEmbeddings)
-minusOneTopic = crosstab.iloc[:, 0]
-
-
-
-
-
-#NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
-print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
-quantInTop12345 = ()
-for idx, row in crosstab.iterrows():
-    print(idx)
-    SV = sorted(row, reverse=True)
-    print(SV[:10])
-    quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
-    total = sum(SV)
-    print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
-    print(quantInTop12345, "\n")
-
-
-#NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
-print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
-print("before training this will probably be much lower than the one including -1")
-quantInTop12345 = ()
-crossTabNoMinus = crosstab.iloc[:, 1:]
-for idx, row in crossTabNoMinus.iterrows():
-    print(idx)
-    SV = sorted(row, reverse=True)
-    print(SV[:10])
-    quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
-    total = sum(SV)
-    print("below doesnt count the -1 so is also inaccurate")
-    print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
-    print(quantInTop12345, "\n")
-
-
-
-
-
-
-allRowsTotal = 0
-allMinusOneTotal = 0
-for idx, row in crosstab.iterrows():
-    rowsTotal = row.sum()
-    allRowsTotal = allRowsTotal + rowsTotal
-
-    allMinusOneTotal = allMinusOneTotal + row[0]
-    print(idx, (row[0] / rowsTotal) * 100)
-print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
-
-print(bertopicModel.get_topic_info())
-
-
-
-
-
-# statsFromCT = statsFromCrosstab(crosstab)
-# most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
-
-# #THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
-# topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
-
-# pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
-# predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
-# predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName] #unclassified indicated there were no training samples in that topic
-# print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
-
-# themeTrueLabel = TrainValTest[1]["Category"].tolist()
-
-# # Calculate accuracy
-# accuracy = accuracy_score(themeTrueLabel, predByTheme)
-# print("Accuracy:", accuracy)
-
-# # Calculate precision
-# precision = precision_score(themeTrueLabel, predByTheme, average='weighted')
-# print("Precision:", precision)
-
-# # Calculate recall
-# recall = recall_score(themeTrueLabel, predByTheme, average='weighted')
-# print("Recall:", recall)
-
-# # Calculate F1 score
-# f1 = f1_score(themeTrueLabel, predByTheme, average='weighted')
-# print("F1 Score:", f1)
-
-# # # Calculate confusion matrix
-# # conf_matrix = confusion_matrix(themeTrueLabel, predByTheme)
-# # print("Confusion Matrix:\n", conf_matrix)
-
-
+print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
+if (len(bertopicModel.get_topics()) < 10
+    print("\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
+else:
+        
+    crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocusedTrainingEmbeddings)
+    minusOneTopic = crosstab.iloc[:, 0]
+    
+    
+    #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
+    print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
+    quantInTop12345 = ()
+    for idx, row in crosstab.iterrows():
+        print(idx)
+        SV = sorted(row, reverse=True)
+        print(SV[:10])
+        quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+        total = sum(SV)
+        print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
+        print(quantInTop12345, "\n")
+    
+    
+    #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
+    print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
+    print("before training this will probably be much lower than the one including -1")
+    quantInTop12345 = ()
+    crossTabNoMinus = crosstab.iloc[:, 1:]
+    for idx, row in crossTabNoMinus.iterrows():
+        print(idx)
+        SV = sorted(row, reverse=True)
+        print(SV[:10])
+        quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+        total = sum(SV)
+        print("below doesnt count the -1 so is also inaccurate")
+        print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
+        print(quantInTop12345, "\n")
+    
+    
+    
+    
+    
+    
+    allRowsTotal = 0
+    allMinusOneTotal = 0
+    for idx, row in crosstab.iterrows():
+        rowsTotal = row.sum()
+        allRowsTotal = allRowsTotal + rowsTotal
+    
+        allMinusOneTotal = allMinusOneTotal + row[0]
+        print(idx, (row[0] / rowsTotal) * 100)
+    print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
+    
+    print(bertopicModel.get_topic_info())
+    
+    
+    
+    
+    
+    # statsFromCT = statsFromCrosstab(crosstab)
+    # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+    
+    # #THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
+    # topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
+    
+    # pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
+    # predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
+    # predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName] #unclassified indicated there were no training samples in that topic
+    # print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
+    
+    # themeTrueLabel = TrainValTest[1]["Category"].tolist()
+    
+    # # Calculate accuracy
+    # accuracy = accuracy_score(themeTrueLabel, predByTheme)
+    # print("Accuracy:", accuracy)
+    
+    # # Calculate precision
+    # precision = precision_score(themeTrueLabel, predByTheme, average='weighted')
+    # print("Precision:", precision)
+    
+    # # Calculate recall
+    # recall = recall_score(themeTrueLabel, predByTheme, average='weighted')
+    # print("Recall:", recall)
+    
+    # # Calculate F1 score
+    # f1 = f1_score(themeTrueLabel, predByTheme, average='weighted')
+    # print("F1 Score:", f1)
+    
+    # # # Calculate confusion matrix
+    # # conf_matrix = confusion_matrix(themeTrueLabel, predByTheme)
+    # # print("Confusion Matrix:\n", conf_matrix)
+    
+    
 
 
 
