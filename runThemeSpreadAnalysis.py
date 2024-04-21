@@ -285,7 +285,7 @@ print(bertopicModel.get_topic_info())
 
 # pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
 # predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
-# predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName]
+# predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName] #unclassified indicated there were no training samples in that topic
 # print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
 
 # themeTrueLabel = TrainValTest[1]["Category"].tolist()
