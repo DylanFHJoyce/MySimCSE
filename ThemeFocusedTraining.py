@@ -130,6 +130,9 @@ runThemeSpreadAnalysis()
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
+
+
+#MUST HAVE AT LEAST ONE 
 focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
 focusCategories = ["crime"]
 
