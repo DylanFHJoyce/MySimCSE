@@ -217,8 +217,19 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 #do bert model on gen dataset
 
+# #themesList = list(set(TrainValTest[0]["Category"].tolist()))
+
+# ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated"])
+# ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
+# ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+
+
+
 bertopicModel = BERTopic(min_topic_size=70)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
+minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
+
+
 
 print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
 if (len(bertopicModel.get_topics()) < 10):
@@ -234,6 +245,8 @@ else:
     quantInTop12345 = ()
     for idx, row in crosstab.iterrows():
         print(idx)
+        print(row)
+        print("Quantity in -1: ", row.loc["minusOneTopicName"])
         SV = sorted(row, reverse=True)
         print(SV[:10])
         quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
@@ -242,20 +255,20 @@ else:
         print(quantInTop12345, "\n")
     
     
-    #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
-    print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
-    print("before training this will probably be much lower than the one including -1")
-    quantInTop12345 = ()
-    crossTabNoMinus = crosstab.iloc[:, 1:]
-    for idx, row in crossTabNoMinus.iterrows():
-        print(idx)
-        SV = sorted(row, reverse=True)
-        print(SV[:10])
-        quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
-        total = sum(SV)
-        print("below doesnt count the -1 so is also inaccurate")
-        print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
-        print(quantInTop12345, "\n")
+    # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
+    # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
+    # print("before training this will probably be much lower than the one including -1")
+    # quantInTop12345 = ()
+    # crossTabNoMinus = crosstab.iloc[:, 1:]
+    # for idx, row in crossTabNoMinus.iterrows():
+    #     print(idx)
+    #     SV = sorted(row, reverse=True)
+    #     print(SV[:10])
+    #     quantInTop12345 = (SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5]))
+    #     total = sum(SV)
+    #     print("below doesnt count the -1 so is also inaccurate")
+    #     print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
+    #     print(quantInTop12345, "\n")
     
     
     
