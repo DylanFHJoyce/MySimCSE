@@ -14,6 +14,10 @@ import nltk
 from nltk.tokenize import word_tokenize
 
 
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+
+
+
 print("first need to calculate corpus")
 def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
 
@@ -162,7 +166,7 @@ def topicsToThemes(BTTrainComp):
     #find non empty/most similar topic on same level of hierarchy / adjacent / above?
     #merge it
 
-    print("but if the theme contains no samples... for all dict entries that are still empty: start at lowest hierarchy layer?")
+    print("(this note is for if you are continuing devlopment of theme hierarchy: but if the theme contains no samples... for all dict entries that are still empty: start at lowest hierarchy layer?")
 
 
     return bertTopicCorrelateDict
@@ -201,7 +205,11 @@ with open('split4000Manual.pkl', 'rb') as f:
 with open("ThemeFocusedTrainingEmbeddings.pkl", "rb") as f:
     ThemeFocusedTrainingEmbeddings = pickle.load(f)
 
+with open("ThemeFocusedValEmbeddings.pkl", "rb") as f:
+    ThemeFocusedValEmbeddings = pickle.load(f)
 
+with open("ThemeFocusedTestEmbeddings.pkl", "rb") as f:
+    ThemeFocusedTestEmbeddings = pickle.load(f)
 
 
 
@@ -268,6 +276,19 @@ print(bertopicModel.get_topic_info())
 
 
 
+
+# statsFromCT = statsFromCrosstab(crosstab)
+# most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
+
+# #THIS LEAVES SOME TOPICS WITHOUT A THEME IF THEY DID NOT CONTAIN TRAINING SAMPLES
+# topicsToThemesDict = topicsToThemes(BTTrainComp) #make a dict for which theme each topic belongs to 
+
+# pred, _ = bertopicModel.transform(TrainValTest[1]["Document"].tolist(), ThemeFocusedValEmbeddings)
+# predByName = convertTopicNumToName(pred, bertopicModel.get_topic_info())
+# predByTheme = [topicsToThemesDict.get(key, "Unclassified") for key in predByName]
+# print("HERE COULD DO COSINE SIM TO ASSIGN REMAINING TOPICS TO THEME BASED ON SIM TO ALREADY ASSIGNED TOPICS")
+
+# themeTrueLabel = TrainValTest[1]["Category"].tolist()
 
 # exampleColName = crosstab.columns[1]
 # for val in crosstab[exampleColName]:
