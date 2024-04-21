@@ -221,7 +221,7 @@ bertopicModel = BERTopic()#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 
 print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
-if (len(bertopicModel.get_topics()) < 10:
+if (len(bertopicModel.get_topics()) < 10):
     print("\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
 else:
         
