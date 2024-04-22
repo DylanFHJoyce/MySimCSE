@@ -282,6 +282,11 @@ else:
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
 
+        if percentagesOutOfFullTotal[0] < 0.2:
+            print("\n\n\nTheme: ", idx, "May be quite spread out or much in -1\n\n\n\n\n")
+        if percentagesOutOfFullTotal[0] > 0.8:
+            print("\n\n\nTheme ", idx, "May be quite condenced\n\n\n\n\n")
+
 
 
     condThreshold = 8.5
@@ -291,10 +296,12 @@ else:
         colTotal = colVals.sum()
 
         percentage = colVals / colTotal
-        print(column, percentage)
+        
         if (percentage > condThreshold).any():
+            print(column, percentage)
             print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme")
         if not (percentage > mixedThreshold).any():
+            print(column, percentage)
             print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic")
         
     
