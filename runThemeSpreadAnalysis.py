@@ -284,7 +284,7 @@ else:
 
 
 
-    condThreshold = 0.7
+    condThreshold = 8.5
     mixedThreshold = 0.3
     for column in crosstab.columns:
         colVals = crosstab[column]
@@ -293,9 +293,9 @@ else:
         percentage = colVals / colTotal
         print(column, percentage)
         if (percentage > condThreshold).any():
-            print(column, " is condenced")
+            print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme")
         if not (percentage > mixedThreshold).any():
-            print(column, " is mixed")
+            print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic")
         
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
