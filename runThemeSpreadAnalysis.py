@@ -281,6 +281,18 @@ else:
         print("% no minus but out of full number of samples: ", percentagesOutOfFullTotal)
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
+
+
+
+    threshold = 0.5
+    for column in crosstab.columns:
+        colVals = crosstab[column]
+        colTotal = colVals.sum()
+
+        percentage = colVals / colTotal
+        if (percentages > threshold).any():
+            print(column, " is very mixed")
+        
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
     # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
