@@ -368,7 +368,7 @@ print("if doing entropy then need all columns as count, even blank ones?")
     #and keep in mid the difference that will make
 
     
-print(bertopicModel.get_topic_info())
+
 
 #take training data embeddings and transform to the bert model
 
