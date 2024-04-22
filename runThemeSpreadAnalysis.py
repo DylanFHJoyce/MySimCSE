@@ -299,10 +299,10 @@ else:
         
         if (percentage > condThreshold).any():
             print(column, percentage)
-            print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme")
+            print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme\n\n")
         if not (percentage > mixedThreshold).any():
             print(column, percentage)
-            print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic")
+            print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic\n\n")
         
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
