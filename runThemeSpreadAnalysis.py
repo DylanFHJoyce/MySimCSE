@@ -237,7 +237,7 @@ if (len(bertopicModel.get_topics()) < 10):
 else:
         
     crosstab = compareTrainTopicsToBTopics(bertopicModel, TrainValTest[0], ThemeFocusedTrainingEmbeddings)
-    minusOneTopic = crosstab.iloc[:, 0]
+    #minusOneTopic = crosstab.iloc[:, 0]
     
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
@@ -275,8 +275,10 @@ else:
         #print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
         percentages = [(value / total) for value in quantInTop12345]
         percentagesNoMinus = [(value / totalNoMinus) for value in quantInTop12345NoMinus]
+        percentagesOutOfFullTotal = [(value / total) for value in quantInTop12345NoMinus]
         print("%: ", percentages)
         print("% NO MINUS: ", percentagesNoMinus)
+        print("% no minus but out of full number of samples: ", percentagesOutOfFullTotal)
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
     
