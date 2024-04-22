@@ -18,7 +18,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 
 
-print("first need to calculate corpus")
+print("first need to calculate corpus (IF NOT ALREADY DONE EXTERNALLY)")
 def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
 
 
@@ -228,7 +228,7 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 bertopicModel = BERTopic(min_topic_size=70)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
-
+print(minusOneTopicName)
 
 
 print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
@@ -253,7 +253,31 @@ else:
         total = sum(SV)
         print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
         print(quantInTop12345, "\n")
-    
+
+
+
+   
+    for idx, row in crosstab.iterrows():
+        print(idx)
+        print(row)
+        
+        rowNoMinus = row.drop(minusOneTopicName)
+        SV = sorted(row, reverse=True)
+        SVNoMinus = sorted(rowNoMinus, reverse=True)
+
+        quantInTop12345 = [SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5])]
+        quantInTop12345NoMinus = [SVNoMinus[0], sum(SVNoMinus[:2]), sum(SVNoMinus[:3]), sum(SVNoMinus[:4]), sum(SVNoMinus[:5])]
+        
+        total = sum(SV)
+        totalNoMinus = sum(SVNoMinus)
+        
+        #print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
+        percentages = [(value / total) for value in quantInTop12345]
+        percentagesNoMinus = [(value / totalNoMinus) for value in quantInTop12345NoMinus]
+        print("%: ", percentages)
+        print("% NO MINUS: ", percentagesNoMinus)
+        print(quantInTop12345, "\n")
+        print(quantInTop12345NoMinus, "\n")
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
     # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
