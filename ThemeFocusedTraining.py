@@ -78,7 +78,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 #use either base model or sim model to start
 #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
-startingModel = "sentence-transformers/all-mpnet-base-v2"
+#startingModel = "sentence-transformers/all-mpnet-base-v2"
 
 
 #do embeddings
