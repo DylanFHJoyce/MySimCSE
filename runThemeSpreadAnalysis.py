@@ -240,19 +240,19 @@ else:
     minusOneTopic = crosstab.iloc[:, 0]
     
     
-    #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
-    print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
-    quantInTop12345WithMinus = []
-    for idx, row in crosstab.iterrows():
-        print(idx)
-        print(row)
-        print("Quantity in -1: ", row.loc[minusOneTopicName])
-        SV = sorted(row, reverse=True)
-        print(SV[:10])
-        quantInTop12345WithMinus = [SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5])]
-        total = sum(SV)
-        print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
-        print(quantInTop12345, "\n")
+    # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)
+    # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (INCLUDING -1)")
+    # quantInTop12345 = []
+    # for idx, row in crosstab.iterrows():
+    #     print(idx)
+    #     print(row)
+    #     print("Quantity in -1: ", row.loc[minusOneTopicName])
+    #     SV = sorted(row, reverse=True)
+    #     print(SV[:10])
+    #     quantInTop12345 = [SV[0], sum(SV[:2]), sum(SV[:3]), sum(SV[:4]), sum(SV[:5])]
+    #     total = sum(SV)
+    #     print((SV[0]/total), (sum(SV[:2])/total), (sum(SV[:3])/total), (sum(SV[:4])/total), (sum(SV[:5])/total))
+    #     print(quantInTop12345, "\n")
 
 
 
@@ -260,6 +260,7 @@ else:
     for idx, row in crosstab.iterrows():
         print(idx)
         print(row)
+        print("Quantity in -1: ", row.loc[minusOneTopicName])
         
         rowNoMinus = row.drop(minusOneTopicName)
         SV = sorted(row, reverse=True)
@@ -276,8 +277,8 @@ else:
         percentagesNoMinus = [(value / totalNoMinus) for value in quantInTop12345NoMinus]
         print("%: ", percentages)
         print("% NO MINUS: ", percentagesNoMinus)
-        print(quantInTop12345, "\n")
-        print(quantInTop12345NoMinus, "\n")
+        print("with minus: ", quantInTop12345, "\n")
+        print("no minus: ", quantInTop12345NoMinus, "\n")
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
     # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
