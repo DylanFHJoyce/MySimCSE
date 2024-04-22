@@ -284,14 +284,18 @@ else:
 
 
 
-    threshold = 0.5
+    condThreshold = 0.7
+    mixedThreshold = 0.3
     for column in crosstab.columns:
         colVals = crosstab[column]
         colTotal = colVals.sum()
 
         percentage = colVals / colTotal
-        if (percentage > threshold).any():
-            print(column, " is very mixed")
+        print(column, percentage)
+        if (percentage > condThreshold).any():
+            print(column, " is condenced")
+        if not (percentage > mixedThreshold).any():
+            print(column, " is mixed")
         
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
