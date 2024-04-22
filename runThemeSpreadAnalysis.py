@@ -290,7 +290,7 @@ else:
         colTotal = colVals.sum()
 
         percentage = colVals / colTotal
-        if (percentages > threshold).any():
+        if (percentage > threshold).any():
             print(column, " is very mixed")
         
     
