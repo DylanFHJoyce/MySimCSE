@@ -72,7 +72,7 @@ trainLabeledDataDF = TrainValTest[0]
 # specificThemeTripletDataset.reset_index(drop=True, inplace=True)
 
 
-specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
+#specificThemeTripletDataset.to_csv("altTripFindError.csv", index=False)
 
 #"specificThemeTripletDataset.csv"
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
@@ -84,6 +84,6 @@ startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
 
 
 themeFocusModel = "themeFocusModel"
-trainingTripletsCSV = "specificThemeTripletDataset.csv"#"altTripFindError.csv"
+trainingTripletsCSV = "trainingTriplets4000Manual.csv"#"specificThemeTripletDataset.csv"#"altTripFindError.csv"
 learning_rate =5e-5
 runSim(startingModel, trainingTripletsCSV, learning_rate, 1)#, themeFocusModel)
