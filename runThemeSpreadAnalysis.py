@@ -360,11 +360,14 @@ else:
                     coOccurrenceMatrix[idxTheme1, idxTheme2] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2]
                     coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
 
-    showN = 6
+    showN = 14
 
-    #
+    #from the co occurance matrix partition to put top showN elements in front of the rest,
+    #(using a negation of the results which would otherwise be the last showN elements)
     topIdxs = np.argpartition(-coOccurrenceMatrix.flatten(), showN)[:showN]
-    
+
+    #for top co occurances turn back into origional shape, get name of both themes that are co-occuring and 
+    #print them out
     for index in topIdxs:
         i, j = np.unravel_index(index, coOccurrenceMatrix.shape)
         theme1 = crosstab.index[i]
