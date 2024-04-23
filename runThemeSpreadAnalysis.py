@@ -455,7 +455,7 @@ else:
     ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
     ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
-    newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": 1, "percTopicsAreMixed": 1, "percTopicsAreCondenced": 1, "percSpreadThemes": 1, "percCondencedThemes": 1}
+    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": 1, "percTopicsAreMixed": 1, "percTopicsAreCondenced": 1, "percSpreadThemes": 1, "percCondencedThemes": 1}
     newRow = pd.DataFrame([newRow])
     ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
 
