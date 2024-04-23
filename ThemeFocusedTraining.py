@@ -250,7 +250,7 @@ for ThemeFocusedIteration in range(0, 1):
     ThemeSpreadAnalysisBertResults["themeIter"] = 0
     
     ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
-    ThemeResults = pd.concat([simResults, ThemeSpreadAnalysisBertResults], axis=0, ignore_index=True)
+    ThemeResults = pd.concat([ThemeResults, ThemeSpreadAnalysisBertResults], axis=0, ignore_index=True)
     
     pd.set_option('display.width', 1000)
     print(ThemeResults)
