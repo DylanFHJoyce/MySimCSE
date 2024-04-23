@@ -373,7 +373,8 @@ else:
         if i <= j: #this just makes sure it only prints them out once
             theme1 = crosstab.index[i]
             theme2 = crosstab.index[j]
-            print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
+            coCount = coOccurrenceMatrix[i, j]
+            print("Themes ", theme1, " and ", theme2, " co-occur", coCount, " times in the same topics.")
     
     # # then we take 
     # maxCoOccurrences = np.max(coOccurrenceMatrix)
