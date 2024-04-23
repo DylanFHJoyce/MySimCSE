@@ -386,9 +386,23 @@ else:
     #     print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
 
 
+    
+    
+    muddle_measure = {}
 
+    theme_occurrences = crosstab.sum(axis=1)
+    
+    theme_co_occurrences = coOccurrenceMatrix.sum(axis=1)
 
+    for i, theme in enumerate(crosstab.index):
 
+        muddle_measure[theme] = theme_co_occurrences[i] / theme_occurrences[theme]
+    
+ 
+    sorted_themes = sorted(muddle_measure.items(), key=lambda x: x[1], reverse=True)
+
+    for theme, measure in sorted_themes:
+        print(f"Theme '{theme}' has a muddle measure of {measure}.")
 
 
 
