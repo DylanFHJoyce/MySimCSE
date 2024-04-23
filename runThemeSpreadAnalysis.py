@@ -359,16 +359,33 @@ else:
                     idxTheme2 = crosstab.index.get_loc(theme2)
                     coOccurrenceMatrix[idxTheme1, idxTheme2] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2]
                     coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
-        
-    # then we take 
-    maxCoOccurrences = np.max(coOccurrenceMatrix)
-    themeIndices = np.where(coOccurrenceMatrix == maxCoOccurrences)
 
-    # show the themes with the maximum co-occurrences
-    for i, j in zip(themeIndices[0], themeIndices[1]):
+    showN = 6
+    topIdxs = np.argpartition(-coOccurrenceMatrix.flatten(), N)[:N]
+    for index in top_indices:
+        i, j = np.unravel_index(index, coOccurrenceMatrix.shape)
         theme1 = crosstab.index[i]
         theme2 = crosstab.index[j]
         print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
+    
+    # # then we take 
+    # maxCoOccurrences = np.max(coOccurrenceMatrix)
+    # themeIndices = np.where(coOccurrenceMatrix == maxCoOccurrences)
+    # # show the themes with the maximum co-occurrences
+    # for i, j in zip(themeIndices[0], themeIndices[1]):
+    #     theme1 = crosstab.index[i]
+    #     theme2 = crosstab.index[j]
+    #     print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
+
+
+
+
+
+
+
+
+
+
 
     # statsFromCT = statsFromCrosstab(crosstab)
     # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
