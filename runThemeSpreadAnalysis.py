@@ -238,6 +238,9 @@ minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
 print(minusOneTopicName)
 
 
+
+
+
 print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
 if (len(bertopicModel.get_topics()) < 10):
     print("\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
@@ -343,8 +346,12 @@ else:
     print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
     
     print("\n\n\n\n")
+
     
-    
+    minusOneTopic = crosstab.iloc[:, 0]#.sum() #for getting all of column 0 (0 indexed obvs) (and can sum if needed)
+    print(minusOneTopic.sum())
+    print(minusOneTopic.sum()/len(TrainValTest[0]))
+
 
 
 
