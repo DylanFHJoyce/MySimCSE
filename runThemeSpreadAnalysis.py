@@ -231,8 +231,8 @@ ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv
 
 
 
-
-bertopicModel = BERTopic()#min_topic_size=40)#min_topic_size=min_topic_size)
+min_topic_size=40
+bertopicModel = BERTopic(min_topic_size=min_topic_size)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
 print(minusOneTopicName)
@@ -492,7 +492,7 @@ else:
     ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
     ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
-    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": 0, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes}
+    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes}
     newRow = pd.DataFrame([newRow])
     ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
 
