@@ -225,7 +225,7 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 
 
-bertopicModel = BERTopic()#min_topic_size=30)#min_topic_size=min_topic_size)
+bertopicModel = BERTopic(min_topic_size=40)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
 print(minusOneTopicName)
