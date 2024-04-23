@@ -234,12 +234,12 @@ coherenceTuple = (0, 0)
 
 #start loop here
 
-topicSizes = [20, 50, 80]
+topicSizes = [20, 40, 60, 80, 100]
 topicSizes = [40]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
-    for iteration in range(0, 1):
+    for iteration in range(0, 2):
         
         bertopicModel = BERTopic(min_topic_size=min_topic_size)
         bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
