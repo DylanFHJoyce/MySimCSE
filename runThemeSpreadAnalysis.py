@@ -265,6 +265,14 @@ else:
     #     print(quantInTop12345, "\n")
 
 
+    
+    numTopicsAreMixed = 0
+    numTopicsAreCondenced = 0
+    numSpreadThemes = 0
+    numCondencedThemes = 0
+
+
+
 
    
     for idx, row in crosstab.iterrows():
@@ -293,12 +301,20 @@ else:
         print("no minus: ", quantInTop12345NoMinus, "\n")
 
         if percentagesOutOfFullTotal[3] <= 0.55:
+            numSpreadThemes = numSpreadThemes + 1
             print("\n\n\n(4 top topics dont contain 55% of Theme): ", idx, "May be quite spread out or much in -1\n\n\n\n\n")
         if percentagesOutOfFullTotal[0] >= 0.75:
+            numCondencedThemes = numCondencedThemes + 1
             print("\n\n\n(top topic has over 75% of Theme): ", idx, "May be quite condenced\n\n\n\n\n")
 
 
 
+
+
+
+
+
+    
     condThreshold = 0.85
     mixedThreshold = 0.3
     for column in crosstab.columns:
@@ -309,11 +325,15 @@ else:
         
         if (percentage > condThreshold).any():
             print(column, percentage)
+            numTopicsAreCondenced = numTopicsAreCondenced + 1
             print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme\nMAYBE ALSO CHECK HERE IF ITS MOST OF THE SAMPLES FOR THAT THEME\n\n")
         if not (percentage > mixedThreshold).any():
             print(column, percentage)
+            numTopicsAreMixed = numTopicsAreMixed + 1
             print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic\n\n")
-        
+
+
+
     
     # #NUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)
     # print("\n\nNUMBER OF SAMPLES IN TOP 12345 TOPICS FOR EACH THEME (WITHOUT -1)")
@@ -414,8 +434,8 @@ else:
         print(f"Theme '{theme}' has a mixedMeasure of {measure}.")
         totalMixedMeasure = totalMixedMeasure + measure
 
-
-    print("\n\nAverage Mixed Measure: ", (totalMixedMeasure / len(sortedThemes)))
+    AveMixedMeasure = (totalMixedMeasure / len(sortedThemes))
+    print("\n\nAverage Mixed Measure: ", AveMixedMeasure)
 
 
 
@@ -456,13 +476,23 @@ else:
     # # # Calculate confusion matrix
     # # conf_matrix = confusion_matrix(themeTrueLabel, predByTheme)
     # # print("Confusion Matrix:\n", conf_matrix)
+
+
+
+
+    numberOfTopics = len(bertopicModel.get_topic_info())
+    numberOfThemes = len(crosstab.index)
+    percTopicsAreMixed = numTopicsAreMixed / numberOfTopics
+    percTopicsAreCondenced = numTopicsAreCondenced / numberOfTopics
+    percSpreadThemes = numSpreadThemes / numberOfThemes
+    percCondencedThemes = numCondencedThemes / numberOfThemes
     
     
     ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
     ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
     ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
-    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": 0, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": 1, "percTopicsAreMixed": 1, "percTopicsAreCondenced": 1, "percSpreadThemes": 1, "percCondencedThemes": 1}
+    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": 0, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes}
     newRow = pd.DataFrame([newRow])
     ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
 
