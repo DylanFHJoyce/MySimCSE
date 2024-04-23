@@ -337,7 +337,7 @@ for min_topic_size in topicSizes:
         
             
             condThreshold = 0.85
-            mixedThreshold = 0.3
+            mixedThreshold = 0.5
             for column in crosstab.columns:
                 colVals = crosstab[column]
                 colTotal = colVals.sum()
@@ -351,7 +351,7 @@ for min_topic_size in topicSizes:
                 if not (percentage > mixedThreshold).any():
                     print(column, percentage)
                     numTopicsAreMixed = numTopicsAreMixed + 1
-                    print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic\n\n")
+                    print(column, " is mixed (less than 50% of any single theme) maybe train to split it if its a large topic\n\n")
         
         
         
