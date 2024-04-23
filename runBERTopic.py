@@ -236,7 +236,7 @@ topicSizes = [20, 60, 100]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
-    for iteration in range(0, 1):
+    for iteration in range(0, 2):
         
         
         # ctfidf_model = ClassTfidfTransformer(reduce_frequent_words=True)
