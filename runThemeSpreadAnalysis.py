@@ -257,7 +257,10 @@ for min_topic_size in topicSizes:
         if (len(bertopicModel.get_topics()) < 10):
             print("\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
         else:
+            ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
+
+            
             TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
             print("TD: ", TD)
             coherenceTuple = NPMICoherence(bertopicModel, corpusAndDictionaryLabelInc[0], corpusAndDictionaryLabelInc[1])
@@ -521,7 +524,7 @@ for min_topic_size in topicSizes:
             ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
         
         
-        ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
+            ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
         
         
         # exampleColName = crosstab.columns[1]
