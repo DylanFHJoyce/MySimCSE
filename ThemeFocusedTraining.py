@@ -120,6 +120,13 @@ with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
 
 
 
+TopicOrder=["themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"]
+ThemeResults = pd.DataFrame(columns=TopicOrder)
+ThemeResults.to_csv("ThemeResults.csv", index=False)
+ThemeResults = pd.read_csv("ThemeResults.csv")
+
+
+
 
 
 #do bert model and use theme spread analysis to decide upon themes to train
@@ -236,6 +243,21 @@ for ThemeFocusedIteration in range(0, 1):
     runThemeSpreadAnalysis()
 
 
+
+
+    #####################YOU WOULD ALSO DO THIS AFTER THE BASE MODEL RUN
+    ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+    ThemeSpreadAnalysisBertResults["themeIter"] = 0
+    
+    ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
+    ThemeResults = pd.concat([simResults, ThemeSpreadAnalysisBertResults], axis=0, ignore_index=True)
+    
+    pd.set_option('display.width', 1000)
+    print(ThemeResults)
+    print("above are all ThemeResults so far")
+    
+
+ThemeResults.to_csv("ThemeResults.csv", index=False)
 
 
 
