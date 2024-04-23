@@ -370,9 +370,10 @@ else:
     #print them out
     for index in topIdxs:
         i, j = np.unravel_index(index, coOccurrenceMatrix.shape)
-        theme1 = crosstab.index[i]
-        theme2 = crosstab.index[j]
-        print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
+        if i <= j: #this just makes sure it only prints them out once
+            theme1 = crosstab.index[i]
+            theme2 = crosstab.index[j]
+            print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
     
     # # then we take 
     # maxCoOccurrences = np.max(coOccurrenceMatrix)
