@@ -219,9 +219,16 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 # #themesList = list(set(TrainValTest[0]["Category"].tolist()))
 
-# ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated"])
-# ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
-# ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
+ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
+ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+
+
+
+
+
+#start loop here
+
 
 
 
@@ -444,7 +451,16 @@ else:
     # # print("Confusion Matrix:\n", conf_matrix)
     
     
+    ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
+    ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
+    ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
+    newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics())}
+    newRow = pd.DataFrame([newRow])
+    ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
+
+
+ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
 
 
 # exampleColName = crosstab.columns[1]
