@@ -339,6 +339,9 @@ else:
     
     
 
+
+
+    
     #make blank matrix
     print("consider making the df into % first and ignoring any V minor occurances? might not matter if we're just selcting the most anyway?")
     coOccurrenceMatrix = np.zeros((len(crosstab.index), len(crosstab.index)), dtype=int)
@@ -351,8 +354,11 @@ else:
         for i, theme1 in enumerate(presentThemes):
             for j, theme2 in enumerate(presentThemes):
                 if i < j:
-                    coOccurrenceMatrix[theme1, theme2] += topic[theme1] * topic[theme2]
-                    coOccurrenceMatrix[theme2, theme1] += topic[theme1] * topic[theme2] 
+                    #get name of idx
+                    idxTheme1 = crosstab.index.get_loc(theme1)
+                    idxTheme2 = crosstab.index.get_loc(theme2)
+                    coOccurrenceMatrix[idxTheme1, idxTheme2] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2]
+                    coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
         
     # then we take 
     maxCoOccurrences = np.max(coOccurrenceMatrix)
