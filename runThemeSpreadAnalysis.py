@@ -361,10 +361,11 @@ else:
                     coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
 
     showN = 6
-    
+
+    #
     topIdxs = np.argpartition(-coOccurrenceMatrix.flatten(), showN)[:showN]
     
-    for index in top_indices:
+    for index in topIdxs:
         i, j = np.unravel_index(index, coOccurrenceMatrix.shape)
         theme1 = crosstab.index[i]
         theme2 = crosstab.index[j]
