@@ -396,8 +396,13 @@ else:
         mixedMeasure[theme] = allThemeCoOccurrences[i] / allInTheme[theme]
         
     sortedThemes = sorted(mixedMeasure.items(), key=lambda x: x[1], reverse=True) #sort by the most mixed and print
+    totalMixedMeasure = 0
     for theme, measure in sortedThemes:
         print(f"Theme '{theme}' has a mixedMeasure of {measure}.")
+        totalMixedMeasure = totalMixedMeasure + measure
+
+
+    print("\n\nAverage Mixed Measure: ", (totalMixedMeasure / len(sortedThemes)))
 
 
 
