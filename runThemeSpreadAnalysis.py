@@ -289,7 +289,7 @@ else:
 
 
 
-    condThreshold = 8.5
+    condThreshold = 0.85
     mixedThreshold = 0.3
     for column in crosstab.columns:
         colVals = crosstab[column]
@@ -299,7 +299,7 @@ else:
         
         if (percentage > condThreshold).any():
             print(column, percentage)
-            print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme\n\n")
+            print(column, " is condenced (more than 85% composed of a single theme) maybe train to split it if it contains most of the samples for that theme\nMAYBE ALSO CHECK HERE IF ITS MOST OF THE SAMPLES FOR THAT THEME\n\n")
         if not (percentage > mixedThreshold).any():
             print(column, percentage)
             print(column, " is mixed (less than 30% of any single theme) maybe train to split it if its a large topic\n\n")
@@ -387,14 +387,11 @@ else:
     #     theme2 = crosstab.index[j]
     #     print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
 
-
-    
-    
     mixedMeasure = {}
-    allInTheme = crosstab.sum(axis=1) #get total samples for each theme
+    allInTheme = crosstabNormalized.sum(axis=1) #get total samples for each theme
     allThemeCoOccurrences = coOccurrenceMatrix.sum(axis=1) #get all times a theme co-occured
 
-    for i, theme in enumerate(crosstab.index): #for each theme calc how often it cooccured/how many samples it had
+    for i, theme in enumerate(crosstabNormalized.index): #for each theme calc how often it cooccured/how many samples it had
         mixedMeasure[theme] = allThemeCoOccurrences[i] / allInTheme[theme]
         
     sortedThemes = sorted(mixedMeasure.items(), key=lambda x: x[1], reverse=True) #sort by the most mixed and print
