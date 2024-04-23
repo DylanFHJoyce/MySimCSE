@@ -482,10 +482,10 @@ else:
 
     numberOfTopics = len(bertopicModel.get_topic_info())
     numberOfThemes = len(crosstab.index)
-    percTopicsAreMixed = numTopicsAreMixed / numberOfTopics
-    percTopicsAreCondenced = numTopicsAreCondenced / numberOfTopics
-    percSpreadThemes = numSpreadThemes / numberOfThemes
-    percCondencedThemes = numCondencedThemes / numberOfThemes
+    percTopicsAreMixed = int((numTopicsAreMixed / numberOfTopics) * 100)
+    percTopicsAreCondenced = int((numTopicsAreCondenced / numberOfTopics) * 100)
+    percSpreadThemes = int((numSpreadThemes / numberOfThemes) * 100)
+    percCondencedThemes = int ((numCondencedThemes / numberOfThemes) * 100) 
     
     
     ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
