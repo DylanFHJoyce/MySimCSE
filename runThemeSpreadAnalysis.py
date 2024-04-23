@@ -362,7 +362,7 @@ else:
     for i, j in zip(themeIndices[0], themeIndices[1]):
         theme1 = crosstab.index[i]
         theme2 = crosstab.index[j]
-        print(f"Themes '{theme1}' and '{theme2}' co-occur the most in the same topics.")
+        print("Themes ", theme1, " and ", theme2, " co-occur the most in the same topics.")
 
     # statsFromCT = statsFromCrosstab(crosstab)
     # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
