@@ -360,7 +360,7 @@ else:
                     coOccurrenceMatrix[idxTheme1, idxTheme2] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2]
                     coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
 
-    showN = 14
+    showN = 40
 
     #from the co occurance matrix partition to put top showN elements in front of the rest,
     #(using a negation of the results which would otherwise be the last showN elements)
