@@ -77,6 +77,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 
 #use either base model or sim model to start
 #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
+output_dir = "themeFocusModel"
 startingModel = output_dir#"princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
 #startingModel = "sentence-transformers/all-mpnet-base-v2"
 
@@ -205,7 +206,7 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
-output_dir = "themeFocusModel"
+output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rate =5e-6
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
