@@ -76,9 +76,49 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 #have the sections all in here and comment out at whatever stage in the process, its messy but i need to save time.
 
 
-
+startingModel = "princeton-nlp/sup-simcse-bert-base-uncased"
+print("THIS STARTING MODEL SHOULD BE THE ONE FROM THE OTHER THING WE TRAINED")
 #we have a model to start with
 #we use it to encode our data etc
+
+datasetName = "genDatasetProcessed.pkl"
+#def makeEmbeddings(datasetName):
+simModel = SimCSE(startingModel)
+
+#load dataset to embed
+with open(datasetName, "rb") as f:
+  loaded_list = pickle.load(f)
+#embed dataset with simcse model 
+ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
+
+with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeSpreadEmbeddings, f)
+
+#open  the laelled data (format train, val, test)
+with open('split4000Manual.pkl', 'rb') as f:
+    TrainValTest = pickle.load(f)
+#make embeddings of val data for experiment 2 use
+ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+
+
+ThemeFocusedValEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
+with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedValEmbeddings, f)
+
+ThemeFocusedTestEmbeddings = simModel.encode(TrainValTest[2]["Document"].tolist()).numpy()
+with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
+    pickle.dump(ThemeFocusedTestEmbeddings, f)
+
+
+
+TopicOrder=["LR", "themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
+ThemeResults = pd.DataFrame(columns=TopicOrder)
+ThemeResults.to_csv("ThemeResults.csv", index=False)
+ThemeResults = pd.read_csv("ThemeResults.csv")
+
+
 
 
 
