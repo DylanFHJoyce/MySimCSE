@@ -131,8 +131,15 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 
 #do bert model and use theme spread analysis to decide upon themes to train
 
-print("STARTING FIRST THEME SPREAD ANALYSIS")
-runThemeSpreadAnalysis()
+
+
+
+
+#print("STARTING FIRST THEME SPREAD ANALYSIS")
+#runThemeSpreadAnalysis()
+
+
+
 
 
 
