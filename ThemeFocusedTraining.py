@@ -120,7 +120,7 @@ with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
 
 
 
-TopicOrder=["themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"]
+TopicOrder=["themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
 ThemeResults = pd.DataFrame(columns=TopicOrder)
 ThemeResults.to_csv("ThemeResults.csv", index=False)
 ThemeResults = pd.read_csv("ThemeResults.csv")
