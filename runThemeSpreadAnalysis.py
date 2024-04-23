@@ -219,7 +219,7 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 # #themesList = list(set(TrainValTest[0]["Category"].tolist()))
 
-ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
+ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"])
 ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
 ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
@@ -273,7 +273,7 @@ else:
 
 
 
-
+    totalEnthropy = 0
    
     for idx, row in crosstab.iterrows():
         print(idx)
@@ -281,6 +281,11 @@ else:
         print("Quantity in -1: ", row.loc[minusOneTopicName])
         
         rowNoMinus = row.drop(minusOneTopicName)
+
+        probabilities = rowNoMinus / rowNoMinus.sum() # for entropy
+        enthropy = -np.sum(probabilities * np.log2(probabilities))
+        totalEnthropy = totalEnthropy + enthropy
+        
         SV = sorted(row, reverse=True)
         SVNoMinus = sorted(rowNoMinus, reverse=True)
 
@@ -300,6 +305,7 @@ else:
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
 
+        print("\nENTHROPY FOR THIS THEME: ", enthropy)
         if percentagesOutOfFullTotal[3] <= 0.55:
             numSpreadThemes = numSpreadThemes + 1
             print("\n\n\n(4 top topics dont contain 55% of Theme): ", idx, "May be quite spread out or much in -1\n\n\n\n\n")
@@ -439,7 +445,7 @@ else:
 
 
 
-
+    
 
 
     # statsFromCT = statsFromCrosstab(crosstab)
@@ -486,13 +492,13 @@ else:
     percTopicsAreCondenced = int((numTopicsAreCondenced / numberOfTopics) * 100)
     percSpreadThemes = int((numSpreadThemes / numberOfThemes) * 100)
     percCondencedThemes = int ((numCondencedThemes / numberOfThemes) * 100) 
+    aveEnthropy = int((totalEnthropy / numberOfThemes) * 100)
     
-    
-    ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes"])
+    ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"])
     ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
     ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
-    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes}
+    newRow = {"iteration": 0, "TD": 0, "Coherence": 0, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes, "aveEnthropy": aveEnthropy}
     newRow = pd.DataFrame([newRow])
     ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
 
