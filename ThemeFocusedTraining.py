@@ -77,8 +77,8 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 
 #use either base model or sim model to start
 #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
-output_dir = "themeFocusModel"
-startingModel = output_dir#"princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
+#output_dir = "themeFocusModel"
+startingModel = "princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
 #startingModel = "sentence-transformers/all-mpnet-base-v2"
 
 
@@ -121,7 +121,7 @@ with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
 
 
 
-TopicOrder=["themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
+TopicOrder=["LR", "themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
 ThemeResults = pd.DataFrame(columns=TopicOrder)
 ThemeResults.to_csv("ThemeResults.csv", index=False)
 ThemeResults = pd.read_csv("ThemeResults.csv")
@@ -136,8 +136,8 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 
 
 
-#print("STARTING FIRST THEME SPREAD ANALYSIS")
-#runThemeSpreadAnalysis()
+print("STARTING FIRST THEME SPREAD ANALYSIS")
+runThemeSpreadAnalysis()
 
 
 
@@ -208,63 +208,65 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rate =5e-6
+learning_rates = [5e-6]
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
-for ThemeFocusedIteration in range(0, 1):
-    startingModel = output_dir
-    runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
-    #startingModel = output_dir #after first training run we use that model for each subsequent run
-
+for learning_rate in learning_rates:
+    for ThemeFocusedIteration in range(0, 1):
+        #startingModel = output_dir
+        runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
+        #startingModel = output_dir #after first training run we use that model for each subsequent run
     
-    #redo Embeddings with new focus model
-    simModel = output_dir
+        
+        #redo Embeddings with new focus model
+        simModel = output_dir
+        
+        # datasetName = "genDatasetProcessed.pkl"
+        # #def makeEmbeddings(datasetName):
+        simModel = SimCSE(simModel)
+        
+        
+        #load dataset to embed
+        with open(datasetName, "rb") as f:
+          loaded_list = pickle.load(f)
+        #embed dataset with simcse model 
+        ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
+        
+        with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+            pickle.dump(ThemeSpreadEmbeddings, f)
+        
+        
+        #open  the laelled data (format train, val, test)
+        with open('split4000Manual.pkl', 'rb') as f:
+            TrainValTest = pickle.load(f)
+        #make embeddings of val data for experiment 2 use
+        ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+        with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+            pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+        
+        
+        # #do bert model and use theme spread analysis to decide upon themes to train
+        
+        
+        print("\n\nSTARTING SECOND THEME SPREAD ANALYSIS/ secondTrain")
+        runThemeSpreadAnalysis()
     
-    # datasetName = "genDatasetProcessed.pkl"
-    # #def makeEmbeddings(datasetName):
-    simModel = SimCSE(simModel)
     
     
-    #load dataset to embed
-    with open(datasetName, "rb") as f:
-      loaded_list = pickle.load(f)
-    #embed dataset with simcse model 
-    ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
     
-    with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
-        pickle.dump(ThemeSpreadEmbeddings, f)
-    
-    
-    #open  the laelled data (format train, val, test)
-    with open('split4000Manual.pkl', 'rb') as f:
-        TrainValTest = pickle.load(f)
-    #make embeddings of val data for experiment 2 use
-    ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
-    with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
-        pickle.dump(ThemeFocusedTrainingEmbeddings, f)
-    
-    
-    # #do bert model and use theme spread analysis to decide upon themes to train
-    
-    
-    print("\n\nSTARTING SECOND THEME SPREAD ANALYSIS/ secondTrain")
-    runThemeSpreadAnalysis()
-
-
-
-
-    #####################YOU WOULD ALSO DO THIS AFTER THE BASE MODEL RUN
-    ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
-    ThemeSpreadAnalysisBertResults["themeIter"] = 0
-    
-    ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
-    ThemeResults = pd.concat([ThemeResults, ThemeSpreadAnalysisBertResults], axis=0, ignore_index=True)
-    
-    pd.set_option('display.width', 1000)
-    print(ThemeResults)
-    print("above are all ThemeResults so far")
-    
+        #####################YOU WOULD ALSO DO THIS AFTER THE BASE MODEL RUN
+        ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+        ThemeSpreadAnalysisBertResults["themeIter"] = 0
+        ThemeSpreadAnalysisBertResults["LR"] = learning_rate
+        
+        ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
+        ThemeResults = pd.concat([ThemeResults, ThemeSpreadAnalysisBertResults], axis=0, ignore_index=True)
+        
+        pd.set_option('display.width', 1000)
+        print(ThemeResults)
+        print("above are all ThemeResults so far")
+        
 
 ThemeResults.to_csv("ThemeResults.csv", index=False)
 
