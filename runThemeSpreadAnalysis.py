@@ -335,7 +335,7 @@ else:
         print(idx, (row[0] / rowsTotal) * 100)
     print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
     
-    print(bertopicModel.get_topic_info())
+    print("\n\n\n\n")
     
     
 
@@ -344,7 +344,7 @@ else:
     
     #make blank matrix
     print("consider making the df into % first and ignoring any V minor occurances? might not matter if we're just selcting the most anyway?")
-    coOccurrenceMatrix = np.zeros((len(crosstab.index), len(crosstab.index)), dtype=int)
+    coOccurrenceMatrix = np.zeros((len(crosstab.index), len(crosstab.index)), dtype=float)
     for column in crosstab.columns: #for each topic colum
         topic = crosstab[column] #topic = that columns values 
         # Find the themes present in this topic
@@ -388,21 +388,16 @@ else:
 
     
     
-    muddle_measure = {}
+    mixedMeasure = {}
+    allInTheme = crosstab.sum(axis=1) #get total samples for each theme
+    allThemeCoOccurrences = coOccurrenceMatrix.sum(axis=1) #get all times a theme co-occured
 
-    theme_occurrences = crosstab.sum(axis=1)
-    
-    theme_co_occurrences = coOccurrenceMatrix.sum(axis=1)
-
-    for i, theme in enumerate(crosstab.index):
-
-        muddle_measure[theme] = theme_co_occurrences[i] / theme_occurrences[theme]
-    
- 
-    sorted_themes = sorted(muddle_measure.items(), key=lambda x: x[1], reverse=True)
-
-    for theme, measure in sorted_themes:
-        print(f"Theme '{theme}' has a muddle measure of {measure}.")
+    for i, theme in enumerate(crosstab.index): #for each theme calc how often it cooccured/how many samples it had
+        mixedMeasure[theme] = allThemeCoOccurrences[i] / allInTheme[theme]
+        
+    sortedThemes = sorted(mixedMeasure.items(), key=lambda x: x[1], reverse=True) #sort by the most mixed and print
+    for theme, measure in sortedThemes:
+        print(f"Theme '{theme}' has a mixedMeasure of {measure}.")
 
 
 
