@@ -282,9 +282,9 @@ else:
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
 
-        if percentagesOutOfFullTotal[0] < 0.2:
+        if percentagesOutOfFullTotal[0] <= 0.2:
             print("\n\n\nTheme: ", idx, "May be quite spread out or much in -1\n(we should probably use a check on the last of the values being under x instead of the first, both work but for this the last is more clear)\n\n\n\n\n")
-        if percentagesOutOfFullTotal[0] > 0.8:
+        if percentagesOutOfFullTotal[0] >= 0.8:
             print("\n\n\nTheme ", idx, "May be quite condenced\n\n\n\n\n")
 
 
