@@ -338,9 +338,32 @@ else:
     print(bertopicModel.get_topic_info())
     
     
-    
-    
-    
+
+    #make blank matrix
+    print("consider making the df into % first and ignoring any V minor occurances? might not matter if we're just selcting the most anyway?")
+    coOccurrenceMatrix = np.zeros((len(crosstab.index), len(crosstab.index)), dtype=int)
+    for column in crosstab.columns: #for each topic colum
+        topic = crosstab[column] #topic = that columns values 
+        # Find the themes present in this topic
+        presentThemes = topic.index[topic > 0] #get any themes that occur in this topic
+
+        #this section counts for each theme which other theme occurs and adds it to the matrix
+        for i, theme1 in enumerate(presentThemes):
+            for j, theme2 in enumerate(presentThemes):
+                if i < j:
+                    coOccurrenceMatrix[theme1, theme2] += topic[theme1] * topic[theme2]
+                    coOccurrenceMatrix[theme2, theme1] += topic[theme1] * topic[theme2] 
+        
+    # then we take 
+    maxCoOccurrences = np.max(coOccurrenceMatrix)
+    themeIndices = np.where(coOccurrenceMatrix == maxCoOccurrences)
+
+    # show the themes with the maximum co-occurrences
+    for i, j in zip(themeIndices[0], themeIndices[1]):
+        theme1 = crosstab.index[i]
+        theme2 = crosstab.index[j]
+        print(f"Themes '{theme1}' and '{theme2}' co-occur the most in the same topics.")
+
     # statsFromCT = statsFromCrosstab(crosstab)
     # most_common_predictions, prediction_frequency, total_samples_per_prediction, prediction_composition, average_category_spread, category_spread, least_spread_categories, most_spread_categories, BTTrainComp = statsFromCT
     
