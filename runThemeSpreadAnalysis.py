@@ -225,7 +225,7 @@ print(len(ThemeSpreadEmbeddings), len(generalDataset))
 
 
 
-bertopicModel = BERTopic(min_topic_size=40)#min_topic_size=min_topic_size)
+bertopicModel = BERTopic()#min_topic_size=40)#min_topic_size=min_topic_size)
 bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
 minusOneTopicName = bertopicModel.get_topic_info().iloc[0]["Name"]
 print(minusOneTopicName)
@@ -282,10 +282,10 @@ else:
         print("with minus: ", quantInTop12345, "\n")
         print("no minus: ", quantInTop12345NoMinus, "\n")
 
-        if percentagesOutOfFullTotal[0] <= 0.2:
-            print("\n\n\nTheme: ", idx, "May be quite spread out or much in -1\n(we should probably use a check on the last of the values being under x instead of the first, both work but for this the last is more clear)\n\n\n\n\n")
-        if percentagesOutOfFullTotal[0] >= 0.8:
-            print("\n\n\nTheme ", idx, "May be quite condenced\n\n\n\n\n")
+        if percentagesOutOfFullTotal[3] <= 0.55:
+            print("\n\n\n(4 top topics dont contain 55% of Theme): ", idx, "May be quite spread out or much in -1\n\n\n\n\n")
+        if percentagesOutOfFullTotal[0] >= 0.75:
+            print("\n\n\n(top topic has over 75% of Theme): ", idx, "May be quite condenced\n\n\n\n\n")
 
 
 
@@ -344,9 +344,11 @@ else:
     
     #make blank matrix
     print("consider making the df into % first and ignoring any V minor occurances? might not matter if we're just selcting the most anyway?")
+    
+    crosstabNormalized = crosstab.div(crosstab.sum(axis=0), axis=1)
     coOccurrenceMatrix = np.zeros((len(crosstab.index), len(crosstab.index)), dtype=float)
-    for column in crosstab.columns: #for each topic colum
-        topic = crosstab[column] #topic = that columns values 
+    for column in crosstabNormalized.columns: #for each topic colum
+        topic = crosstabNormalized[column] #topic = that columns values 
         # Find the themes present in this topic
         presentThemes = topic.index[topic > 0] #get any themes that occur in this topic
 
@@ -355,8 +357,8 @@ else:
             for j, theme2 in enumerate(presentThemes):
                 if i < j:
                     #get name of idx
-                    idxTheme1 = crosstab.index.get_loc(theme1)
-                    idxTheme2 = crosstab.index.get_loc(theme2)
+                    idxTheme1 = crosstabNormalized.index.get_loc(theme1)
+                    idxTheme2 = crosstabNormalized.index.get_loc(theme2)
                     coOccurrenceMatrix[idxTheme1, idxTheme2] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2]
                     coOccurrenceMatrix[idxTheme2, idxTheme1] += topic.iloc[idxTheme1] * topic.iloc[idxTheme2] 
 
@@ -371,8 +373,8 @@ else:
     for index in topIdxs:
         i, j = np.unravel_index(index, coOccurrenceMatrix.shape)
         if i <= j: #this just makes sure it only prints them out once
-            theme1 = crosstab.index[i]
-            theme2 = crosstab.index[j]
+            theme1 = crosstabNormalized.index[i]
+            theme2 = crosstabNormalized.index[j]
             coCount = coOccurrenceMatrix[i, j]
             print("Themes ", theme1, " and ", theme2, " co-occur", coCount, " times in the same topics.")
     
