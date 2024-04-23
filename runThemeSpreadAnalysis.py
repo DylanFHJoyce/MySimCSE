@@ -511,8 +511,9 @@ for min_topic_size in topicSizes:
             ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"])
             ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
             ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
-        
-            newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple[0], "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes, "aveEnthropy": aveEnthropy}
+
+            #COHERENCE TUPLE IS NOW NOT A TUPLE
+            newRow = {"iteration": iteration, "TD": TD, "Coherence": coherenceTuple, "topicSize": min_topic_size, "percTrainInMinusOne": (minusOneTopic.sum()/len(TrainValTest[0]))*100, "numTopicsGenerated": len(bertopicModel.get_topics()), "AveMixedMeasure": AveMixedMeasure, "percTopicsAreMixed": percTopicsAreMixed, "percTopicsAreCondenced": percTopicsAreCondenced, "percSpreadThemes": percSpreadThemes, "percCondencedThemes": percCondencedThemes, "aveEnthropy": aveEnthropy}
             newRow = pd.DataFrame([newRow])
             ThemeSpreadAnalysisBertResults = pd.concat([ThemeSpreadAnalysisBertResults, newRow], axis=0, ignore_index=True)
         
