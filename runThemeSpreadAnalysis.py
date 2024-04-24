@@ -233,14 +233,16 @@ ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv
 # got rid of aTopicWasPrimarilyThisThemeCount as i think that number would not be linear/easily interpretable as we start to overtrain
 TTFDFColumns = ["topTopicThemePerc", "topToThirdTopicThemePerc", "topToFifthTopicThemePerc", "enthropy", "percInMinusOne"]#, "aTopicWasPrimarilyThisThemeCount"]
 #TTFDFColumns = ["themeSpreadCount", "themeCondencedCount", "aTopicWasPrimarilyThisThemeCount"]
-ThemesToFocusDF = pd.DataFrame(index = TrainValTest[0]["Category"].unique(), columns=TTFDFColumns)
+themesList = list(TrainValTest[0]["Category"].unique())
+print(themesList)
+ThemesToFocusDF = pd.DataFrame(index = themesList, columns=TTFDFColumns)
 ThemesToFocusDF.fillna(0, inplace=True)
 ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index=False)
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
-# quit()
+quit()
 
 #placeholder values incase we comment them out
 TD = 0
