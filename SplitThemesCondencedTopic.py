@@ -126,7 +126,7 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 #(so our normal spread analysis but we count the times a theme is condenced and add it to the overall count)
 #we proceede with one or a few of the most condenced themes
 
-
+STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
 #we run a final bert model to generate a midling amount of topics, we use fit transform to create this model so that we have 
 #the topic allocations for the samples in the wider dataset
 
