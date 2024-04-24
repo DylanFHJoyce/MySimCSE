@@ -240,9 +240,6 @@ ThemesToFocusDF.fillna(0, inplace=True)
 ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 
-ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  # Specify index_label=False to avoid writing the index to the CSV file
-
-ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 
 
 # print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -574,7 +571,7 @@ for min_topic_size in topicSizes:
         print("if doing entropy then need all columns as count, even blank ones?")
         #then i also want the enthropy for each theme with and without the -1 topic
         #and keep in mid the difference that will make
-   
+ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 print("\n\n\n\nTTFDF\n\n\n\n", ThemesToFocusDF)            
         
         
