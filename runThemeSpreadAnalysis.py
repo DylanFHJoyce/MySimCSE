@@ -237,7 +237,7 @@ themesList = list(TrainValTest[0]["Category"].unique())
 print(themesList)
 ThemesToFocusDF = pd.DataFrame(index = themesList, columns=TTFDFColumns)
 ThemesToFocusDF.fillna(0, inplace=True)
-ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index=False)
+ThemesToFocusDF.to_csv("ThemesToFocusDF.csv")
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
 
 
