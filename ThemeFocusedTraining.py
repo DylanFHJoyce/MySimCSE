@@ -220,7 +220,7 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
