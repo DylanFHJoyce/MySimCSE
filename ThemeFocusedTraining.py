@@ -220,16 +220,16 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
 for learning_rate in learning_rates:
-    for ThemeFocusedIteration in range(0, 1): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
+    for ThemeFocusedIteration in range(0, 2): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
-        runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
         #startingModel = output_dir #after first training run we use that model for each subsequent run
     
         
