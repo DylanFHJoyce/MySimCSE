@@ -557,17 +557,17 @@ for min_topic_size in topicSizes:
         # for val in crosstab[exampleColName]:
         #     print(val)
         
-        
+
         
         print("if doing entropy then need all columns as count, even blank ones?")
-            #then i also want the enthropy for each theme with and without the -1 topic
-            #and keep in mid the difference that will make
+        #then i also want the enthropy for each theme with and without the -1 topic
+        #and keep in mid the difference that will make
+   
+print("\n\n\n\nTTFDF\n\n\n\n", ThemesToFocusDF)            
         
-            
         
-        
-        #take training data embeddings and transform to the bert model
-        
-        #do spread analysis of the most 
+#take training data embeddings and transform to the bert model
+
+#do spread analysis of the most 
 
 
