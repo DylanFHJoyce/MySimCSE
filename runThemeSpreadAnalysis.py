@@ -358,9 +358,9 @@ for min_topic_size in topicSizes:
                 ThemesToFocusDF.loc[idx]["topTopicThemePerc"] = percentagesOutOfFullTotal[0]
                 ThemesToFocusDF.loc[idx]["topToThirdTopicThemePerc"] = percentagesOutOfFullTotal[2]
                 ThemesToFocusDF.loc[idx]["topToFifthTopicThemePerc"] = percentagesOutOfFullTotal[4]
+                print(ThemesToFocusDF.loc[idx])
         
-        
-        
+            
         
         
         
