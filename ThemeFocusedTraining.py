@@ -225,7 +225,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 
 print("firstTrain")
 for learning_rate in learning_rates:
-    for ThemeFocusedIteration in range(0, 2): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
+    for ThemeFocusedIteration in range(0, 4): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -271,7 +271,7 @@ for learning_rate in learning_rates:
     
         #####################YOU WOULD ALSO DO THIS AFTER THE BASE MODEL RUN
         ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
-        ThemeSpreadAnalysisBertResults["themeIter"] = 0
+        ThemeSpreadAnalysisBertResults["themeIter"] = ThemeFocusedIteration
         ThemeSpreadAnalysisBertResults["LR"] = learning_rate
         
         ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
