@@ -214,6 +214,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates:
     for ThemeFocusedIteration in range(0, 1): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
+        ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #startingModel = output_dir #after first training run we use that model for each subsequent run
@@ -267,8 +268,7 @@ for learning_rate in learning_rates:
         print(ThemeResults)
         print("above are all ThemeResults so far")
         
-
-ThemeResults.to_csv("ThemeResults.csv", index=False)
+        ThemeResults.to_csv("ThemeResults.csv", index=False)
 
 
 
