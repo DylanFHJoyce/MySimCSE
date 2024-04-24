@@ -355,12 +355,12 @@ for min_topic_size in topicSizes:
                 if percentagesOutOfFullTotal[0] >= 0.75:
                     numCondencedThemes = numCondencedThemes + 1
                     print("\n\n\n(top topic has over 75% of Theme): ", idx, "May be quite condenced\n\n\n\n\n")
-                ThemesToFocusDF.loc[idx]["topTopicThemePerc"] = percentagesOutOfFullTotal[0]
-                ThemesToFocusDF.loc[idx]["topToThirdTopicThemePerc"] = percentagesOutOfFullTotal[2]
-                ThemesToFocusDF.loc[idx]["topToFifthTopicThemePerc"] = percentagesOutOfFullTotal[4]
+                ThemesToFocusDF.loc[idx, "topTopicThemePerc"] = percentagesOutOfFullTotal[0]
+                ThemesToFocusDF.loc[idx, "topToThirdTopicThemePerc"] = percentagesOutOfFullTotal[2]
+                ThemesToFocusDF.loc[idx, "topToFifthTopicThemePerc"] = percentagesOutOfFullTotal[4]
                 print(ThemesToFocusDF.loc[idx])
         
-            
+            #ThemesToFocusDF.loc[idx, "percInMinusOne"]
         
         
         
@@ -414,8 +414,8 @@ for min_topic_size in topicSizes:
                 
                 allMinusOneTotal = allMinusOneTotal + row[0]
                 
-                ThemesToFocusDF.loc[idx]["percInMinusOne"] = ((row[0] / rowsTotal) * 100)
-                print("test: ", ThemesToFocusDF.loc[idx]["percInMinusOne"])
+                ThemesToFocusDF.loc[idx, "percInMinusOne"] = (row[0] / rowsTotal) * 100
+                print("test: ", ThemesToFocusDF.loc[idx, "percInMinusOne"])
                 
                 print(idx, (row[0] / rowsTotal) * 100)
             print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
