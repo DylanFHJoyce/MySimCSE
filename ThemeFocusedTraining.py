@@ -91,7 +91,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 #use either base model or sim model to start
 #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
 #output_dir = "themeFocusModel"
-startingModel = "princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
+#startingModel = "princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
 startingModel = "google-bert/bert-base-uncased"
 
 #startingModel = "sentence-transformers/all-mpnet-base-v2"
@@ -222,11 +222,11 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
-output_dir = "mybertModel"
+#output_dir = "mybertModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rates = [5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
-Testepochs = 4
+Testepochs = 8
 print("firstTrain")
 for learning_rate in learning_rates:
     for ThemeFocusedIteration in range(0, 4): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
@@ -235,7 +235,7 @@ for learning_rate in learning_rates:
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
         runSim(startingModel, trainingTripletsCSV, learning_rate, Testepochs, output_dir, per_device_train_batch_size)
-        Testepochs = 4
+        Testepochs = 2
         startingModel = output_dir #after first training run we use that model for each subsequent run
     
         
