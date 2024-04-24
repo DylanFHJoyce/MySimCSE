@@ -255,7 +255,7 @@ coherenceTuple = (0, 0)
 #start loop here
 
 topicSizes = [20, 50, 70, 100]
-#topicSizes = [40]
+topicSizes = [40]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
