@@ -230,7 +230,7 @@ for learning_rate in learning_rates:
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
-        #startingModel = output_dir #after first training run we use that model for each subsequent run
+        startingModel = output_dir #after first training run we use that model for each subsequent run
     
         
         #redo Embeddings with new focus model
