@@ -74,14 +74,14 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 
 
 
-print("STARTING?")
+# print("STARTING?")
 
-output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
-trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [0, 1e-4, 5e-5, 5e-6]
-per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
+# output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
+# trainingTripletsCSV = "specificThemeTripletDataset.csv"
+# learning_rates = [0, 1e-4, 5e-5, 5e-6]
+# per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
-runSim(output_dir, trainingTripletsCSV, 5e-5, 2, output_dir, per_device_train_batch_size)
+# runSim(output_dir, trainingTripletsCSV, 5e-5, 2, output_dir, per_device_train_batch_size)
 
 
 
