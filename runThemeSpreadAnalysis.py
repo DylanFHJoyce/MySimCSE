@@ -245,8 +245,8 @@ ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  # Specify inde
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 
 
-print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
-quit()
+# print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
+# quit()
 
 #placeholder values incase we comment them out
 TD = 0
@@ -557,8 +557,14 @@ for min_topic_size in topicSizes:
         
         
             ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
-        
-        
+
+
+
+
+
+
+            ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  # Specify index_label=False to avoid writing the index to the CSV file
+
         # exampleColName = crosstab.columns[1]
         # for val in crosstab[exampleColName]:
         #     print(val)
