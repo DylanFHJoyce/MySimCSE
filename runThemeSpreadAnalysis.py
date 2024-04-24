@@ -231,10 +231,12 @@ ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv
 
 #CHANGE THIS TO(for each theme): top topic %, top to third topics %, top to fifth topics %, aTopicWasPrimarilyThisThemeCount
 # got rid of aTopicWasPrimarilyThisThemeCount as i think that number would not be linear/easily interpretable as we start to overtrain
-TTFDFColumns = ["topTopicThemePerc", "topToThirdTopicThemePerc", "topToFifthTopicThemePerc"]#, "aTopicWasPrimarilyThisThemeCount"]
+TTFDFColumns = ["topTopicThemePerc", "topToThirdTopicThemePerc", "topToFifthTopicThemePerc", "enthropy", "percInMinusOne"]#, "aTopicWasPrimarilyThisThemeCount"]
 #TTFDFColumns = ["themeSpreadCount", "themeCondencedCount", "aTopicWasPrimarilyThisThemeCount"]
 ThemesToFocusDF = pd.DataFrame(index = TrainValTest[0]["Category"].unique(), columns=TTFDFColumns)
 ThemesToFocusDF.fillna(0, inplace=True)
+ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index=False)
+ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -247,11 +249,11 @@ coherenceTuple = (0, 0)
 #start loop here
 
 topicSizes = [20, 40, 60, 80, 100]
-#topicSizes = [40]
+topicSizes = [40]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
-    for iteration in range(0, 2):
+    for iteration in range(0, 1):
         
         bertopicModel = BERTopic(min_topic_size=min_topic_size)
         bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
@@ -263,6 +265,9 @@ for min_topic_size in topicSizes:
     
         
         ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+
+        ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
+
 
         print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
         if (len(bertopicModel.get_topics()) < 10):
@@ -301,6 +306,10 @@ for min_topic_size in topicSizes:
             numSpreadThemes = 0
             numCondencedThemes = 0
         
+
+
+
+            
         
         
             totalEnthropy = 0
@@ -315,6 +324,7 @@ for min_topic_size in topicSizes:
                 probabilities = rowNoMinus / rowNoMinus.sum() # for entropy
                 enthropy = -np.sum(probabilities * np.log2(probabilities))
                 totalEnthropy = totalEnthropy + enthropy
+                ThemesToFocusDF.loc[idx]["enthropy"] = enthropy
                 
                 SV = sorted(row, reverse=True)
                 SVNoMinus = sorted(rowNoMinus, reverse=True)
@@ -398,13 +408,17 @@ for min_topic_size in topicSizes:
             for idx, row in crosstab.iterrows():
                 rowsTotal = row.sum()
                 allRowsTotal = allRowsTotal + rowsTotal
-            
+                
                 allMinusOneTotal = allMinusOneTotal + row[0]
+                
+                ThemesToFocusDF.loc[idx]["percInMinusOne"] = (row[0] / rowsTotal) * 100
+                
                 print(idx, (row[0] / rowsTotal) * 100)
             print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
             
             print("\n\n\n\n")
-        
+
+
             
             minusOneTopic = crosstab.iloc[:, 0]#.sum() #for getting all of column 0 (0 indexed obvs) (and can sum if needed)
             print(minusOneTopic.sum())
