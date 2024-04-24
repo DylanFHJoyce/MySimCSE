@@ -414,7 +414,8 @@ for min_topic_size in topicSizes:
                 
                 allMinusOneTotal = allMinusOneTotal + row[0]
                 
-                ThemesToFocusDF.loc[idx]["percInMinusOne"] = (row[0] / rowsTotal) * 100
+                ThemesToFocusDF.loc[idx]["percInMinusOne"] = ((row[0] / rowsTotal) * 100)
+                print("test: ", ThemesToFocusDF.loc[idx]["percInMinusOne"])
                 
                 print(idx, (row[0] / rowsTotal) * 100)
             print("average % in minus one: ", (allMinusOneTotal/allRowsTotal) * 100)
@@ -560,7 +561,7 @@ for min_topic_size in topicSizes:
 
 
 
-            ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  # Specify index_label=False to avoid writing the index to the CSV file
+            ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  
 
         # exampleColName = crosstab.columns[1]
         # for val in crosstab[exampleColName]:
@@ -570,7 +571,7 @@ for min_topic_size in topicSizes:
         
         print("if doing entropy then need all columns as count, even blank ones?")
         #then i also want the enthropy for each theme with and without the -1 topic
-        #and keep in mid the difference that will make
+        #and keep in mind the difference that will make
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 print("\n\n\n\nTTFDF\n\n\n\n", ThemesToFocusDF)            
         
