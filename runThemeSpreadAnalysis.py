@@ -514,8 +514,8 @@ for min_topic_size in topicSizes:
             percCondencedThemes = int ((numCondencedThemes / numberOfThemes) * 100) 
             aveEnthropy = int((totalEnthropy / numberOfThemes) * 100)
             
-            ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"])
-            ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
+            #ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"])
+            #ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
             ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
             #COHERENCE TUPLE IS NOW NOT A TUPLE
