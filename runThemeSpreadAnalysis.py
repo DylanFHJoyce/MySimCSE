@@ -227,6 +227,9 @@ ThemeSpreadAnalysisBertResults = pd.DataFrame(columns=["iteration", "TD", "Coher
 ThemeSpreadAnalysisBertResults.to_csv("ThemeSpreadAnalysisBertResults.csv", index=False)
 ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
+
+
+#CHANGE THIS TO(for each theme): top topic %, top to third topics %, top to fifth topics %, aTopicWasPrimarilyThisThemeCount
 TTFDFColumns = ["themeSpreadCount", "themeCondencedCount", "aTopicWasPrimarilyThisThemeCount"]
 ThemesToFocusDF = pd.DataFrame(index = TrainValTest[0].index, columns=TTFDFColumns)
 
