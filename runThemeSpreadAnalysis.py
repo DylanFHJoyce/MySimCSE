@@ -252,13 +252,13 @@ for min_topic_size in topicSizes:
 
     
         
-        
+        ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
+
         print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
         if (len(bertopicModel.get_topics()) < 10):
-            print("\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
+            print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA BERTOPIC GENERATION HAS BEEN SKIPPED IN runThemeSpreadAnalysis.py\n\n\n\n")
         else:
-            ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
-
+            
 
             
             TD = topicDiversity(bertopicModel.get_topic_info()["Representation"].tolist()) #you give this bertopicmodel.get_topic_info()["Representation"].tolist()
