@@ -61,6 +61,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
     f"--num_train_epochs {num_epochs} "
     f"--per_device_train_batch_size {per_device_train_batch_size} "
     f"--learning_rate {learning_rate} "
+    "--tokenizer_name bert-base-uncased "
     "--max_seq_length 64 "
     "--load_best_model_at_end "
     "--pooler_type cls "
