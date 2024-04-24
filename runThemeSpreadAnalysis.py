@@ -327,7 +327,7 @@ for min_topic_size in topicSizes:
                 probabilities = rowNoMinus / rowNoMinus.sum() # for entropy
                 enthropy = -np.sum(probabilities * np.log2(probabilities))
                 totalEnthropy = totalEnthropy + enthropy
-                ThemesToFocusDF.loc[idx]["enthropy"] = enthropy
+                ThemesToFocusDF.loc[idx, "enthropy"] = enthropy
                 
                 SV = sorted(row, reverse=True)
                 SVNoMinus = sorted(rowNoMinus, reverse=True)
