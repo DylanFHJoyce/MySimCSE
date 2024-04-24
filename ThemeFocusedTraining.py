@@ -84,12 +84,6 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 runSim(output_dir, trainingTripletsCSV, 5e-5, 2, output_dir, per_device_train_batch_size)
 
 
-print("preBREAK")
-
-return
-
-print("postBREAK")
-
 
 
 
