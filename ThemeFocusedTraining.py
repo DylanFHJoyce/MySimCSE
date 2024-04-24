@@ -86,7 +86,7 @@ runSim(output_dir, trainingTripletsCSV, 5e-5, 2, output_dir, per_device_train_ba
 
 print("preBREAK")
 
-break
+return
 
 print("postBREAK")
 
