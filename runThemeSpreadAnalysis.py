@@ -259,7 +259,7 @@ topicSizes = [40]
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
-    for iteration in range(0, 2):
+    for iteration in range(0, 1):
         
         bertopicModel = BERTopic(min_topic_size=min_topic_size)
         bertopicModel.fit(documents=generalDataset, embeddings=ThemeSpreadEmbeddings)
