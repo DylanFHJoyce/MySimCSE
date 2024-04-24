@@ -371,7 +371,7 @@ def main():
                 use_auth_token=True if model_args.use_auth_token else None,
                 model_args=model_args                  
             )
-        elif 'bert' in model_args.model_name_or_path:
+        elif 'bert' in model_args.model_name_or_path or 'theme' in model_args.model_name_or_path:
             model = BertForCL.from_pretrained(
                 model_args.model_name_or_path,
                 from_tf=bool(".ckpt" in model_args.model_name_or_path),
