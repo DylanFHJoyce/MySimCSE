@@ -229,6 +229,7 @@ for learning_rate in learning_rates:
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
+        print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
         runSim(startingModel, trainingTripletsCSV, learning_rate, 2, output_dir, per_device_train_batch_size)
         startingModel = output_dir #after first training run we use that model for each subsequent run
     
