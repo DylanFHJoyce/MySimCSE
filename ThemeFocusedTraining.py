@@ -227,7 +227,7 @@ print("firstTrain")
 for learning_rate in learning_rates:
     for ThemeFocusedIteration in range(0, 2): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
         ThemeResults = pd.read_csv("ThemeResults.csv")
-        #startingModel = output_dir
+        startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         runSim(startingModel, trainingTripletsCSV, learning_rate, 1, output_dir, per_device_train_batch_size)
         startingModel = output_dir #after first training run we use that model for each subsequent run
