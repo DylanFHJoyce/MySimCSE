@@ -237,8 +237,12 @@ themesList = list(TrainValTest[0]["Category"].unique())
 print(themesList)
 ThemesToFocusDF = pd.DataFrame(index = themesList, columns=TTFDFColumns)
 ThemesToFocusDF.fillna(0, inplace=True)
-ThemesToFocusDF.to_csv("ThemesToFocusDF.csv")
-ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
+ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)
+ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
+
+ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  # Specify index_label=False to avoid writing the index to the CSV file
+
+ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 
 
 print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
@@ -268,7 +272,7 @@ for min_topic_size in topicSizes:
         
         ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
 
-        ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv")
+        ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
 
 
         print("WE SKIP GENERATIONS WITH VERY LOW TOPIC QUANTITIES, IF IT HAPPENS CONSISTENTLY THEN CHECK PARAMS")
