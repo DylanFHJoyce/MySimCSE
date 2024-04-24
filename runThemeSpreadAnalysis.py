@@ -230,8 +230,15 @@ ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv
 
 
 #CHANGE THIS TO(for each theme): top topic %, top to third topics %, top to fifth topics %, aTopicWasPrimarilyThisThemeCount
-TTFDFColumns = ["themeSpreadCount", "themeCondencedCount", "aTopicWasPrimarilyThisThemeCount"]
-ThemesToFocusDF = pd.DataFrame(index = TrainValTest[0].index, columns=TTFDFColumns)
+# got rid of aTopicWasPrimarilyThisThemeCount as i think that number would not be linear/easily interpretable as we start to overtrain
+TTFDFColumns = ["topTopicThemePerc", "topToThirdTopicThemePerc", "topToFifthTopicThemePerc"]#, "aTopicWasPrimarilyThisThemeCount"]
+#TTFDFColumns = ["themeSpreadCount", "themeCondencedCount", "aTopicWasPrimarilyThisThemeCount"]
+ThemesToFocusDF = pd.DataFrame(index = TrainValTest[0]["Category"].unique(), columns=TTFDFColumns)
+ThemesToFocusDF.fillna(0, inplace=True)
+
+
+print("\n\n\n\n\n\n\n\n\n\n\n", ThemesToFocusDF, "\n\n\n\n\n\n\n\n\n\n\n\n\n")
+# quit()
 
 #placeholder values incase we comment them out
 TD = 0
@@ -335,7 +342,9 @@ for min_topic_size in topicSizes:
                 if percentagesOutOfFullTotal[0] >= 0.75:
                     numCondencedThemes = numCondencedThemes + 1
                     print("\n\n\n(top topic has over 75% of Theme): ", idx, "May be quite condenced\n\n\n\n\n")
-        
+                ThemesToFocusDF.loc[idx]["topTopicThemePerc"] = percentagesOutOfFullTotal[0]
+                ThemesToFocusDF.loc[idx]["topToThirdTopicThemePerc"] = percentagesOutOfFullTotal[2]
+                ThemesToFocusDF.loc[idx]["topToFifthTopicThemePerc"] = percentagesOutOfFullTotal[4]
         
         
         
@@ -360,7 +369,7 @@ for min_topic_size in topicSizes:
                     print(column, percentage)
                     numTopicsAreMixed = numTopicsAreMixed + 1
                     print(column, " is mixed (less than 50% of any single theme) maybe train to split it if its a large topic\n\n")
-        
+            
         
         
             
