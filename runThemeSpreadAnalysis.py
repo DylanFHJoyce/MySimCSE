@@ -563,7 +563,7 @@ for min_topic_size in topicSizes:
 
 
             ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  
-            print("\n\n\n\nTTFDF\n end of min_topic_size: ", min_topic_size, " iteration: ", iteration, ThemesToFocusDF)
+            print("\n\n\n\nTTFDF\n end of min_topic_size: ", min_topic_size, " iteration: ", iteration, "\n", ThemesToFocusDF)
         # exampleColName = crosstab.columns[1]
         # for val in crosstab[exampleColName]:
         #     print(val)
