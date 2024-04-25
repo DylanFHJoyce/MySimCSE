@@ -25,7 +25,7 @@ def NPMICoherence(topicModel, tokenized_corpus, corpusDictionary):
     #remove -1 from topics (-1 is those that didnt fall into a topic)
     topicReps = topicModel.get_topic_info()[1:]["Representation"].tolist()
     # Calculate NPMI coherence
-    coherence_model_npmi = gensim.models.CoherenceModel(topics=topicReps, texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi', topn=3) #or <10
+    coherence_model_npmi = gensim.models.CoherenceModel(topics=topicReps, texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi', topn=5) #or <10 #was 3
     # # Calculate NPMI coherence
     #coherence_model_npmi = gensim.models.CoherenceModel(topics=topicModel.get_topic_info()["Representation"].tolist(), texts=tokenized_corpus, dictionary=corpusDictionary, coherence='c_npmi'would put top n here but changing back)
     
