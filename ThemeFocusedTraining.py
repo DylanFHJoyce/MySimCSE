@@ -229,7 +229,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
-    for ThemeFocusedIteration in range(0, 11, 2): #
+    for ThemeFocusedIteration in range(2, 11, 2): #
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
