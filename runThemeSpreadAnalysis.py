@@ -563,7 +563,7 @@ for min_topic_size in topicSizes:
 
 
             ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  
-
+            print("\n\n\n\nTTFDF\n end of min_topic_size: ", min_topic_size, " iteration: ", iteration, ThemesToFocusDF)
         # exampleColName = crosstab.columns[1]
         # for val in crosstab[exampleColName]:
         #     print(val)
@@ -574,7 +574,7 @@ for min_topic_size in topicSizes:
         #then i also want the enthropy for each theme with and without the -1 topic
         #and keep in mind the difference that will make
 ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
-print("\n\n\n\nTTFDF\n\n\n\n", ThemesToFocusDF)            
+#print("\n\n\n\nTTFDF\n end of min_topic_size: ", min_topic_size, " iteration: ", iteration, ThemesToFocusDF)            
         
         
 #take training data embeddings and transform to the bert model
