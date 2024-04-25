@@ -224,7 +224,7 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 output_dir = "themeFocusbertModel" #if changing this change further up in file aswell (test ver)
 #output_dir = "mybertModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [0, 5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
