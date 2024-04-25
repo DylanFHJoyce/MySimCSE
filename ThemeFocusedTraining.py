@@ -221,7 +221,7 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
-output_dir = "themeFocusModel" #if changing this change further up in file aswell (test ver)
+output_dir = "themeFocusbertModel" #if changing this change further up in file aswell (test ver)
 #output_dir = "mybertModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
 learning_rates = [5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
@@ -237,7 +237,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         
-        startingModel = output_dir #after first training run we use that model for each subsequent run
+        #startingModel = output_dir #after first training run we use that model for each subsequent run
     
         
         #redo Embeddings with new focus model
