@@ -229,15 +229,16 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
-    for ThemeFocusedIteration in range(20, 36, 5): #THEN CHANGE TO 26 AND START AT 16
-    #for ThemeFocusedIteration in range(4, 5):
+    #for ThemeFocusedIteration in range(20, 36, 5): #THEN CHANGE TO 26 AND START AT 16
+    for ThemeFocusedIteration in range(0, 1):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
-        runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         
+        #USE THIS ONE#runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
+        output_dir = "princeton-nlp/sup-simcse-bert-base-uncased"
         #startingModel = output_dir #after first training run we use that model for each subsequent run
     
         
