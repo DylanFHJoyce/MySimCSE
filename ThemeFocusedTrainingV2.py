@@ -92,14 +92,12 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
 #sentence-transformers/all-mpnet-base-v2 (this is the model the bertopic paper uses, but it may be cased)
 #output_dir = "themeFocusModel"
 
+
+####################################################################################################
+#get embeddings for starting model
 startingModel = "princeton-nlp/sup-simcse-bert-base-uncased" #This has randomly stopped working?
 #startingModel = "google-bert/bert-base-uncased"
-
 #startingModel = "sentence-transformers/all-mpnet-base-v2"
-
-
-#do embeddings
-#makeEmbeddings()
 datasetName = "genDatasetProcessed.pkl"
 #def makeEmbeddings(datasetName):
 simModel = SimCSE(startingModel)
@@ -112,9 +110,7 @@ ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
 with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeSpreadEmbeddings, f)
-
-
-
+    
 #open  the laelled data (format train, val, test)
 with open('split4000Manual.pkl', 'rb') as f:
     TrainValTest = pickle.load(f)
@@ -122,8 +118,7 @@ with open('split4000Manual.pkl', 'rb') as f:
 ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
 with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeFocusedTrainingEmbeddings, f)
-
-
+    
 ThemeFocusedValEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
 with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeFocusedValEmbeddings, f)
@@ -131,27 +126,22 @@ with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
 ThemeFocusedTestEmbeddings = simModel.encode(TrainValTest[2]["Document"].tolist()).numpy()
 with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeFocusedTestEmbeddings, f)
+####################################################################################################
 
 
 
 
-
-
+###############################################################################################
+#dataframe for bertopic model results
 TopicOrder=["LR", "epoch", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
 ThemeResults = pd.DataFrame(columns=TopicOrder)
 ThemeResults.to_csv("ThemeResults.csv", index=False)
 ThemeResults = pd.read_csv("ThemeResults.csv")
+#############################################################################################
 
 
 
-
-
-#do bert model and use theme spread analysis to decide upon themes to train
-
-
-
-
-
+#get results for base model to decide 
 print("STARTING FIRST THEME SPREAD ANALYSIS")
 runThemeSpreadAnalysis()
 
