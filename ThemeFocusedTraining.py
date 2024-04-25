@@ -137,7 +137,7 @@ with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
 
 
 
-TopicOrder=["LR", "themeIter", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
+TopicOrder=["LR", "epoch", "iteration", "TD", "Coherence", "topicSize", "percTrainInMinusOne", "numTopicsGenerated", "AveMixedMeasure", "percTopicsAreMixed", "percTopicsAreCondenced", "percSpreadThemes", "percCondencedThemes", "aveEnthropy"]
 ThemeResults = pd.DataFrame(columns=TopicOrder)
 ThemeResults.to_csv("ThemeResults.csv", index=False)
 ThemeResults = pd.read_csv("ThemeResults.csv")
@@ -228,13 +228,14 @@ learning_rates = [5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, don
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
-for learning_rate in learning_rates:
-    for ThemeFocusedIteration in range(0, 1): #DONT CHANGE THIS, we do multiple iters anyway in the bertopic process
+for learning_rate in learning_rates: #for x in range(0, 11, 2):
+    for ThemeFocusedIteration in range(0, 11, 2): #
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
-        runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         
         startingModel = output_dir #after first training run we use that model for each subsequent run
     
@@ -277,7 +278,7 @@ for learning_rate in learning_rates:
     
         #####################YOU WOULD ALSO DO THIS AFTER THE BASE MODEL RUN
         ThemeSpreadAnalysisBertResults = pd.read_csv("ThemeSpreadAnalysisBertResults.csv")
-        ThemeSpreadAnalysisBertResults["themeIter"] = ThemeFocusedIteration
+        ThemeSpreadAnalysisBertResults["epoch"] = ThemeFocusedIteration
         ThemeSpreadAnalysisBertResults["LR"] = learning_rate
         
         ThemeSpreadAnalysisBertResults = ThemeSpreadAnalysisBertResults[TopicOrder]
