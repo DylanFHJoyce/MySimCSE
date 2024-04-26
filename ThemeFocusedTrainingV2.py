@@ -198,34 +198,31 @@ trainLabeledDataDF = TrainValTest[0]
 # #MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
 # focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
 # focusCategories = ["crime"]
+focusCategories = topIEntropy.tolist()
+trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
+trainLabeledDataDFFocus.reset_index(drop=True)
 
-# trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
-# trainLabeledDataDFFocus.reset_index(drop=True)
-
+print("LEN OF TRAINING DATA FROM THOSE THINGS: ", len(trainLabeledDataDFFocus))
 # #trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
 
-# trainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
-# focusSamples = len(trainLabeledDataDFFocus)
-# percentFromNonFocus = 0.1
+trainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
+focusSamples = len(trainLabeledDataDFFocus)
+percentFromNonFocus = 0.2
 
-# print("\n\n\nTHIS IS THE LENGTH BEING MADE INTO SAMPLES")
-# print(int(focusSamples/percentFromNonFocus))
-# print("\n\n\n")
+print("\n\n\nTHIS IS THE LENGTH BEING MADE INTO SAMPLES")
+print(int(focusSamples/percentFromNonFocus))
+print("\n\n\n")
 
 # #take random sample of NonFocus df to keep general context
 
-# random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
-# trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
-# trainLabeledDataDFNonFocus.reset_index(drop=True)
+random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
+trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
+trainLabeledDataDFNonFocus.reset_index(drop=True)
 
 # print(len(trainLabeledDataDFFocus))
 
-# FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
-# FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
-
-
-
-
+FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
+FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 
@@ -239,6 +236,8 @@ SECONDspecificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF,
 print(len(specificThemeTripletDataset))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 SECONDspecificThemeTripletDataset.to_csv("SECONDspecificThemeTripletDataset.csv", index=False)
+
+
 
 
 
