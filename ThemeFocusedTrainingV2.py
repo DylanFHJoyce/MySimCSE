@@ -407,6 +407,9 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 ########################################################################################################################
 #Then based on the themes to focus output we vary the themeSamplesMultiplier dict values
 
+        # with open("multipleRunThemesToFocus.pkl", "rb") as f:
+        #     multipleRunThemesToFocus = pickle.load(f)
+
         ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
         topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 6)
         bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 6)
@@ -454,6 +457,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 ########################################################################################################################
 
 print(concThemeTriplets)
+
+
 
 
 
