@@ -65,7 +65,7 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
     "--max_seq_length 64 "
     "--load_best_model_at_end "
     "--pooler_type cls "
-    "--overwrite_output_dir "
+    "--overwrite_output_dir " #removing this did not work
     "--temp 0.05 "
      "--do_train "
      "--fp16 "
@@ -155,12 +155,14 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 ThemesToFocusBASEMODELDF = pd.read_csv("ThemesToFocusBASEMODELDF.csv", index_col=0)
 print("\n\nHERE ARE THE THEMES TO FOCUS FROM BASE MODEL RESULTS\n", ThemesToFocusBASEMODELDF)
 
-topI = getTopIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
-bottomi = getBottomIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
+topIEntropy = getTopIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
+bottomIEntropy = getBottomIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
 
-print("HERE IS TOPI: ", topI)
-print("HERE IS bottomi: ", bottomi)
 
+print("HERE IS topIEntropy: ", topIEntropy)
+print("HERE IS bottomIEntropy: ", bottomIEntropy)
+
+print("HERE IS topIEntropy: ", type(topIEntropy))
 
 #get results for base model to decide 
 # print("STARTING FIRST THEME SPREAD ANALYSIS")
@@ -245,7 +247,7 @@ SECONDspecificThemeTripletDataset.to_csv("SECONDspecificThemeTripletDataset.csv"
 output_dir = "themeFocusbertModel" #if changing this change further up in file aswell (test ver)
 #output_dir = "mybertModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [5e-6]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
