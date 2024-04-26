@@ -330,7 +330,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 7):
+    for ThemeFocusedIteration in range(0, 12):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -431,11 +431,11 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
     
-        # for theme in bottomTopicThemePerc:
-        #     if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-        #         themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.1
-        #     else:
-        #         print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
+        for theme in bottomTopicThemePerc:
+            if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.05
+            else:
+                print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
         print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
         concThemeTriplets = pd.DataFrame()
