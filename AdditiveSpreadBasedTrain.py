@@ -334,7 +334,7 @@ per_device_train_batch_size = 32 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 5):
+    for ThemeFocusedIteration in range(0, 15):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -419,8 +419,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
         bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
 
-        # topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
-        # bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
+        percInMinusOne = getTopIdxs(ThemesToFocusDF, "percInMinusOne", 6)
+        #NOT THIS percInMinusOne = getBottomIdxs(ThemesToFocusDF, "percInMinusOne", 6)
         
         
         print("HERE IS topIEntropy: ", topIEntropy)
@@ -434,19 +434,30 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         print("top: ", topTopicThemePerc)
         print("bottom: ", bottomTopicThemePerc)
 
-        #topTopicThemePerc
+        #NOT THIS, DO ADDITIVE #topTopicThemePerc
         # for theme in topTopicThemePerc:
         #     if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
         #         themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.1
         #     else:
         #         print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
-    
-        for theme in bottomTopicThemePerc:
+
+
+
+        
+        # for theme in bottomTopicThemePerc:
+        #     if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
+        #         themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.1
+        #     else:
+        #         print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
+
+        for theme in percInMinusOne:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.1
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
+
+        
         print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
         concThemeTriplets = pd.DataFrame()
         for theme, value in themeBasedTriplets.items():
