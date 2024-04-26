@@ -398,7 +398,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 ########################################################################################################################
 #Then based on the themes to focus output we vary the themeSamplesMultiplier dict values
 
-        ThemesToFocusDF = pd.read_csv("ThemesToFocus.csv", index_col=0)
+        ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
         topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
         bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
 
@@ -414,6 +414,9 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         print("HERE IS topIEntropy: ", type(topIEntropy.tolist()))
         print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
+
+        print("top: ", topTopicThemePerc)
+        print("bottom: ", bottomTopicThemePerc)
 
         #topTopicThemePerc
         for theme in topTopicThemePerc:
