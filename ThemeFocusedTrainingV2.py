@@ -323,17 +323,18 @@ output_dir = "themeFocusbertModel" #if changing this change further up in file a
 
 
 
+#trainingTripletsCSV = "specificThemeTripletDataset.csv"
 trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-trainingTripletsCSV = "specificThemeTripletDataset.csv"
 
 
-learning_rates = [5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+
+learning_rates = [5e-6]#5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 12):
+    for ThemeFocusedIteration in range(0, 1):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -344,7 +345,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
 
         print("\nStarting Model: ", startingModel, "\ntrainingTripletsCSV: ", trainingTripletsCSV, "\n\n")
-        runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        runSim(startingModel, trainingTripletsCSV, learning_rate, 25, output_dir, per_device_train_batch_size)
+        #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         trainingTripletsCSV = "concThemeTriplets.csv"
         #startingModel = output_dir #after first training run we use that model for each subsequent run
         #trainingTripletsCSV = "SECONDspecificThemeTripletDataset"
