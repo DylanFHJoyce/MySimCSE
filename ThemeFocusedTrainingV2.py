@@ -204,7 +204,8 @@ for theme in allThemes:
     thisThemeTrainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
     thisThemeTrainLabeledDataDFFocus.reset_index(drop=True)
 
-    
+    print(focusCategories)
+    print(len(thisThemeTrainLabeledDataDFFocus))
     
     allOtherThemeTrainLabeledDataDFNonFocus = thisThemeTrainLabeledDataDFFocus[~thisThemeTrainLabeledDataDFFocus["Category"].isin(focusCategories)]
     focusSamples = len(thisThemeTrainLabeledDataDFFocus)
