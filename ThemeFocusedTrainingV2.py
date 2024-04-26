@@ -229,7 +229,7 @@ for theme in allThemes:
 
     themeBasedTriplets[theme] = thisThemeTripletDataset
 
-print(themeBasedTriplets)
+#print(themeBasedTriplets)
 #THEN 
 #FOR theme in themeBasedTriplets (for key, value in?)
     #make blank training df
@@ -238,8 +238,9 @@ print(themeBasedTriplets)
     #on spread each iteration
 #then save as the thing we are to use
 
+
 concThemeTriplets = pd.DataFrame()
-for theme, value in themeBasedTriplets:
+for theme, value in themeBasedTriplets.items():
     numSamples = 200 * themeSamplesMultiplier[theme]
     print(numSamples)
     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
