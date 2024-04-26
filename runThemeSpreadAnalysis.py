@@ -257,6 +257,9 @@ coherenceTuple = (0, 0)
 topicSizes = [40] #DONT CHANGE UNLESS YOU ALSO CHANGE BASE MODEL RESULTS!!!!!!!!
 #DONT CHANGE UNLESS YOU ALSO CHANGE BASE MODEL RESULTS!!!!!!!!
 #
+
+multipleRunThemesToFocus = []
+
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
     #for iteration in range(0, 3):
@@ -574,6 +577,9 @@ for min_topic_size in topicSizes:
 
             ThemesToFocusDF.to_csv("ThemesToFocusDF.csv", index_label=False)  
             print("\n\n\n\nTTFDF\n end of min_topic_size: ", min_topic_size, " iteration: ", iteration, "\n", ThemesToFocusDF)
+            multipleRunThemesToFocus.append(ThemesToFocusDF)
+            with open("multipleRunThemesToFocus.pkl", "wb") as f:
+                pickle.dump(multipleRunThemesToFocus, f)
         # exampleColName = crosstab.columns[1]
         # for val in crosstab[exampleColName]:
         #     print(val)
