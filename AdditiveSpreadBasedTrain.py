@@ -344,7 +344,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #output_dir = "bertout"
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
 
-        print("\nStarting Model: ", startingModel, "\ntrainingTripletsCSV: ", trainingTripletsCSV, "\n\n")
+        print("\nStarting Model: ", startingModel, "\ntraining data Triplets CSV: ", trainingTripletsCSV, "\n\n")
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         trainingTripletsCSV = "concThemeTriplets.csv"
