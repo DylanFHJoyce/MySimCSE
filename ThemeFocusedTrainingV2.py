@@ -256,13 +256,14 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
-        startingModel = output_dir
+        #startingModel = output_dir
         print("LR STARTING: ", learning_rate)
         output_dir = "bertout"
-        runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
-        #USE THIS ONE #  runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
-        startingModel = output_dir #after first training run we use that model for each subsequent run
-        trainingTripletsCSV = "SECONDspecificThemeTripletDataset"
+        #runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
+        runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
+       
+        #startingModel = output_dir #after first training run we use that model for each subsequent run
+        #trainingTripletsCSV = "SECONDspecificThemeTripletDataset"
         #learning_rate = 5e-6
         
         #redo Embeddings with new focus model
