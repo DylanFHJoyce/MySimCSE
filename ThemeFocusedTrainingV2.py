@@ -395,7 +395,53 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
 
 
+########################################################################################################################
+#Then based on the themes to focus output we vary the themeSamplesMultiplier dict values
 
+        ThemesToFocusDF = pd.read_csv("ThemesToFocus.csv", index_col=0)
+        topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
+        bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
+
+        topTopicThemePerc = getTopIdxs(ThemesToFocusDF, " topTopicThemePerc", 3)
+        bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, " topTopicThemePerc", 3)
+
+        
+        
+        print("HERE IS topIEntropy: ", topIEntropy)
+        print("HERE IS bottomIEntropy: ", bottomIEntropy)
+        
+        print("HERE IS topIEntropy: ", type(topIEntropy))
+        print("HERE IS topIEntropy: ", type(topIEntropy.tolist()))
+        print("HERE IS topIEntropy: ", topIEntropy.tolist())
+
+
+        #topTopicThemePerc
+        for theme in topTopicThemePerc
+            if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
+            else:
+                print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
+    
+        for theme in bottomTopicThemePerc
+            if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.2
+            else:
+                print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
+
+        print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
+        # concThemeTriplets = pd.DataFrame()
+        # for theme, value in themeBasedTriplets.items():
+        #     numSamples = int(200 * themeSamplesMultiplier[theme])
+        #     print(numSamples)
+        #     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
+        # concThemeTriplets.reset_index(drop=True, inplace=True)
+        # print("MUST SHUFFLE THIS DATASET BEFORE USING IT FOR TRAINING!")
+        # concThemeTriplets = concThemeTriplets.sample(frac=1).reset_index(drop=True)
+        # concThemeTriplets.to_csv("concThemeTriplets.csv", index=False)
+
+########################################################################################################################
+
+print(concThemeTriplets)
 
 
 
