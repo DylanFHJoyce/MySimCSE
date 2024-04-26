@@ -324,7 +324,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 2):
+    for ThemeFocusedIteration in range(0, 4):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -421,26 +421,26 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #topTopicThemePerc
         for theme in topTopicThemePerc:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.2
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
     
         for theme in bottomTopicThemePerc:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
         print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
-        # concThemeTriplets = pd.DataFrame()
-        # for theme, value in themeBasedTriplets.items():
-        #     numSamples = int(200 * themeSamplesMultiplier[theme])
-        #     print(numSamples)
-        #     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
-        # concThemeTriplets.reset_index(drop=True, inplace=True)
-        # print("MUST SHUFFLE THIS DATASET BEFORE USING IT FOR TRAINING!")
-        # concThemeTriplets = concThemeTriplets.sample(frac=1).reset_index(drop=True)
-        # concThemeTriplets.to_csv("concThemeTriplets.csv", index=False)
+        concThemeTriplets = pd.DataFrame()
+        for theme, value in themeBasedTriplets.items():
+            numSamples = int(200 * themeSamplesMultiplier[theme])
+            print(numSamples)
+            concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
+        concThemeTriplets.reset_index(drop=True, inplace=True)
+        print("MUST SHUFFLE THIS DATASET BEFORE USING IT FOR TRAINING!")
+        concThemeTriplets = concThemeTriplets.sample(frac=1).reset_index(drop=True)
+        concThemeTriplets.to_csv("concThemeTriplets.csv", index=False)
 
 ########################################################################################################################
 
