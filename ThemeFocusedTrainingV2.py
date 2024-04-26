@@ -238,7 +238,19 @@ for theme in allThemes:
     #on spread each iteration
 #then save as the thing we are to use
 
+concThemeTriplets = pd.DataFrame()
+for theme, value in themeBasedTriplets:
+    numSamples = 200 * themeSamplesMultiplier[theme]
+    print(numSamples)
+    concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
+concThemeTriplets.reset_index(drop=True, inplace=True)
 
+
+print("LEN CONC THEME TRIPLETS", len(concThemeTriplets))
+#print(concThemeTriplets)
+
+#print(len(specificThemeTripletDataset))
+#specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 
 
 
