@@ -182,8 +182,8 @@ print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 
 
-
-
+allThemes = TrainValTest[0]["Category"].value_counts()
+print("ALL THEMES", allThemes)
 
 
 
@@ -198,6 +198,9 @@ trainLabeledDataDF = TrainValTest[0]
 # #MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
 # focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
 # focusCategories = ["crime"]
+
+
+
 focusCategories = topIEntropy.tolist()
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
 trainLabeledDataDFFocus.reset_index(drop=True)
