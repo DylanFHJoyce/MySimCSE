@@ -340,7 +340,7 @@ for min_topic_size in topicSizes:
                 quantInTop12345NoMinus = [SVNoMinus[0], sum(SVNoMinus[:2]), sum(SVNoMinus[:3]), sum(SVNoMinus[:4]), sum(SVNoMinus[:5])]
 
                 
-                SVNoMinusRowNamesTest = sorted(row.items(), key=lambda x: x[1], reverse=True)
+                SVNoMinusRowNamesTest = sorted(rowNoMinus.items(), key=lambda x: x[1], reverse=True)
                 for p in range(0, 3):
                     print("\nTHIS THEME HAS ", p, "th MOST VALS IN: ", SVNoMinusRowNamesTest[p])
 
