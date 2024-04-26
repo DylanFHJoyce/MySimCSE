@@ -245,7 +245,8 @@ for theme, value in themeBasedTriplets.items():
     print(numSamples)
     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
 concThemeTriplets.reset_index(drop=True, inplace=True)
-
+print("MUST SHUFFLE THIS DATASET BEFORE USING IT FOR TRAINING!")
+concThemeTriplets = concThemeTriplets.sample(frac=1).reset_index(drop=True)
 concThemeTriplets.to_csv("concThemeTriplets.csv", index=False)
 
 print(concThemeTriplets)
