@@ -183,7 +183,7 @@ print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 
 allThemes = TrainValTest[0]["Category"].value_counts()
-allThemes = TrainValTest[0]["Category"].index().tolist()
+allThemes = TrainValTest[0]["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 
 
