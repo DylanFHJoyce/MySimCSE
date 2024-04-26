@@ -163,11 +163,9 @@ print("HERE IS bottomi: ", bottomi)
 
 
 #get results for base model to decide 
-print("STARTING FIRST THEME SPREAD ANALYSIS")
-runThemeSpreadAnalysis()
-
-
-
+# print("STARTING FIRST THEME SPREAD ANALYSIS")
+# runThemeSpreadAnalysis()
+###################### ################# ############################## ################### ############################ HERE!
 
 
 # topI = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
