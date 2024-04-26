@@ -74,6 +74,17 @@ def runSim(startingModel, trainingTripletsCSV, learning_rate, num_epochs, output
   subprocess.run(command, shell=True)
 
 
+def getTopIdxs(df, column_name, x):
+    topIdxs = df.nlargest(x, column_name).index
+    return topIdxs
+
+
+def getBottomIdxs(df, column_name, x):
+    bottomIdxs = df.nlargest(x, column_name).index
+    return bottomIdxs
+
+
+
 
 # print("STARTING?")
 
@@ -146,7 +157,22 @@ print("STARTING FIRST THEME SPREAD ANALYSIS")
 runThemeSpreadAnalysis()
 
 
-quit()
+ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
+print("\n\nHERE ARE THE THEMES TO FOCUS\n", ThemesToFocusDF)
+
+topI = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
+bottomi = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
+
+print("HERE IS TOPI: ", topI)
+print("HERE IS bottomi: ", bottomi)
+
+
+
+
+
+
+
+
 
 
 
