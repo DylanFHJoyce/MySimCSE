@@ -167,8 +167,11 @@ print("HERE IS topIEntropy: ", type(topIEntropy.tolist()))
 print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 #get results for base model to decide 
-# print("STARTING FIRST THEME SPREAD ANALYSIS")
-# runThemeSpreadAnalysis()
+print("STARTING FIRST THEME SPREAD ANALYSIS")
+runThemeSpreadAnalysis()
+
+
+print("\n\n\nDONEDONEDONE\n\n\n")
 ###################### ################# ############################## ################### ############################ HERE!
 
 
@@ -319,9 +322,9 @@ output_dir = "themeFocusbertModel" #if changing this change further up in file a
 #output_dir = "mybertModel"
 
 
-trainingTripletsCSV = "specificThemeTripletDataset.csv"
-trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+trainingTripletsCSV = "specificThemeTripletDataset.csv"
 
 
 learning_rates = [5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
