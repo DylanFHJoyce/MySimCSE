@@ -228,14 +228,16 @@ FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
-#specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
-specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
-SECONDspecificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
+specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
+
+#BELOW WAS THE ONE USED FOR ALL DATA
+#specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
+
 
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
 print(len(specificThemeTripletDataset))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
-SECONDspecificThemeTripletDataset.to_csv("SECONDspecificThemeTripletDataset.csv", index=False)
+
 
 
 
