@@ -163,6 +163,8 @@ print("HERE IS topIEntropy: ", topIEntropy)
 print("HERE IS bottomIEntropy: ", bottomIEntropy)
 
 print("HERE IS topIEntropy: ", type(topIEntropy))
+print("HERE IS topIEntropy: ", type(topIEntropy.tolist()))
+print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 #get results for base model to decide 
 # print("STARTING FIRST THEME SPREAD ANALYSIS")
