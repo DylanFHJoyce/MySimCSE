@@ -241,7 +241,7 @@ for theme in allThemes:
 
 concThemeTriplets = pd.DataFrame()
 for theme, value in themeBasedTriplets.items():
-    numSamples = 200 * themeSamplesMultiplier[theme]
+    numSamples = int(200 * themeSamplesMultiplier[theme])
     print(numSamples)
     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
 concThemeTriplets.reset_index(drop=True, inplace=True)
