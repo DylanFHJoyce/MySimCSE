@@ -200,6 +200,7 @@ themeBasedTriplets = {}
 for theme in allThemes:
     print(theme, "\n")
     focusCategories = [theme]
+    print(focusCategories, "\nIS THIS RIGHT?")
 
     thisThemeTrainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
     thisThemeTrainLabeledDataDFFocus.reset_index(drop=True)
