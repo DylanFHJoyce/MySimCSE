@@ -252,7 +252,10 @@ coherenceTuple = (0, 0)
 #start loop here
 
 #topicSizes = [20, 40, 80]
-topicSizes = [40]
+
+#DONT CHANGE UNLESS YOU ALSO CHANGE BASE MODEL RESULTS!!!!!!!!
+topicSizes = [40] #DONT CHANGE UNLESS YOU ALSO CHANGE BASE MODEL RESULTS!!!!!!!!
+#DONT CHANGE UNLESS YOU ALSO CHANGE BASE MODEL RESULTS!!!!!!!!
 #
 print("MIN TOPIC SIZE CHANGED TO NR_TOPICS")
 for min_topic_size in topicSizes:
