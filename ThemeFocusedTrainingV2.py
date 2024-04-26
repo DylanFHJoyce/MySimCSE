@@ -196,7 +196,9 @@ trainLabeledDataDF = TrainValTest[0]
 allThemes = trainLabeledDataDF["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
-
+themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
+print(themeSamplesMultiplier)
+print("AAAA\n\n\n\n")
 for theme in allThemes:
     print(theme, "\n")
     focusCategories = [theme]
@@ -226,6 +228,18 @@ for theme in allThemes:
     thisThemeTripletDataset = generate_triplet_dataset(thisThemeFocusAndPercentOfNonFocusDf, 500)
 
     themeBasedTriplets[theme] = thisThemeTripletDataset
+
+
+#THEN 
+#FOR theme in themeBasedTriplets (for key, value in?)
+    #make blank training df
+    #training dataframe = itself concat x samples from theme
+    #x could be 200 * y with y staring at 1.0 and being stored in a dict that can be increaced/decreaced based
+    #on spread each iteration
+#then save as the thing we are to use
+
+
+
 
 
 #print(thisThemeTripletDataset)
