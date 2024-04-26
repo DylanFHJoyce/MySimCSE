@@ -153,7 +153,7 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 
 
 ThemesToFocusBASEMODELDF = pd.read_csv("ThemesToFocusBASEMODELDF.csv", index_col=0)
-print("\n\nHERE ARE THE THEMES TO FOCUS\n", ThemesToFocusBASEMODELDF)
+print("\n\nHERE ARE THE THEMES TO FOCUS FROM BASE MODEL RESULTS\n", ThemesToFocusBASEMODELDF)
 
 topI = getTopIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
 bottomi = getBottomIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
@@ -190,43 +190,45 @@ runThemeSpreadAnalysis()
 trainLabeledDataDF = TrainValTest[0]
 
 
-#MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
-focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
-focusCategories = ["crime"]
-
-trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
-trainLabeledDataDFFocus.reset_index(drop=True)
-
-#trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
 
 
 
-trainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
-focusSamples = len(trainLabeledDataDFFocus)
-percentFromNonFocus = 0.1
+# #MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
+# focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
+# focusCategories = ["crime"]
+
+# trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
+# trainLabeledDataDFFocus.reset_index(drop=True)
+
+# #trainLabeledDataDFFocus = pd.concat([trainLabeledDataDFFocus] * 20, ignore_index=True)
+
+# trainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
+# focusSamples = len(trainLabeledDataDFFocus)
+# percentFromNonFocus = 0.1
+
+# print("\n\n\nTHIS IS THE LENGTH BEING MADE INTO SAMPLES")
+# print(int(focusSamples/percentFromNonFocus))
+# print("\n\n\n")
+
+# #take random sample of NonFocus df to keep general context
+
+# random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
+# trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
+# trainLabeledDataDFNonFocus.reset_index(drop=True)
+
+# print(len(trainLabeledDataDFFocus))
+
+# FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
+# FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
-print("\n\n\nTHIS IS THE LENGTH BEING MADE INTO SAMPLES")
-print(int(focusSamples/percentFromNonFocus))
-print("\n\n\n")
 
 
-#take random sample of NonFocus df to keep general context
-
-random_indices = np.random.choice(trainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
-trainLabeledDataDFNonFocus = trainLabeledDataDFNonFocus.loc[random_indices]
-trainLabeledDataDFNonFocus.reset_index(drop=True)
-
-print(len(trainLabeledDataDFFocus))
 
 
-FocusAndPercentOfNonFocusDf = pd.concat([trainLabeledDataDFFocus, trainLabeledDataDFNonFocus])
-
-FocusAndPercentOfNonFocusDf.to_csv("FocusAndPercentOfNonFocusDf.csv")
 
 
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
-
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
 specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
 
@@ -239,34 +241,28 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 
 
 
-
-
-
-
-
-
 #run training 
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusbertModel" #if changing this change further up in file aswell (test ver)
 #output_dir = "mybertModel"
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
-learning_rates = [2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
-    for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    #for ThemeFocusedIteration in range(0, 1):
+    #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
+    for ThemeFocusedIteration in range(0, 2):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
-        #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
-        
-        runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
-        
-        #startingModel = output_dir #after first training run we use that model for each subsequent run
-    
+
+        print("LR STARTING: ", learning_rate)
+        runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        #USE THIS ONE #  runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
+        startingModel = output_dir #after first training run we use that model for each subsequent run
+        learning_rate = 5e-6
         
         #redo Embeddings with new focus model
         simModel = output_dir
