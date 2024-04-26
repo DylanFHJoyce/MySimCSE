@@ -198,6 +198,7 @@ print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
 
 for theme in allThemes:
+    print(theme, "\n")
     focusCategories = [theme]
 
     thisThemeTrainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
@@ -209,6 +210,8 @@ for theme in allThemes:
     focusSamples = len(thisThemeTrainLabeledDataDFFocus)
     percentFromNonFocus = 0.2
 
+
+    print(len(allOtherThemeTrainLabeledDataDFNonFocus))
     random_indices = np.random.choice(allOtherThemeTrainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
     allOtherThemeTrainLabeledDataDFNonFocus = allOtherThemeTrainLabeledDataDFNonFocus.loc[random_indices]
     allOtherThemeTrainLabeledDataDFNonFocus.reset_index(drop=True)
@@ -223,7 +226,9 @@ for theme in allThemes:
     themeBasedTriplets[theme] = thisThemeTripletDataset
 
 
-print(thisThemeTripletDataset)
+#print(thisThemeTripletDataset)
+
+
 ##
 
 # #MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
