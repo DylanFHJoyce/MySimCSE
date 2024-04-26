@@ -317,14 +317,20 @@ specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=Fals
 #need to save triplet set and then feed it in as runSim gets it by file name not by internal parameter
 output_dir = "themeFocusbertModel" #if changing this change further up in file aswell (test ver)
 #output_dir = "mybertModel"
+
+
 trainingTripletsCSV = "specificThemeTripletDataset.csv"
+trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 learning_rates = [5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 4):
+    for ThemeFocusedIteration in range(0, 7):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -399,11 +405,11 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 #Then based on the themes to focus output we vary the themeSamplesMultiplier dict values
 
         ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
-        topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
-        bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
+        topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 6)
+        bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 6)
 
-        topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 3)
-        bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 3)
+        topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
+        bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
 
         
         
@@ -421,13 +427,13 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #topTopicThemePerc
         for theme in topTopicThemePerc:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.1
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
     
         for theme in bottomTopicThemePerc:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.1
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
