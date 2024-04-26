@@ -182,9 +182,7 @@ print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 
 
-allThemes = TrainValTest[0]["Category"].value_counts()
-allThemes = TrainValTest[0]["Category"].unique().tolist()
-print("ALL THEMES", allThemes)
+
 
 
 
@@ -194,13 +192,43 @@ trainLabeledDataDF = TrainValTest[0]
 
 
 
+#allThemes = trainLabeledDataDF["Category"].value_counts()
+allThemes = trainLabeledDataDF["Category"].unique().tolist()
+print("ALL THEMES", allThemes)
+themeBasedTriplets = {}
 
+for theme in allThemes:
+    focusCategories = [theme]
+
+    thisThemeTrainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
+    thisThemeTrainLabeledDataDFFocus.reset_index(drop=True)
+
+    
+    
+    allOtherThemeTrainLabeledDataDFNonFocus = thisThemeTrainLabeledDataDFFocus[~thisThemeTrainLabeledDataDFFocus["Category"].isin(focusCategories)]
+    focusSamples = len(thisThemeTrainLabeledDataDFFocus)
+    percentFromNonFocus = 0.2
+
+    random_indices = np.random.choice(allOtherThemeTrainLabeledDataDFNonFocus.index, int(focusSamples * percentFromNonFocus), replace=False)
+    allOtherThemeTrainLabeledDataDFNonFocus = allOtherThemeTrainLabeledDataDFNonFocus.loc[random_indices]
+    allOtherThemeTrainLabeledDataDFNonFocus.reset_index(drop=True)
+    
+    # print(len(trainLabeledDataDFFocus))
+    
+    thisThemeFocusAndPercentOfNonFocusDf = pd.concat([thisThemeTrainLabeledDataDFFocus, allOtherThemeTrainLabeledDataDFNonFocus])
+    #thisThemeFocusAndPercentOfNonFocusDf.to_csv("thisThemeFocusAndPercentOfNonFocusDf.csv")
+
+    thisThemeTripletDataset = generate_triplet_dataset(thisThemeFocusAndPercentOfNonFocusDf, 500)
+
+    themeBasedTriplets[theme] = thisThemeTripletDataset
+
+
+print(thisThemeTripletDataset)
+##
 
 # #MUST HAVE AT LEAST ONE THEME OMITTED FOR THE OTHER PART TO WORK (OR CHANGE THIS NEXT SECTION TO SKIP IF THERE ISNT)
 # focusCategories = ["crime", "Discrimination/representation/rights", "protest/public concern"]
 # focusCategories = ["crime"]
-
-
 
 focusCategories = topIEntropy.tolist()
 trainLabeledDataDFFocus = trainLabeledDataDF[trainLabeledDataDF["Category"].isin(focusCategories)]
