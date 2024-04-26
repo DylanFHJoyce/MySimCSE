@@ -328,7 +328,7 @@ trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 
-learning_rates = [5e-6]#5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
+learning_rates = [2.5e-5]#5e-6]#5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 print("firstTrain")
