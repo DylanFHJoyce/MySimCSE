@@ -402,8 +402,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         topIEntropy = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
         bottomIEntropy = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
 
-        topTopicThemePerc = getTopIdxs(ThemesToFocusDF, " topTopicThemePerc", 3)
-        bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, " topTopicThemePerc", 3)
+        topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 3)
+        bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 3)
 
         
         
