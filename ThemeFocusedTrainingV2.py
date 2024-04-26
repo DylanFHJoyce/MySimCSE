@@ -152,19 +152,29 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 
 
 
+ThemesToFocusBASEMODELDF = pd.read_csv("ThemesToFocusBASEMODELDF.csv", index_col=0)
+print("\n\nHERE ARE THE THEMES TO FOCUS\n", ThemesToFocusBASEMODELDF)
+
+topI = getTopIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
+bottomi = getBottomIdxs(ThemesToFocusBASEMODELDF, "enthropy", 3)
+
+print("HERE IS TOPI: ", topI)
+print("HERE IS bottomi: ", bottomi)
+
+
 #get results for base model to decide 
 print("STARTING FIRST THEME SPREAD ANALYSIS")
 runThemeSpreadAnalysis()
 
 
-ThemesToFocusDF = pd.read_csv("ThemesToFocusDF.csv", index_col=0)
-print("\n\nHERE ARE THE THEMES TO FOCUS\n", ThemesToFocusDF)
 
-topI = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
-bottomi = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
 
-print("HERE IS TOPI: ", topI)
-print("HERE IS bottomi: ", bottomi)
+
+# topI = getTopIdxs(ThemesToFocusDF, "enthropy", 3)
+# bottomi = getBottomIdxs(ThemesToFocusDF, "enthropy", 3)
+
+# print("HERE IS TOPI: ", topI)
+# print("HERE IS bottomi: ", bottomi)
 
 
 
