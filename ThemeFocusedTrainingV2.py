@@ -229,7 +229,7 @@ for theme in allThemes:
 
     themeBasedTriplets[theme] = thisThemeTripletDataset
 
-
+print(themeBasedTriplets)
 #THEN 
 #FOR theme in themeBasedTriplets (for key, value in?)
     #make blank training df
