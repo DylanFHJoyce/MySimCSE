@@ -80,7 +80,7 @@ def getTopIdxs(df, column_name, x):
 
 
 def getBottomIdxs(df, column_name, x):
-    bottomIdxs = df.nlargest(x, column_name).index
+    bottomIdxs = df.nsmallest(x, column_name).index
     return bottomIdxs
 
 
