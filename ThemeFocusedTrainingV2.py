@@ -207,7 +207,7 @@ for theme in allThemes:
     print(focusCategories)
     print(len(thisThemeTrainLabeledDataDFFocus))
     
-    allOtherThemeTrainLabeledDataDFNonFocus = thisThemeTrainLabeledDataDFFocus[~thisThemeTrainLabeledDataDFFocus["Category"].isin(focusCategories)]
+    allOtherThemeTrainLabeledDataDFNonFocus = trainLabeledDataDF[~trainLabeledDataDF["Category"].isin(focusCategories)]
     focusSamples = len(thisThemeTrainLabeledDataDFFocus)
     percentFromNonFocus = 0.2
 
