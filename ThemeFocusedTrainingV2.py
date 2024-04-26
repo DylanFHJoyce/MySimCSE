@@ -417,6 +417,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
         bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
 
+        # topTopicThemePerc = getTopIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
+        # bottomTopicThemePerc = getBottomIdxs(ThemesToFocusDF, "topTopicThemePerc", 6)
         
         
         print("HERE IS topIEntropy: ", topIEntropy)
