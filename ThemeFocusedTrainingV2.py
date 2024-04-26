@@ -324,7 +324,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 1):
+    for ThemeFocusedIteration in range(0, 2):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir runThemeSpreadAnalysis()
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -334,7 +334,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #output_dir = "bertout"
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
-       
+        trainingTripletsCSV = "concThemeTriplets.csv"
         #startingModel = output_dir #after first training run we use that model for each subsequent run
         #trainingTripletsCSV = "SECONDspecificThemeTripletDataset"
         #learning_rate = 5e-6
