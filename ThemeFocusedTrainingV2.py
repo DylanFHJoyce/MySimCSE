@@ -250,7 +250,7 @@ per_device_train_batch_size = 64 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAIN
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
-    for ThemeFocusedIteration in range(0, 2):
+    for ThemeFocusedIteration in range(0, 3):
         ThemeResults = pd.read_csv("ThemeResults.csv")
         #startingModel = output_dir
         #STARTING MODEL (THUS OUTPUT DIR) MUST HAVE "theme" in its name!!!!!!!!!!!
@@ -260,7 +260,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #USE THIS ONE #  runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         startingModel = output_dir #after first training run we use that model for each subsequent run
-        learning_rate = 5e-6
+        #learning_rate = 5e-6
         
         #redo Embeddings with new focus model
         simModel = output_dir
