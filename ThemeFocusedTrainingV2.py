@@ -258,6 +258,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         print("\n\n\n\n\n\n\nSTARTINGMODEL", startingModel, "\n\n\n\n\n\n\n")
         startingModel = output_dir
         print("LR STARTING: ", learning_rate)
+        output_dir = "bertout"
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #USE THIS ONE #  runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         startingModel = output_dir #after first training run we use that model for each subsequent run
