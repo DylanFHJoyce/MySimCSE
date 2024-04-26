@@ -229,11 +229,12 @@ trainLabeledDataDF = TrainValTest[0]
 #COULD INCREACE LEN OF DATA GENERATED IF ERRORS PERSIST
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 4000)# len(FocusAndPercentOfNonFocusDf))
 specificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
+SECONDspecificThemeTripletDataset = generate_triplet_dataset(trainLabeledDataDF, 4000)
 
 #specificThemeTripletDataset = generate_triplet_dataset(FocusAndPercentOfNonFocusDf, 200)
 print(len(specificThemeTripletDataset))
 specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
-
+SECONDspecificThemeTripletDataset.to_csv("SECONDspecificThemeTripletDataset.csv", index=False)
 
 
 
@@ -260,6 +261,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #USE THIS ONE #  runSim(startingModel, trainingTripletsCSV, learning_rate, ThemeFocusedIteration, output_dir, per_device_train_batch_size)
         startingModel = output_dir #after first training run we use that model for each subsequent run
+        trainingTripletsCSV = SECONDspecificThemeTripletDataset
         #learning_rate = 5e-6
         
         #redo Embeddings with new focus model
