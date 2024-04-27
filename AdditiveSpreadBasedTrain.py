@@ -472,7 +472,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
         for theme in percInMinusOne:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.6 # 0.2
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
