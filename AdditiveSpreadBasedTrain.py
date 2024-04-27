@@ -444,6 +444,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         print("top: ", topTopicThemePerc)
         print("bottom: ", bottomTopicThemePerc)
 
+        print("\n\nTHEME SAMPLES MULTIPLIER BEFORE ITERATION: ", themeSamplesMultiplier)
+
         #NOT THIS, DO ADDITIVE #topTopicThemePerc
         # for theme in topTopicThemePerc:
         #     if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
@@ -468,7 +470,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
 
         
-        print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
+        print("\n\nTHEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
         concThemeTriplets = pd.DataFrame()
         for theme, value in themeBasedTriplets.items():
             #IF YOU CHANGE 200 CHECK ELSEWHERE VALUES!
