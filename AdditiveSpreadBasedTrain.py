@@ -193,14 +193,20 @@ print("\n\n\nDONEDONEDONE\n\n\n")
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
-
+with open('bestDictResults.pkl', 'rb') as f:
+    bestDictResults = pickle.load(f)
 
 #allThemes = trainLabeledDataDF["Category"].value_counts()
 allThemes = trainLabeledDataDF["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
 #IF YOU CHANGE STARTING MULTIPLIER THEN RECORD CHANGE ON OTHER STATS
+
 themeSamplesMultiplier = {theme: 0.4 for theme in allThemes}
+themeSamplesMultiplier = bestDictResults
+#!!!!!!!!!!!
+
+
 print(themeSamplesMultiplier)
 print("AAAA\n\n\n\n")
 for theme in allThemes:
@@ -241,6 +247,8 @@ for theme in allThemes:
     #x could be 200 * y with y staring at 1.0 and being stored in a dict that can be increaced/decreaced based
     #on spread each iteration
 #then save as the thing we are to use
+
+
 
 
 concThemeTriplets = pd.DataFrame()
