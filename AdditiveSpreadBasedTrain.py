@@ -3,7 +3,7 @@ from simcse import SimCSE
 import pickle
 import numpy as np
 import pandas as pd
-
+import copy
 import random
 
 print("\n\n\nSTARTING THEME FOCUSED TRAINING: ")
@@ -351,7 +351,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
         print("\nStarting Model: ", startingModel, "\ntraining data Triplets CSV: ", trainingTripletsCSV, "\n\n")
         
-        multiplierPerIteration.append((ThemeFocusedIteration, themeSamplesMultiplier)) #save the multiplier so you know the training data divisions
+        multiplierPerIteration.append((ThemeFocusedIteration, copy.deepcopy(themeSamplesMultiplier))) #save the multiplier so you know the training data divisions
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         with open("multiplierPerIteration.pkl", "wb") as f: #save multipliers and iteration
             pickle.dump(multiplierPerIteration, f)
