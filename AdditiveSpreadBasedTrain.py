@@ -199,6 +199,7 @@ trainLabeledDataDF = TrainValTest[0]
 allThemes = trainLabeledDataDF["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
+#IF YOU CHANGE STARTING MULTIPLIER THEN RECORD CHANGE ON OTHER STATS
 themeSamplesMultiplier = {theme: 0.4 for theme in allThemes}
 print(themeSamplesMultiplier)
 print("AAAA\n\n\n\n")
@@ -244,6 +245,8 @@ for theme in allThemes:
 
 concThemeTriplets = pd.DataFrame()
 for theme, value in themeBasedTriplets.items():
+    #IF YOU EVER CHANGE 200 HERE CHANGE ELSEWHERE, AND RECORD THE CHANGE 
+    #AS IT SHOULD BE STORED WITH THE MULTIPLIER DICTS FOR FUTURE REFRENCE
     numSamples = int(200 * themeSamplesMultiplier[theme])
     print(numSamples)
     concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
@@ -331,6 +334,8 @@ trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 learning_rates = [2.5e-5]#5e-6]#5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
 per_device_train_batch_size = 16 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
+multiplierPerIteration = []
+
 print("firstTrain")
 for learning_rate in learning_rates: #for x in range(0, 11, 2):
     #for ThemeFocusedIteration in range(5, 41, 10): #THEN CHANGE TO 26 AND START AT 16
@@ -345,6 +350,8 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 6, output_dir, per_device_train_batch_size)
 
         print("\nStarting Model: ", startingModel, "\ntraining data Triplets CSV: ", trainingTripletsCSV, "\n\n")
+        
+        multiplierPerIteration.append(themeSamplesMultiplier) #save the multiplier so you know the training data divisions
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         trainingTripletsCSV = "concThemeTriplets.csv"
@@ -461,6 +468,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
         print("THEME SAMPLES MULTIPLIER AFTER ITERATION: ", themeSamplesMultiplier)
         concThemeTriplets = pd.DataFrame()
         for theme, value in themeBasedTriplets.items():
+            #IF YOU CHANGE 200 CHECK ELSEWHERE VALUES!
             numSamples = int(200 * themeSamplesMultiplier[theme])
             print(numSamples)
             concThemeTriplets = pd.concat([concThemeTriplets, value.head(numSamples)])
