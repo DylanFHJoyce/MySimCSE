@@ -456,7 +456,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
         #NOT THIS, DO ADDITIVE #topTopicThemePerc
         for theme in topTopicThemePerc:
-            if themeSamplesMultiplier[theme] > 0.1 and themeSamplesMultiplier[theme] < 2.2:
+            if themeSamplesMultiplier[theme] > 0.3 and themeSamplesMultiplier[theme] < 2.2:
                 themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] - 0.3
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
