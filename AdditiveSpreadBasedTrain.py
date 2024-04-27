@@ -167,8 +167,8 @@ print("HERE IS topIEntropy: ", type(topIEntropy.tolist()))
 print("HERE IS topIEntropy: ", topIEntropy.tolist())
 
 #get results for base model to decide 
-print("STARTING FIRST THEME SPREAD ANALYSIS")
-runThemeSpreadAnalysis()
+print("SKIPPING FIRST THEME SPREAD ANALYSIS")
+#runThemeSpreadAnalysis()
 
 
 print("\n\n\nDONEDONEDONE\n\n\n")
