@@ -351,8 +351,11 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
         print("\nStarting Model: ", startingModel, "\ntraining data Triplets CSV: ", trainingTripletsCSV, "\n\n")
         
-        multiplierPerIteration.append(themeSamplesMultiplier) #save the multiplier so you know the training data divisions
+        multiplierPerIteration.append((ThemeFocusedIteration, themeSamplesMultiplier)) #save the multiplier so you know the training data divisions
         runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
+        with open("multiplierPerIteration.pkl", "wb") as f: #save multipliers and iteration
+            pickle.dump(multiplierPerIteration, f)
+            
         #runSim(startingModel, trainingTripletsCSV, learning_rate, 4, output_dir, per_device_train_batch_size)
         trainingTripletsCSV = "concThemeTriplets.csv"
         #startingModel = output_dir #after first training run we use that model for each subsequent run
