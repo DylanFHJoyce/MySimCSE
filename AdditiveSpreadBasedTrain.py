@@ -332,7 +332,7 @@ trainingTripletsCSV = "concThemeTriplets.csv" #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 learning_rates = [2.5e-5]#5e-6]#5e-5]#2.5e-5]#[1.5e-4, 3e-4]#2.5e-5, 7.5e-5]#5e-5, 5e-6] #0, 1e-4, done already
-per_device_train_batch_size = 32#16 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
+per_device_train_batch_size = 16#32#16 #CHANGE THIS IF USING LOWER QUANTITIES OF TRAINING DATA OR DUPLICATE TRAINING DATA
 
 multiplierPerIteration = []
 
@@ -462,7 +462,7 @@ for learning_rate in learning_rates: #for x in range(0, 11, 2):
 
         for theme in percInMinusOne:
             if themeSamplesMultiplier[theme] > 0.2 and themeSamplesMultiplier[theme] < 2.2:
-                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.15
+                themeSamplesMultiplier[theme] = themeSamplesMultiplier[theme] + 0.2
             else:
                 print(theme, "CANNOT BE ATERED ANY HIGHER/LOWER (change num samples being generated at start if necessary)")
 
