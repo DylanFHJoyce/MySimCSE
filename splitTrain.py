@@ -133,7 +133,7 @@ with open(datasetName, "rb") as f:
 
 print("len of fulldataset list pre removal", len(loaded_list))
 
-loaded_list = [x for x in loaded_list if x not in HealthSubThemesTrain["Documents"].tolist()]
+loaded_list = [x for x in loaded_list if x not in HealthSubThemesTrain["Document"].tolist()]
 
 
 print("len of fulldataset list post removal", len(loaded_list))
