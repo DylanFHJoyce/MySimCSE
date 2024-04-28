@@ -122,6 +122,8 @@ with open('HealthSubThemesTrain.pkl', 'rb') as f:
 #HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
 # HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
 # HealthSubThemesTrain.rename(columns={'Documents': 'Document'}, inplace=True)
+
+HealthSubThemesTrain = HealthSubThemesTrain.head(100)
 print(HealthSubThemesTrain)
 
 
@@ -140,7 +142,7 @@ print("len of fulldataset list post removal", len(loaded_list))
 
 
 
-splitHealthTriplets = generate_triplet_dataset(HealthSubThemesTrain, 2000)
+splitHealthTriplets = generate_triplet_dataset(HealthSubThemesTrain, 1000)
 
 print(splitHealthTriplets)
 #generate triplet dataset
