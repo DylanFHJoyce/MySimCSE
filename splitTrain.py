@@ -155,6 +155,8 @@ ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
 
 
+#to break
+runSim(a, v, 2.5e-5, 2, "c", 16)
 
 
 
