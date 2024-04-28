@@ -147,7 +147,9 @@ print(splitHealthTriplets)
 # specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
 # trainingTripletsCSV =
 
-runSim(startingModel, splitHealthTriplets, 2.5e-5, 2, "HealthSplitModel", 16)
+
+HealthOutputDir = "HealthSplitModel"
+runSim(startingModel, splitHealthTriplets, 2.5e-5, 2, HealthOutputDir, 16)
 
 
 
