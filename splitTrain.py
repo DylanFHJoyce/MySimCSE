@@ -283,6 +283,14 @@ themeBasedTriplets = {}
 #IF YOU CHANGE STARTING MULTIPLIER THEN RECORD CHANGE ON OTHER STATS
 
 themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
+
+
+HC = "Health crisis"
+if HC in themeSamplesMultiplier:
+    themeSamplesMultiplier[HC] /= 2
+    print("REDUCING SAMPLES OF GEN SET HEALTH CRISIS SO AS TO ALLOW SUBMODELLING THEMES TO BECOME PROMINENT")
+else:
+    print("HEALTH CRISIS NOT REDUCED: ERROR")
 #themeSamplesMultiplier = bestDictResults
 #!!!!!!!!!!!
 
