@@ -119,6 +119,7 @@ simModel = SimCSE(startingModel)
 #THE ADDITIONAL TRAIN DATA SPLIT MEDICAL
 with open('HealthSubThemesTrain.pkl', 'rb') as f:
     HealthSubThemesTrain = pickle.load(f)
+HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
 print(HealthSubThemesTrain)
 
 
