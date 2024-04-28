@@ -121,6 +121,7 @@ with open('HealthSubThemesTrain.pkl', 'rb') as f:
     HealthSubThemesTrain = pickle.load(f)
 HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
 HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
+HealthSubThemesTrain.rename(columns={'Documents': 'Document'}, inplace=True)
 print(HealthSubThemesTrain)
 
 
