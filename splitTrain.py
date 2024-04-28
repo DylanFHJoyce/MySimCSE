@@ -139,6 +139,17 @@ print("len of fulldataset list post removal", len(loaded_list))
 
 
 
+splitHealthTriplets = generate_triplet_dataset(thisThemeFocusAndPercentOfNonFocusDf, 2000)
+
+print(splitHealthTriplets)
+#generate triplet dataset
+# specificThemeTripletDataset.to_csv("specificThemeTripletDataset.csv", index=False)
+# trainingTripletsCSV =
+
+runSim(startingModel, trainingTripletsCSV, 2.5e-5, 2, "HealthSplitModel", 16)
+
+
+
 ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
 
