@@ -123,7 +123,7 @@ with open('HealthSubThemesTrain.pkl', 'rb') as f:
 # HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
 # HealthSubThemesTrain.rename(columns={'Documents': 'Document'}, inplace=True)
 
-HealthSubThemesTrain = HealthSubThemesTrain.head(150)
+HealthSubThemesTrain = HealthSubThemesTrain.head(200)
 print(HealthSubThemesTrain)
 
 
@@ -153,7 +153,7 @@ splitHealthTriplets.to_csv("splitHealthTriplets.csv", index=False)
 splitHealthTripletsCSV = "splitHealthTriplets.csv"
 
 HealthOutputDir = "HealthSplitModel"
-runSim(startingModel, splitHealthTripletsCSV, 2.5e-5, 2, HealthOutputDir, 16)
+runSim(startingModel, splitHealthTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16)
 
 
 
