@@ -188,25 +188,25 @@ print("AFTER EMBED")
 
 
 
-with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
-    pickle.dump(ThemeSpreadEmbeddings, f)
+# with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeSpreadEmbeddings, f)
     
 #open  the laelled data (format train, val, test)
 with open('split4000Manual.pkl', 'rb') as f:
     TrainValTest = pickle.load(f)
-#make embeddings of val data for experiment 2 use
-ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
-with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
-    pickle.dump(ThemeFocusedTrainingEmbeddings, f)
+# #make embeddings of val data for experiment 2 use
+# ThemeFocusedTrainingEmbeddings = simModel.encode(TrainValTest[0]["Document"].tolist()).numpy()
+# with open("ThemeFocusedTrainingEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeFocusedTrainingEmbeddings, f)
     
-ThemeFocusedValEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
-with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
-    pickle.dump(ThemeFocusedValEmbeddings, f)
+# ThemeFocusedValEmbeddings = simModel.encode(TrainValTest[1]["Document"].tolist()).numpy()
+# with open("ThemeFocusedValEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeFocusedValEmbeddings, f)
 
-ThemeFocusedTestEmbeddings = simModel.encode(TrainValTest[2]["Document"].tolist()).numpy()
-with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
-    pickle.dump(ThemeFocusedTestEmbeddings, f)
-####################################################################################################
+# ThemeFocusedTestEmbeddings = simModel.encode(TrainValTest[2]["Document"].tolist()).numpy()
+# with open("ThemeFocusedTestEmbeddings.pkl", "wb") as f:
+#     pickle.dump(ThemeFocusedTestEmbeddings, f)
+# ####################################################################################################
 
 
 
