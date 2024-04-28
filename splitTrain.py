@@ -336,7 +336,7 @@ splitHealthTriplets.to_csv("splitHealthTriplets.csv", index=False)
 
 
 HealthAndLabelled = pd.concat([splitHealthTriplets, concThemeTriplets], ignore_index=True)
-
+HealthAndLabelled = HealthAndLabelled.sample(frac=1).reset_index(drop=True)
 
 print("\n\n\n\n")
 print(HealthAndLabelled)
@@ -347,6 +347,13 @@ print("DONE")
 
 
 
+HealthAndLabelled.to_csv("HealthAndLabelled.csv", index=False)
+HealthAndLabelledTripletsCSV = "HealthAndLabelled.csv"
+
+HealthOutputDir = "HealthSplitModel"
+
+
+runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 2, HealthOutputDir, 16)
 
 
 
