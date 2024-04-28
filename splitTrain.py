@@ -123,7 +123,7 @@ with open('HealthSubThemesTrain.pkl', 'rb') as f:
 # HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
 # HealthSubThemesTrain.rename(columns={'Documents': 'Document'}, inplace=True)
 
-HealthSubThemesTrain = HealthSubThemesTrain.head(300)
+HealthSubThemesTrain = HealthSubThemesTrain # .head(300)
 print(HealthSubThemesTrain)
 
 
