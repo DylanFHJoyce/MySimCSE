@@ -287,7 +287,7 @@ themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
 HC = "Health crisis"
 if HC in themeSamplesMultiplier:
-    themeSamplesMultiplier[HC] /= 2
+    themeSamplesMultiplier[HC] = 0.0
     print("REDUCING SAMPLES OF GEN SET HEALTH CRISIS SO AS TO ALLOW SUBMODELLING THEMES TO BECOME PROMINENT")
 else:
     print("HEALTH CRISIS NOT REDUCED: ERROR")
