@@ -335,7 +335,7 @@ splitHealthTriplets.to_csv("splitHealthTriplets.csv", index=False)
 
 
 
-HealthAndLabelled = = pd.concat([splitHealthTriplets, concThemeTriplets], ignore_index=True)
+HealthAndLabelled = pd.concat([splitHealthTriplets, concThemeTriplets], ignore_index=True)
 
 
 print("\n\n\n\n")
