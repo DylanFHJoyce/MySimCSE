@@ -365,9 +365,9 @@ JustConcTripletsCSV = "concThemeTriplets.csv"
 HealthOutputDir = "HealthSplitModel"
 
 
-#runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
+runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
 
-runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
+#runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
 
 
 
