@@ -104,9 +104,7 @@ def getBottomIdxs(df, column_name, x):
 #output_dir = "themeFocusModel"
 
 
-with open('HealthSubThemesTrain.pkl', 'rb') as f:
-    HealthSubThemesTrain = pickle.load(f)
-print(HealthSubThemesTrain)
+
 
 
 ####################################################################################################
@@ -118,11 +116,38 @@ datasetName = "genDatasetProcessed.pkl"
 #def makeEmbeddings(datasetName):
 simModel = SimCSE(startingModel)
 
+#THE ADDITIONAL TRAIN DATA SPLIT MEDICAL
+with open('HealthSubThemesTrain.pkl', 'rb') as f:
+    HealthSubThemesTrain = pickle.load(f)
+print(HealthSubThemesTrain)
+
+
+
 #load dataset to embed
 with open(datasetName, "rb") as f:
   loaded_list = pickle.load(f)
 #embed dataset with simcse model 
+
+print("len of fulldataset list pre removal", len(loaded_list))
+
+loaded_list = [x for x in loaded_list if x not in HealthSubThemesTrain["Documents"].tolist()]
+
+
+print("len of fulldataset list post removal", len(loaded_list))
+
+
+
 ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
+
+
+
+
+
+
+
+
+
+
 
 with open("ThemeSpreadEmbeddings.pkl", "wb") as f:
     pickle.dump(ThemeSpreadEmbeddings, f)
