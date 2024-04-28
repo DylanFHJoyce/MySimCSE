@@ -139,7 +139,7 @@ print("len of fulldataset list post removal", len(loaded_list))
 
 
 
-splitHealthTriplets = generate_triplet_dataset(thisThemeFocusAndPercentOfNonFocusDf, 2000)
+splitHealthTriplets = generate_triplet_dataset(HealthSubThemesTrain, 2000)
 
 print(splitHealthTriplets)
 #generate triplet dataset
