@@ -153,10 +153,12 @@ runSim(startingModel, splitHealthTriplets, 2.5e-5, 2, "HealthSplitModel", 16)
 
 ThemeSpreadEmbeddings = simModel.encode(loaded_list).numpy()
 
+print("AFTER EMBED")
 
 
-#to break
-runSim(a, v, 2.5e-5, 2, "c", 16)
+
+
+
 
 
 
