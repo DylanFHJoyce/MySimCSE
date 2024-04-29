@@ -272,6 +272,15 @@ ThemeResults = pd.read_csv("ThemeResults.csv")
 #turn labelled training data into triplet dataset based on theme (keep small percentage of general data to keep context)
 trainLabeledDataDF = TrainValTest[0]
 
+
+#ADD A PORTION OF OUR HEALTH SUBTHEMES (CHANGED TO ONE THEME) SO THEY CAN BE TRAINED RELATIVE TO THE OTHER THEMES
+#ASWELL AS HAVING THEIR SEPARATE SUBTHEME TRIPLET SAMPLES ADDED AT THE END
+
+
+
+
+
+
 # with open('bestDictResults.pkl', 'rb') as f:
 #     bestDictResults = pickle.load(f)
 
@@ -280,6 +289,12 @@ allThemes = trainLabeledDataDF["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
 #IF YOU CHANGE STARTING MULTIPLIER THEN RECORD CHANGE ON OTHER STATS
+
+print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
+print(HealthSubThemesTrain)
+
+
+
 
 themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
