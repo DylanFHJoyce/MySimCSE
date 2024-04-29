@@ -128,7 +128,7 @@ with open('HealthMicroSplitThemesTrain.pkl', 'rb') as f:
 #HealthMicroSplitThemesTrain.pkl
 
 HealthSubThemesTrain = HealthMicroSplitThemesTrain
-
+testTripletsRemove = generate_triplet_dataset(HealthSubThemesTrain, 1000)
 
 #HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
 # HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
