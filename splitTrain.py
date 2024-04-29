@@ -285,18 +285,18 @@ trainLabeledDataDF = TrainValTest[0]
 #     bestDictResults = pickle.load(f)
 
 
-HealthSubThemesNoDistinctionQuantity = 150
+# HealthSubThemesNoDistinctionQuantity = 150
 
-print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
-print(HealthSubThemesTrain)
-HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
+# print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
+# print(HealthSubThemesTrain)
+# HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
 
-HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.sample(frac=1).reset_index(drop=True)
-HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.head(HealthSubThemesNoDistinctionQuantity)
-trainLabeledDataDF = pd.concat([trainLabeledDataDF, HealthSubThemesNODISTINCTIONTrain], ignore_index=True)
-print(HealthSubThemesNODISTINCTIONTrain)
+# HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.sample(frac=1).reset_index(drop=True)
+# HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.head(HealthSubThemesNoDistinctionQuantity)
+# trainLabeledDataDF = pd.concat([trainLabeledDataDF, HealthSubThemesNODISTINCTIONTrain], ignore_index=True)
+# print(HealthSubThemesNODISTINCTIONTrain)
 
-print(trainLabeledDataDF)
+# print(trainLabeledDataDF)
 
 #allThemes = trainLabeledDataDF["Category"].value_counts()
 allThemes = trainLabeledDataDF["Category"].unique().tolist()
