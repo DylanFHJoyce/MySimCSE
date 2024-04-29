@@ -123,11 +123,11 @@ simModel = SimCSE(startingModel)
 with open('HealthSubThemesAfterFirstTrain.pkl', 'rb') as f:
     HealthSubThemesTrain = pickle.load(f)
 
+with open('HealthMicroSplitThemesTrain.pkl', 'rb') as f:
+    HealthMicroSplitThemesTrain = pickle.load(f)
+#HealthMicroSplitThemesTrain.pkl
 
-
-
-
-
+HealthSubThemesTrain = HealthMicroSplitThemesTrain
 
 
 #HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
