@@ -292,9 +292,8 @@ themeBasedTriplets = {}
 
 print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
 print(HealthSubThemesTrain)
-
-
-
+HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
+print(HealthSubThemesNODISTINCTIONTrain)
 
 themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
