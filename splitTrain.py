@@ -285,14 +285,17 @@ themeBasedTriplets = {}
 themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
 
-HC = "Health crisis"
-if HC in themeSamplesMultiplier:
-    themeSamplesMultiplier[HC] = 0.0
-    print("REDUCING SAMPLES OF GEN SET HEALTH CRISIS SO AS TO ALLOW SUBMODELLING THEMES TO BECOME PROMINENT")
-else:
-    print("HEALTH CRISIS NOT REDUCED: ERROR")
-#themeSamplesMultiplier = bestDictResults
-#!!!!!!!!!!!
+# HC = "Health crisis"
+# if HC in themeSamplesMultiplier:
+#     themeSamplesMultiplier[HC] = 0.0
+#     print("REDUCING SAMPLES OF GEN SET HEALTH CRISIS SO AS TO ALLOW SUBMODELLING THEMES TO BECOME PROMINENT")
+# else:
+#     print("HEALTH CRISIS NOT REDUCED: ERROR")
+# #themeSamplesMultiplier = bestDictResults
+# #!!!!!!!!!!!
+
+
+
 
 
 print(themeSamplesMultiplier)
@@ -373,9 +376,11 @@ JustConcTripletsCSV = "concThemeTriplets.csv"
 HealthOutputDir = "HealthSplitModel"
 
 
-runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
+#runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
 
-#runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
+
+#if doing full train then make sure we haven't alterd any theme ratios in training
+runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, "fullTrainModel", 16) #32?
 
 
 
