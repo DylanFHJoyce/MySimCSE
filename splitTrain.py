@@ -128,8 +128,7 @@ with open('HealthMicroSplitThemesTrain.pkl', 'rb') as f:
 #HealthMicroSplitThemesTrain.pkl
 
 HealthSubThemesTrain = HealthMicroSplitThemesTrain
-testTripletsRemove = generate_triplet_dataset(HealthSubThemesTrain, 1000)
-print(testTripletsRemove, "\n\nTEST TRIPLETS REMOVE")
+
 #HealthSubThemesTrain = HealthSubThemesTrain.sample(frac=1).reset_index(drop=True)
 # HealthSubThemesTrain.rename(columns={'predictions': 'Category'}, inplace=True)
 # HealthSubThemesTrain.rename(columns={'Documents': 'Document'}, inplace=True)
@@ -376,11 +375,11 @@ JustConcTripletsCSV = "concThemeTriplets.csv"
 HealthOutputDir = "HealthSplitModel"
 
 
-#runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
+runSim(startingModel, HealthAndLabelledTripletsCSV, 2.5e-5, 3, HealthOutputDir, 16) #32?
 
 
 #if doing full train then make sure we haven't alterd any theme ratios in training
-runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, "fullTrainModel", 16) #32?
+#runSim(startingModel, JustConcTripletsCSV, 2.5e-5, 3, "fullTrainModel", 16) #32?
 
 
 
