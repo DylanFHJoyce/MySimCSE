@@ -284,16 +284,23 @@ trainLabeledDataDF = TrainValTest[0]
 # with open('bestDictResults.pkl', 'rb') as f:
 #     bestDictResults = pickle.load(f)
 
+
+print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
+print(HealthSubThemesTrain)
+HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
+
+HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.sample(frac=1).reset_index(drop=True)
+print(HealthSubThemesNODISTINCTIONTrain)
+
+print(trainLabeledDataDF)
+
 #allThemes = trainLabeledDataDF["Category"].value_counts()
 allThemes = trainLabeledDataDF["Category"].unique().tolist()
 print("ALL THEMES", allThemes)
 themeBasedTriplets = {}
 #IF YOU CHANGE STARTING MULTIPLIER THEN RECORD CHANGE ON OTHER STATS
 
-print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
-print(HealthSubThemesTrain)
-HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
-print(HealthSubThemesNODISTINCTIONTrain)
+
 
 themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
