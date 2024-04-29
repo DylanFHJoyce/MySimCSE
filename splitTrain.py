@@ -285,11 +285,15 @@ trainLabeledDataDF = TrainValTest[0]
 #     bestDictResults = pickle.load(f)
 
 
+HealthSubThemesNoDistinctionQuantity = 150
+
 print("\n\n\n\n\n\n\n\nHEALTHSUBTHEMESTRAIN\n\n")
 print(HealthSubThemesTrain)
 HealthSubThemesNODISTINCTIONTrain = pd.DataFrame({'Document': HealthSubThemesTrain['Document'], 'Category': 'HealthSubTheme'})
 
 HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.sample(frac=1).reset_index(drop=True)
+HealthSubThemesNODISTINCTIONTrain = HealthSubThemesNODISTINCTIONTrain.head(HealthSubThemesNoDistinctionQuantity)
+trainLabeledDataDF = pd.concat([trainLabeledDataDF, HealthSubThemesNODISTINCTIONTrain], ignore_index=True)
 print(HealthSubThemesNODISTINCTIONTrain)
 
 print(trainLabeledDataDF)
@@ -307,7 +311,7 @@ themeSamplesMultiplier = {theme: 1.0 for theme in allThemes}
 
 HC = "Health crisis"
 if HC in themeSamplesMultiplier:
-    themeSamplesMultiplier[HC] = 0.5
+    themeSamplesMultiplier[HC] = 0.0
     print("REDUCING SAMPLES OF GEN SET HEALTH CRISIS SO AS TO ALLOW SUBMODELLING THEMES TO BECOME PROMINENT")
 else:
     print("HEALTH CRISIS NOT REDUCED: ERROR")
